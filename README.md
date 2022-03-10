@@ -9,3 +9,11 @@
 
 
 ## Project setup
+
+#### To install dependencies: `npm install`
+#### To run with hot reload at localhost:8080: `npm run dev`
+#### To build for production with minification: `npm run build`
+#### To test the production build locally: `npm run serve`
+#### To run tests with jest and enzyme: `npm run test`
+\
+For detailed explanation visit: <https://github.com/preactjs/preact-cli/blob/master/README.md> 
