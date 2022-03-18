@@ -1,4 +1,3 @@
-
 import React, {useState}  from 'react';
 import './styles.css';
 //import { Link } from 'react-router-dom/match';
@@ -28,7 +27,9 @@ function Navbar() {
             </a>
           </li>
           <li className="nav__item">
-            <a href="/" className="nav__link">
+
+            <a href="/ingredient" className="nav__link">
+
               Recipes
             </a>
           </li>

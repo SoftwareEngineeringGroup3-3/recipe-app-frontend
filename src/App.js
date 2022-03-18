@@ -4,6 +4,7 @@ import './App.css';
 import Navbar from './components/Navbar';
 import LoginRegister from './components/Login/';
 import Home from './components/Home';
+import Ingredient from './components/Ingredient';
 
 function App() {
   return (
@@ -19,6 +20,9 @@ function App() {
         <Switch>
           <Route path="/login">
             <LoginRegister/>
+          </Route>
+          <Route path="/ingredient">
+            <Ingredient/>
           </Route>
         </Switch>
       </div>
