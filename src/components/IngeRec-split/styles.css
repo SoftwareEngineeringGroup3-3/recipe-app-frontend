@@ -1,0 +1,31 @@
+.split-rec-ing {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+  }
+  .left-split:hover {
+    border: 1px solid #777;
+  }
+  .right-split:hover {
+    border: 1px solid #777;
+  }
+
+  .left-split {
+    grid-column: 1;
+    grid-row: 1;
+    background-color: rgb(204, 204, 204);
+  }
+
+  .right-split {
+    grid-column: 2;
+    grid-row: 1;
+    background-color: rgb(204, 204, 204);
+  }
+
+  .split-rec-ing{
+      margin-top: 40px;
+      font-size: x-large;
+      text-align: center;
+      z-index: 2;
+  }

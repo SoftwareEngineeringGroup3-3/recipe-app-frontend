@@ -13,10 +13,10 @@ body {
 li {
   list-style: none;
 }
-a {
+/* a {
   text-decoration: none;
   color: rgb(204, 204, 204);
-}
+} */
 
 .nav {
   display: flex;
@@ -27,6 +27,13 @@ a {
 }
 .nav__brand {
   text-transform: uppercase;
+  color: rgb(204, 204, 204);
+  text-decoration: none;
+}
+
+.nav__link{
+  color: rgb(204, 204, 204);
+  text-decoration: none;
 }
 
 .nav__menu {

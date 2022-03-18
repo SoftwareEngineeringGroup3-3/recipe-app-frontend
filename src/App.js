@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import LoginRegister from './components/Login/';
-import Home from './components/Home';
 import Ingredient from './components/Ingredient';
+import Recipes from './components/Recipes';
+import IngrRecSplit from './components/IngeRec-split';
 
 function App() {
   return (
@@ -12,19 +13,21 @@ function App() {
       <div className="app">
       <Navbar />
       <div className="content">
-        <Switch>
-          <Route path="/">
-            <Home/>
+        
+          <Route path="/start">
+            <IngrRecSplit/>
           </Route>
-        </Switch>
-        <Switch>
+         
           <Route path="/login">
             <LoginRegister/>
           </Route>
-          <Route path="/ingredient">
-            <Ingredient/>
+         
+          <Route path="/recipes">
+                <Recipes/>
           </Route>
-        </Switch>
+          <Route path="/ingredients">
+                <Ingredient/>
+          </Route>
       </div>
      
     </div>

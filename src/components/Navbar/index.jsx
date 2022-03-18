@@ -17,20 +17,13 @@ function Navbar() {
     };
     return (
       <nav className="nav">
-        <a href="/" className="nav__brand">
+        <a href="/start" className="nav__brand">
           recipe app
         </a>
         <ul className={active}>
           <li className="nav__item">
-            <a href="/" className="nav__link">
+            <a href="/start" className="nav__link">
               Home
-            </a>
-          </li>
-          <li className="nav__item">
-
-            <a href="/ingredient" className="nav__link">
-
-              Recipes
             </a>
           </li>
           <li className="nav__item">

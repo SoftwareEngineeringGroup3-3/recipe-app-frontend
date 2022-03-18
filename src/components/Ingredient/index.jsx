@@ -2,7 +2,6 @@ import React from 'react'
 import styles from './styles.css'
 
 function Ingredient() {
-    var recipes = ['Recipe1','Recipe2','Recipe3']
   return (
     <section className="forms-section">
     <div className="forms">
@@ -13,15 +12,13 @@ function Ingredient() {
           <span className="underline"></span>
         </button>
         <form className="form form-recipe">
-          
-
-            {
-                recipes.map(name => <h2>{name}</h2>)
-            }
-          <button type="submit" className="btn-recipes">
+          {/* <button type="submit" className="btn-recipes">
               Recipes
-            {/* <img src="/public/recipesImage.jpg" alt="recipesImage"/> */}
-          </button>
+            {/* <img src="/public/recipesImage.jpg" alt="recipesImage"/> 
+          </button> */}
+           <a href="/recipes" className="nav__link">
+              Recipes
+            </a>
         </form>
       </div>
       <div className="form-wrapper">
