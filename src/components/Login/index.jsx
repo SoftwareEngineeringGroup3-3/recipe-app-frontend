@@ -56,7 +56,7 @@ function LoginRegister() {
         if(data.error) {
           setError(data.message);
         } else {
-          navigate.push('/login');
+          window.location.reload();
         }
       }).catch(error => {
         console.error(error);
