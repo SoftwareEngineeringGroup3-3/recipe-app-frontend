@@ -118,7 +118,7 @@ body {
 	transform: translateX(0);
 }
 
-.form {
+.formPanel {
 	overflow: hidden;
 	min-width: 260px;
 	margin-top: 50px;
@@ -199,7 +199,7 @@ body {
 	}
 }
 
-.form fieldset {
+.formPanel fieldset {
 	position: relative;
 	opacity: 0;
 	margin: 0;
@@ -222,7 +222,7 @@ body {
 	transition: opacity .4s ease-in, transform .35s ease-in;
 }
 
-.form legend {
+.formPanel legend {
 	position: absolute;
 	overflow: hidden;
 	width: 1px;
@@ -253,7 +253,7 @@ body {
   border-radius: 2px;
 }
 
-.form [type='submit'] {
+.formPanel [type='submit'] {
 	opacity: 0;
 	display: block;
 	min-width: 120px;
@@ -265,7 +265,7 @@ body {
 	transition: all .3s ease-out;
 }
 
-.form-wrapper.is-active .form [type='submit'] {
+.form-wrapper.is-active .formPanel [type='submit'] {
 	opacity: 1;
 	transform: translateX(0);
 	transition: all .4s ease-in;
@@ -278,8 +278,7 @@ body {
 }
 
 .btn-signup {
-	color: #a7e245;
+	color: #fbfdff;
 	background: rgb(0, 75, 65);
-	box-shadow: inset 0 0 0 2px #a7e245;
 	transform: translateX(30%);
 }

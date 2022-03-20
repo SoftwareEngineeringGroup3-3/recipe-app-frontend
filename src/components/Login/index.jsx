@@ -1,23 +1,18 @@
-import React from 'react'
+import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styles from './styles.css'
 import { useContext, useState } from 'react';
 import { apiUrl } from '../../api';
 import { setCookie } from '../../cookie';
 import { SessionContext, Session, UserSession } from '../../session';
+import useEffect from 'react';
 
-const switchers = [...document.querySelectorAll('.switcher')]
 
-    switchers.forEach(item => {
-	item.addEventListener('click', function() {
-		switchers.forEach(item => item.parentElement.classList.remove('is-active'))
-		this.parentElement.classList.add('is-active')
-	})
-})
+
 
 function LoginRegister() {
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState(''); 
   const [repPassword, setRepPassword] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState(false);
@@ -73,16 +68,26 @@ function LoginRegister() {
     });
   }
 
-    
+  function switchers(){
+    var switchers = [...document.querySelectorAll('.switcher')]
+
+    switchers.forEach(item => {
+    item.addEventListener('click', function() {
+    switchers.forEach(item => item.parentElement.classList.remove('is-active'))
+    this.parentElement.classList.add('is-active')
+})
+})
+  }
+   
   return (
-    <section className="forms-section">
+    <section className="forms-section" >
   <div className="forms">
     <div className="form-wrapper is-active">
       <button type="button" className="switcher switcher-login">
         Login
         <span className="underline"></span>
       </button>
-      <form className="form form-login" action='#' onSubmit={submitLogin}>
+      <form className="formPanel form-login" onSubmit={submitLogin}>
         <fieldset>
           <legend>Please, enter your email and password for login.</legend>
           <div className="input-block">
@@ -94,15 +99,15 @@ function LoginRegister() {
             <input id="login-password" type="password" required onInput={(ev) => { setPassword(ev.target.value); }}/>
           </div>
         </fieldset>
-        <button type="submit" className="btn-login">Login</button>
+        <button type="submit" className="btn-login" onClick={switchers}>Login</button>
       </form>
     </div>
     <div className="form-wrapper">
-      <button type="button" className="switcher switcher-signup">
+      <button type="button" className="switcher switcher-signup"  onClick={switchers}>
         Sign Up
         <span className="underline"></span>
       </button>
-      <form className="form form-signup" action='#' onSubmit={submitRegister}>
+       <form className="formPanel form-signup"  onSubmit={submitRegister}> 
         <fieldset>
           <legend>Please, enter your email, password and password confirmation for sign up.</legend>
           <div className="input-block">
