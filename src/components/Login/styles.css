@@ -20,7 +20,7 @@ body {
 .section-title {
 	font-size: 32px;
 	letter-spacing: 1px;
-	color: rgb(0, 75, 65);
+	color: #16344E;
 }
 
 .forms {
@@ -248,9 +248,9 @@ body {
 	font-size: 16px;
 	line-height: 40px;
 	color: rgb(204, 204, 204);
-  background: #eef9fe;
-  border: 1px solid #cddbef;
-  border-radius: 2px;
+  	background: #eef9fe;
+  	border: 1px solid #cddbef;
+  	border-radius: 2px;
 }
 
 .formPanel [type='submit'] {
@@ -273,12 +273,12 @@ body {
 
 .btn-login {
 	color: #fbfdff;
-	background: rgb(0, 75, 65);
+	background: #16344E;
 	transform: translateX(-30%);
 }
 
 .btn-signup {
 	color: #fbfdff;
-	background: rgb(0, 75, 65);
+	background: #16344E;
 	transform: translateX(30%);
 }

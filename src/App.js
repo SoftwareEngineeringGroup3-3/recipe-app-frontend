@@ -35,6 +35,21 @@ function App() {
               () => {
                 if(session && session.valid) {
                   return [
+                    // <Route path="/recipes">
+                    //   <Recipes/>
+                    // </Route>,
+                    // <Route path="/ingredients">
+                    //       <Ingredient/>
+                    // </Route>,
+                    // <Route path="/start">
+                    //   <IngrRecSplit/>
+                    // </Route>
+                  ]
+                } else if (!session || !session.valid) {
+                  return [
+                    <Route path="/login">
+                      <LoginRegister/>
+                    </Route>,
                     <Route path="/recipes">
                       <Recipes/>
                     </Route>,
@@ -43,12 +58,6 @@ function App() {
                     </Route>,
                     <Route path="/start">
                       <IngrRecSplit/>
-                    </Route>
-                  ]
-                } else if (!session || !session.valid) {
-                  return [
-                    <Route path="/login">
-                      <LoginRegister/>
                     </Route>
                   ]
                 }
