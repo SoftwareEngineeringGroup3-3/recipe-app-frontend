@@ -8,7 +8,7 @@ import { SessionContext, Session, UserSession } from '../../session';
 import useEffect from 'react';
 
 
-
+//TODO: wstepna walidacja pól register na froncie | wyswietanie diva z potwierdzeniem rejestracji lub bledu
 
 function LoginRegister() {
   const [username, setUsername] = useState('');
@@ -31,7 +31,7 @@ function LoginRegister() {
         if(data.error) {
           setError(data.message);
         } else {
-          setCookie('security-header', data.security_header, 1000 * 3600 * 2); //expires after 2 hours
+          setCookie('security_header', data.security_header, 1000 * 3600 * 2); //expires after 2 hours
           setSession(new UserSession(data.security_header));
           navigate.push('/start');
         }
