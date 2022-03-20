@@ -1,10 +1,15 @@
-import React, {useState}  from 'react';
+import React, {useState, useContext}  from 'react';
 import './styles.css';
+import { SessionContext, Session, UserSession } from '../../session';
 //import { Link } from 'react-router-dom/match';
 
 function Navbar() {
     const [active, setActive] = useState("nav__menu");
     const [icon, setIcon] = useState("nav__toggler");
+
+    const { session, setSession } = useContext (SessionContext);
+
+
     const navToggle = () => {
       if (active === "nav__menu") {
         setActive("nav__menu nav__active");
@@ -15,6 +20,13 @@ function Navbar() {
         setIcon("nav__toggler toggle");
       } else setIcon("nav__toggler");
     };
+
+    
+    const logout = () => {
+      setSession(null);
+    };
+
+
     return (
       <nav className="nav">
         <a href="/start" className="nav__brand">
@@ -32,7 +44,7 @@ function Navbar() {
             </a>
           </li>
           <li className="nav__item">
-            <a href="/logStart" className="nav__link">
+            <a href="/logStart" className="nav__link" onClick={logout}>
               Log Out
             </a>
           </li>
