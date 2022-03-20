@@ -5,7 +5,9 @@ import Navbar from './components/Navbar';
 import LoginRegister from './components/Login/';
 import Ingredient from './components/Ingredient';
 import Recipes from './components/Recipes';
+import LogOutStart from './components/LogOutStart';
 import IngrRecSplit from './components/IngeRec-split';
+import NavbarLogOut from './components/NavbarLogout';
 import { SessionContext, UserSession } from './session';
 import { useState } from 'react';
 import { deleteCookie, getCookie, setCookie } from './cookie';
@@ -28,37 +30,42 @@ function App() {
     }}>
       <Router>
         <div className="app">
-        <Navbar />
-        <div className="content">
+        
+          
+        
           {
             (
               () => {
                 if(session && session.valid) {
                   return [
-                    // <Route path="/recipes">
-                    //   <Recipes/>
-                    // </Route>,
-                    // <Route path="/ingredients">
-                    //       <Ingredient/>
-                    // </Route>,
-                    // <Route path="/start">
-                    //   <IngrRecSplit/>
-                    // </Route>
-                  ]
-                } else if (!session || !session.valid) {
-                  return [
-                    <Route path="/login">
-                      <LoginRegister/>
-                    </Route>,
-                    <Route path="/recipes">
+                   <Route path="/recipes">
+                      <Navbar/>
                       <Recipes/>
                     </Route>,
                     <Route path="/ingredients">
+                      <Navbar/>
                           <Ingredient/>
                     </Route>,
                     <Route path="/start">
+                      <Navbar/>
                       <IngrRecSplit/>
+                    </Route>,
+                    // <Route path="/logStart">
+                    //   <Navbar/>
+                    //   <LogOutStart/>
+                    // </Route>,
+                    ]
+                } else if (!session || !session.valid) {
+                  return [
+                   <Route path="/login">
+                     <NavbarLogOut/>
+                    <LoginRegister/>
+                    </Route>,
+                    <Route path="/logStart">
+                      <NavbarLogOut/>
+                      <LogOutStart/>
                     </Route>
+                  
                   ]
                 }
               }
@@ -66,7 +73,7 @@ function App() {
           }
         </div>
       
-      </div>
+      
       </Router>
     </SessionContext.Provider>
     
