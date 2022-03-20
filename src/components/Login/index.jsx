@@ -70,17 +70,20 @@ function LoginRegister() {
 
   function switchers(){
     var switchers = [...document.querySelectorAll('.switcher')]
-
     switchers.forEach(item => {
-    item.addEventListener('click', function() {
-    switchers.forEach(item => item.parentElement.classList.remove('is-active'))
-    this.parentElement.classList.add('is-active')
-})
-})
+      item.addEventListener('click', function() {
+        switchers.forEach(item => item.parentElement.classList.remove('is-active'))
+        this.parentElement.classList.add('is-active')
+      });
+    });
   }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    switchers();
+  });
    
   return (
-    <section className="forms-section" >
+    <section className="forms-section">
   <div className="forms">
     <div className="form-wrapper is-active">
       <button type="button" className="switcher switcher-login">
