@@ -31,8 +31,8 @@ function LoginRegister() {
         if(data.error) {
           setError(data.message);
         } else {
-          setCookie('login_token', data.token, 1000 * 3600 * 2); //expires after 2 hours
-          setSession(new UserSession(data.token));
+          setCookie('security-header', data.security_header, 1000 * 3600 * 2); //expires after 2 hours
+          setSession(new UserSession(data.security_header));
           navigate.push('/start');
         }
       }).catch(error => {
