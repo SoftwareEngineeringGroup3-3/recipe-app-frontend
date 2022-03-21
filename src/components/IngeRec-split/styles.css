@@ -7,48 +7,55 @@
   }
   .left-split:hover {
     border: 1px solid #777;
+    opacity: 1;
   }
   .right-split:hover {
     border: 1px solid #777;
+    opacity: 1;
+    /* cursor: pointer; */
   }
 
   .left-split {
     grid-column: 1;
     grid-row: 1;
     background-color: rgb(204, 204, 204);
+    opacity: 0.4;
   }
 
   .right-split {
     grid-column: 2;
     grid-row: 1;
     background-color: rgb(204, 204, 204);
+    opacity: 0.4;
   }
 
   .ingrRec-split{
       margin-top: 40px;
-     
       text-align: center;
-      z-index: 2;
      
   }
   .img-rec{
     width: 100%;
     height: 100%;
     display: block;
-    opacity: 0.4;
+    /* opacity: 0.4; */
     object-fit: cover;
   }
 
   .img-rec:hover{
-    opacity: 1;
+    /* opacity: 1; */
   }
 
   .recLeb{
     position: absolute;
     text-decoration: none;
     color: white;
-    opacity: 1;
     font-weight: bold;
     font-size: 8em;
-    text-align: center
+    text-align: center;
+    cursor: pointer;
   }
+
+  /* .recLeb:hover{
+    opacity: 1;
+  } */
