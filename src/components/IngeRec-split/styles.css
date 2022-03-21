@@ -42,20 +42,14 @@
     object-fit: cover;
   }
 
-  .img-rec:hover{
-    /* opacity: 1; */
-  }
+ 
 
   .recLeb{
     position: absolute;
     text-decoration: none;
     color: white;
     font-weight: bold;
-    font-size: 8em;
+    font-size: 8vw;
     text-align: center;
     cursor: pointer;
   }
-
-  /* .recLeb:hover{
-    opacity: 1;
-  } */

@@ -1,6 +1,8 @@
 .logOutStart-div{
     height: 100%;
     width: 100%;
+    position: absolute;
+    
 }
 
 .logFood{
@@ -14,11 +16,12 @@
 .logOutStartText{
     position: absolute;
     z-index: 2;
-    text-align: center;
+    text-align: left;
     text-decoration: none;
     color: white;
     font-weight: bold;
-    font-size: 8em;
+    font-size: 6.5vw;
+    
 }
 
 .logOutStart{
@@ -30,7 +33,8 @@
     text-decoration: none;
     color: white;
     font-weight: bold;
-    font-size: 5em;
+    font-size: 5vw;
+    
 }
 
 .logOutStart:hover{
