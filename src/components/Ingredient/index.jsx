@@ -7,8 +7,9 @@ function Ingredient() {
          <StoredIngredients></StoredIngredients>
         <div class="IngredientBar">
           <div id="Title"><h4>List of ingredients:</h4></div>
-          
-            <input id="Filter" type="text" placeholder='Start writting ingredient'></input>
+          <button class="BarButton" type="submit">Next</button>
+          <button class="BarButton" type="submit">Finish</button>
+            
           
         </div>
         <IngredientForm>
@@ -40,8 +41,9 @@ function IngredientForm(){
 
 function StoredIngredients(){
   return(
-    <div class="StoredIngredients">Stored ingredients:
-    <div class="StoredElement"> Here will be stored</div>
+    <div class="StoredIngredients">
+      <div id="StoredTitle">Stored Ingredients</div>
+      <div class="StoredElement">Stored Element</div>
     </div>
   )
 }
