@@ -24,7 +24,7 @@ li {
   justify-content: space-around;
   height: 8vh;
   background: #16344E;
-  font-size: 1vw;
+  font-size: 1.6rem;
 }
 .nav__brand {
   text-transform: uppercase;
