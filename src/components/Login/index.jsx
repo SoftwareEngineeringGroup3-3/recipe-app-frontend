@@ -83,7 +83,8 @@ function LoginRegister() {
   });
    
   return (
-    <section className="forms-section">
+    <div className='login-body'>
+          <section className="forms-section">
   <div className="forms">
     <div className="form-wrapper is-active">
       <button type="button" className="switcher switcher-login">
@@ -135,6 +136,8 @@ function LoginRegister() {
     </div>
   </div>
 </section>
+    </div>
+
   )
 }
 

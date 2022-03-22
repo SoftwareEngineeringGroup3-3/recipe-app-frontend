@@ -7,9 +7,9 @@
 html {
   font-size: 62.5%;
 }
-body {
+/* body {
   font-size: 1.6rem;
-}
+} */
 li {
   list-style: none;
 }
@@ -24,6 +24,7 @@ li {
   justify-content: space-around;
   height: 8vh;
   background: #16344E;
+  font-size: 1vw;
 }
 .nav__brand {
   text-transform: uppercase;

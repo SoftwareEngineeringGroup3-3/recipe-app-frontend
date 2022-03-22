@@ -4,7 +4,7 @@
 	box-sizing: border-box;
 }
 
-body {
+.login-body {
 	margin: 0;
 	font-family: Roboto, -apple-system, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
 	background: rgb(204, 204, 204);
@@ -247,7 +247,7 @@ body {
 	padding-left: 15px;
 	font-size: 16px;
 	line-height: 40px;
-	color: rgb(204, 204, 204);
+	color: #14191D;
   	background: #eef9fe;
   	border: 1px solid #cddbef;
   	border-radius: 2px;
