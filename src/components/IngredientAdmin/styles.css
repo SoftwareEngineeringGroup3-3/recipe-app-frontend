@@ -7,7 +7,7 @@
 	margin: auto;
 }
 
-.RecipeForm{
+.IngredientForm{
 	width: 60%;
 	border-radius: 50px;
 	margin: auto;
@@ -20,7 +20,7 @@
 	overflow-y: scroll;
 	min-width: fit-content;
 }
-.RecipeBar{
+.IngredientBar{
 	width: 60%;
 	border-radius: 50px;
 	height: auto+30px;
@@ -29,7 +29,6 @@
 	padding: 10px;
 	display: flex;
 	justify-content: space-between;
-	min-width: fit-content;
 }
 #Title{
 	width: 200px;
@@ -42,7 +41,7 @@
 	border-color: rgb(0, 75, 65);
 	border-width: 5px;
 }
-#AddRecipe{
+#AddIngredient{
 	color: #fbfdff;
 	background: rgb(0, 75, 65);
 	box-shadow: 0 0 20px gray;
@@ -52,8 +51,8 @@
 	min-width: fit-content;
     text-decoration: none;
 }
-.RecipeElement{
-	width: 30%;
+.IngredientElement{
+	width: 60%;
 	border-radius: 50px;
 	height: auto;
 	margin: auto;
@@ -62,11 +61,12 @@
 	border-style: double;
 	border-color: rgb(0, 75, 65);
 	border-width: 5px;
+	height: 90%;
 	min-width: fit-content;
-	display: inline;
-	justify-content: center;
+	display: flex;
+	justify-content: space-between;
 }
-#AddRecipe:hover {
+#AddIngredient:hover {
     cursor: pointer;
 }
 ::-webkit-scrollbar {
@@ -87,33 +87,32 @@
 ::-webkit-scrollbar-thumb:hover {
 	background: rgb(184, 67, 67);
 }
-.StoredIngredients{
-	left: 0.5%;
-	width: 18%;
-	min-width: fit-content;
-	position: absolute;
-	height: 35%;
-	border-style: double;
-	border-color: rgb(179, 96, 48);
-	border-width: 5px;
-	border-radius: 20px;
-	text-align: center;
-	font-size: large;
-	overflow-y: scroll;
-}
-.ViewRecipe{
+.EditButton{
 	color: #fbfdff;
 	background: rgb(0, 75, 65);
 	box-shadow: 0 0 20px gray;
-	padding: 10px;
+	padding: 5px;
 	border-radius: 15px;
 	min-width: fit-content;
-    text-decoration: none;
-	cursor: pointer;
 }
-.Name{
-	padding: 10px;
+.DeleteButton{
+	color: #fbfdff;
+	background: rgb(0, 75, 65);
+	box-shadow: 0 0 20px gray;
+	padding: 5px;
+	border-radius: 15px;
+	min-width: fit-content;
 }
+.IngredientName{
+	padding: 5px;
+	min-width: fit-content;
+}
+.DeleteButton:hover {
+    cursor: pointer;
+}
+.EditButton:hover {
+    cursor: pointer;
+} 
 #Filter{
 	font-size: large;
 	border-radius: 5px;

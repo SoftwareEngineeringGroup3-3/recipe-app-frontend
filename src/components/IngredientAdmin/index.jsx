@@ -1,15 +1,15 @@
 import React from 'react'
 import styles from './styles.css'
 
-function Ingredient() {
+function IngredientAdmin() {
   return (
-      <div class="All">
-         <StoredIngredients></StoredIngredients>
+      <div>
         <div class="IngredientBar">
           <div id="Title"><h4>List of ingredients:</h4></div>
-          
-            <input id="Filter" type="text" placeholder='Start writting ingredient'></input>
-          
+          <input id="Filter" type="text" placeholder='Start writting ingredient'></input>
+          <a type="submit" id="AddIngredient" href='/addingredient'>
+              Add Ingredient
+            </a>
         </div>
         <IngredientForm>
         </IngredientForm>
@@ -27,9 +27,15 @@ function IngredientForm(){
     <div class="IngredientForm">
     {
       recipes.map(name => <div class="IngredientElement">
-          <div class="Name">{name}</div>
-          <button class="AddToStoreButton" type="submit">Add to stored</button>
-          
+          <div class="IngredientName">{name}
+
+          </div>
+          <button href="/EditIngredient" class="EditButton" type="submit"> Edit
+                
+          </button>
+          <button class="DeleteButton" type="submit"> Delete
+
+          </button>
         </div>)
     }
     </div>
@@ -38,12 +44,4 @@ function IngredientForm(){
   
 }
 
-function StoredIngredients(){
-  return(
-    <div class="StoredIngredients">Stored ingredients:
-    <div class="StoredElement"> Here will be stored</div>
-    </div>
-  )
-}
-
-export default Ingredient
+export default IngredientAdmin

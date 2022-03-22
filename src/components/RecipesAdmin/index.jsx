@@ -1,29 +1,31 @@
 import React from 'react'
 import styles from './styles.css'
 
-function Recipes() {
+function RecipesAdmin() {
   return (
       <div class="All">
         <div class="RecipeBar">
           <div id="Title"><h4>List of recipes:</h4></div>
-          
+          <a type="submit" id="AddRecipe" href='/addrecipe'>
+              Add recipe
+            </a>
             <input id="Filter" type="text" placeholder='Start writting recipe'></input>
           
         </div>
-        <RecipeForm>
-        </RecipeForm>
+        <RecipeFormAdmin>
+        </RecipeFormAdmin>
 
       </div>
 
   )
 }
 
-function RecipeForm(){
+function RecipeFormAdmin(){
   var recipes = ['Recipe1','Recipe2','Recipe1','Recipe2','Recipe1','Recipe2','Recipe1','Recipe2']
   
 
   return(
-    <div class="IngredientForm">
+    <div class="RecipeForm">
     {
       recipes.map(name => <div class="IngredientElement">
           <div class="Name">{name}</div>
@@ -37,4 +39,4 @@ function RecipeForm(){
 }
 
 
-export default Recipes
+export default RecipesAdmin

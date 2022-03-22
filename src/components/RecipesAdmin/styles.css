@@ -118,3 +118,13 @@
 	font-size: large;
 	border-radius: 5px;
 }
+#AddRecipe{
+    color: #fbfdff;
+	background: rgb(0, 75, 65);
+	box-shadow: 0 0 20px gray;
+	padding: 15px;
+	font-size: large;
+	border-radius: 15px;
+	min-width: fit-content;
+    text-decoration: none;
+}
