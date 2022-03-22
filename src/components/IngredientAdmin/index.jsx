@@ -3,7 +3,7 @@ import styles from './styles.css'
 
 function IngredientAdmin() {
   return (
-      <div>
+      <div class="All">
         <div class="IngredientBar">
           <div id="Title"><h4>List of ingredients:</h4></div>
           <input id="Filter" type="text" placeholder='Start writting ingredient'></input>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import LoginRegister from './components/Login/';
@@ -20,81 +20,88 @@ import AddRecipe from './components/AddRecipe';
 
 function App() {
   const token = getCookie('security_header');
-  const [session, setSession] = useState(new UserSession(token));
+  const [ session, setSession ] = useState(new UserSession(token));
 
   const setNewSession = (newSession) => {
-    if (!newSession) {
+    if(!newSession){
       deleteCookie('security_header');
     }
     setSession(newSession);
   }
 
   return (
-    <SessionContext.Provider value={{
+    <SessionContext.Provider value = {{
       session: session,
       setSession: setNewSession
     }}>
       <Router>
         <div className="app">
-
-
-
+        
+          
+        
           {
             (
               () => {
-                if (session && session.valid) {
+                if(session && session.valid) {
                   return [
-                    <Switch>
-                      <Route path="/recipes">
-                        <Navbar />
-                        <RecipesAdmin />
-                      </Route>,
-                      <Route path="/addrecipe">
-                        <Navbar />
-                        <AddRecipe />
-                      </Route>,
-                      <Route path="/ingredients">
-                        <Navbar />
-                        <Ingredient />
-                      </Route>,
-                      <Route path="/addingredient">
-                        <Navbar />
-                        <AddIngredient />
-                      </Route>,
-                      <Route path="/editingredient">
-                        <Navbar />
-                        <EditIngredient />
-                      </Route>,
-                      <Route path="/">
-                        <Navbar />
-                        <IngrRecSplit />
-                      </Route>
-                    </Switch>
-
-                  ]
+                   <Route path="/recipes">
+                      <Navbar/>
+                      <Recipes/>
+                    </Route>,
+                    <Route path="/recipesadmin">
+                    <Navbar/>
+                    <RecipesAdmin/>
+                  </Route>,
+                    <Route path="/addrecipe">
+                    <Navbar/>
+                    <AddRecipe/>
+                  </Route>,
+                    <Route path="/ingredients">
+                      <Navbar/>
+                        <Ingredient/>
+                    </Route>,
+                    <Route path="/ingredientsadmin">
+                    <Navbar/>
+                      <IngredientAdmin/>
+                  </Route>,
+                    <Route path="/addingredient">
+                    <Navbar/>
+                        <AddIngredient/>
+                    </Route>,
+                    <Route path="/editingredient">
+                    <Navbar/>
+                        <EditIngredient/>
+                    </Route>,
+                    <Route path="/start">
+                      <Navbar/>
+                      <IngrRecSplit/>
+                    </Route>,
+                    // <Route path="/logStart">
+                    //   <Navbar/>
+                    //   <LogOutStart/>
+                    // </Route>,
+                    ]
                 } else if (!session || !session.valid) {
                   return [
-                    <Switch>
-                      <Route path="/login">
-                        <NavbarLogOut />
-                        <LoginRegister />
-                      </Route>,
-                      <Route path="/">
-                        <NavbarLogOut />
-                        <LogOutStart />
-                      </Route>
-                    </Switch>
+                   <Route path="/login">
+                     <NavbarLogOut/>
+                    <LoginRegister/>
+                    </Route>,
+                    <Route path="/logStart">
+                      <NavbarLogOut/>
+                      <LogOutStart/>
+                    </Route>
                   ]
                 }
               }
             )()
           }
         </div>
-
-
+      
+      
       </Router>
     </SessionContext.Provider>
-
+    
   );
 }
 

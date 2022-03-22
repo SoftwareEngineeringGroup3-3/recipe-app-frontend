@@ -65,6 +65,7 @@
 	min-width: fit-content;
 	display: inline;
 	justify-content: center;
+	font-size: large;
 }
 #AddIngredient:hover {
     cursor: pointer;
@@ -91,15 +92,17 @@
 	left: 0.5%;
 	width: 18%;
 	min-width: fit-content;
-	position: absolute;
+	position: inherit;
 	height: 35%;
 	border-style: double;
-	border-color: rgb(179, 96, 48);
+	border-color: rgb(151, 95, 42);
 	border-width: 5px;
 	border-radius: 20px;
 	text-align: center;
 	font-size: large;
 	overflow-y: scroll;
+	min-width: 18vw;
+	background-color: rgb(221, 196, 196);
 }
 .AddToStoreButton{
 	color: #fbfdff;
@@ -117,4 +120,34 @@
 #Filter{
 	font-size: large;
 	border-radius: 5px;
+}
+.StoredElement{
+	width: 30%;
+	border-radius: 50px;
+	height: auto;
+	margin: auto;
+	margin-top: 10px;
+	padding: 10px;
+	border-style: double;
+	border-color: rgb(0, 75, 65);
+	border-width: 5px;
+	min-width: fit-content;
+	justify-content: center;
+	font-size: large;
+	background-color: #fbfdff;
+}
+#StoredTitle{
+	text-decoration: overline;
+	margin: auto;
+	margin-top: 1vh;
+}
+.BarButton{
+	color: #fbfdff;
+	background: rgb(0, 75, 65);
+	box-shadow: 0 0 20px gray;
+	padding: 15px;
+	border-radius: 20px;
+	min-width: fit-content;
+    text-decoration: none;
+	cursor: pointer;
 }
