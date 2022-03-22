@@ -1,0 +1,120 @@
+.SearchingBar{
+	background-color: aqua;
+	width: 40%;
+	border-radius: 50px;
+	height: 30px;
+	left: 50%;
+	margin: auto;
+}
+
+.IngredientForm{
+	width: 60%;
+	border-radius: 50px;
+	margin: auto;
+	margin-top: 30px;
+	padding: 25px;
+	border-style: double;
+	border-color: rgb(0, 75, 65);
+	border-width: 5px;
+	max-height: 75vh;
+	overflow-y: scroll;
+	min-width: fit-content;
+}
+.IngredientBar{
+	width: 60%;
+	border-radius: 50px;
+	height: auto+30px;
+	margin: auto;
+	margin-top: 30px;
+	padding: 10px;
+	display: flex;
+	justify-content: space-between;
+	min-width: fit-content;
+}
+#Title{
+	width: 200px;
+	min-width: 200px;
+	border-radius: 50px;
+	height: auto;
+	font-size: large;
+	padding: 10px;
+	border-style: double;
+	border-color: rgb(0, 75, 65);
+	border-width: 5px;
+}
+#AddIngredient{
+	color: #fbfdff;
+	background: rgb(0, 75, 65);
+	box-shadow: 0 0 20px gray;
+	padding: 15px;
+	font-size: large;
+	border-radius: 15px;
+	min-width: fit-content;
+    text-decoration: none;
+}
+.IngredientElement{
+	width: 30%;
+	border-radius: 50px;
+	height: auto;
+	margin: auto;
+	margin-top: 30px;
+	padding: 25px;
+	border-style: double;
+	border-color: rgb(0, 75, 65);
+	border-width: 5px;
+	min-width: fit-content;
+	display: inline;
+	justify-content: center;
+}
+#AddIngredient:hover {
+    cursor: pointer;
+}
+::-webkit-scrollbar {
+	width: 3px;
+}
+
+  /* Track */
+::-webkit-scrollbar-track {
+	background: rgb(0, 75, 65);
+}
+
+  /* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+
+  /* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: rgb(184, 67, 67);
+}
+.StoredIngredients{
+	left: 0.5%;
+	width: 18%;
+	min-width: fit-content;
+	position: absolute;
+	height: 35%;
+	border-style: double;
+	border-color: rgb(179, 96, 48);
+	border-width: 5px;
+	border-radius: 20px;
+	text-align: center;
+	font-size: large;
+	overflow-y: scroll;
+}
+.AddToStoreButton{
+	color: #fbfdff;
+	background: rgb(0, 75, 65);
+	box-shadow: 0 0 20px gray;
+	padding: 10px;
+	border-radius: 15px;
+	min-width: fit-content;
+    text-decoration: none;
+	cursor: pointer;
+}
+.Name{
+	padding: 10px;
+}
+#Filter{
+	font-size: large;
+	border-radius: 5px;
+}

@@ -4,6 +4,8 @@ import './App.css';
 import Navbar from './components/Navbar';
 import LoginRegister from './components/Login/';
 import Ingredient from './components/Ingredient';
+import IngredientAdmin from './components/IngredientAdmin';
+import AddIngredient from './components/AddIngredient';
 import Recipes from './components/Recipes';
 import LogOutStart from './components/LogOutStart';
 import IngrRecSplit from './components/IngeRec-split';
@@ -11,6 +13,10 @@ import NavbarLogOut from './components/NavbarLogout';
 import { SessionContext, UserSession } from './session';
 import { useState } from 'react';
 import { deleteCookie, getCookie, setCookie } from './cookie';
+import EditIngredient from './components/EditIngredient';
+import RecipesAdmin from './components/RecipesAdmin';
+import AddRecipe from './components/AddRecipe';
+
 
 function App() {
   const token = getCookie('security_header');
@@ -40,11 +46,23 @@ function App() {
                   return [
                    <Route path="/recipes">
                       <Navbar/>
-                      <Recipes/>
+                      <RecipesAdmin/>
                     </Route>,
+                    <Route path="/addrecipe">
+                    <Navbar/>
+                    <AddRecipe/>
+                  </Route>,
                     <Route path="/ingredients">
                       <Navbar/>
                           <Ingredient/>
+                    </Route>,
+                    <Route path="/addingredient">
+                    <Navbar/>
+                        <AddIngredient/>
+                    </Route>,
+                    <Route path="/editingredient">
+                    <Navbar/>
+                        <EditIngredient/>
                     </Route>,
                     <Route path="/start">
                       <Navbar/>

@@ -1,0 +1,28 @@
+.generalForm{
+	width: 40%;
+	border-radius: 50px;
+	margin: auto;
+	margin-top: 30px;
+	padding: 25px;
+	max-height: 75vh;
+	min-width: fit-content;
+	min-height: 40%;
+	border-style: double;
+	border-color: rgb(0, 75, 65);
+	border-width: 5px;
+}
+.label1{
+	font-size: large;
+}
+
+#UpdateButton{
+	color: #fbfdff;
+	background: rgb(0, 75, 65);
+	box-shadow: 0 0 20px gray;
+	margin-top: 10px;
+	padding: 15px;
+	font-size: large;
+	border-radius: 15px;
+	min-width: fit-content;
+    text-decoration: none;
+}
