@@ -8,6 +8,9 @@
 	margin: 0;
 	font-family: Roboto, -apple-system, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
 	background: rgb(204, 204, 204);
+	height: 100vw;
+	width: 100%;
+	
 }
 
 .forms-section {
