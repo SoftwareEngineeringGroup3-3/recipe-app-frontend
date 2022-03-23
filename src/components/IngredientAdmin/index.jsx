@@ -72,27 +72,27 @@ function IngredientForm() {
   // }
 
 
-  function deleteIngredient(id) {
-    fetch(`${apiUrl}/ingredients/${id}}`, {
-      method: 'DELETE'
-    }).then(res => {
-      res.json().then((data) => {
-        if (data.error) {
-          setError(data.message);
-        } else {
-          var item = document.getElementById(data);
-          item.parentNode.removeChild(item);
-          console.log(100);
-        }
-      }).catch(error => {
-        console.error(error);
-        setError('Invalid server response');
-      }).catch(error => {
-        console.error(error);
-        setError('Failed to connect');
-      })
-    });
-  }
+  // function deleteIngredient(id) {
+  //   fetch(`${apiUrl}/ingredients/${id}}`, {
+  //     method: 'DELETE'
+  //   }).then(res => {
+  //     res.json().then((data) => {
+  //       if (data.error) {
+  //         setError(data.message);
+  //       } else {
+  //         var item = document.getElementById(data);
+  //         item.parentNode.removeChild(item);
+  //         console.log(100);
+  //       }
+  //     }).catch(error => {
+  //       console.error(error);
+  //       setError('Invalid server response');
+  //     }).catch(error => {
+  //       console.error(error);
+  //       setError('Failed to connect');
+  //     })
+  //   });
+  // }
 
 
 
@@ -126,7 +126,7 @@ function IngredientForm() {
               Edit {element.id}
             </a>
           </button>
-          <button className="DeleteButton" onClick={deleteIngredient(element.id)} type="submit" > Delete
+          <button className="DeleteButton"  type="submit" > Delete
 
           </button>
         </div>)
