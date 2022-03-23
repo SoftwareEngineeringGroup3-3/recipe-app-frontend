@@ -14,7 +14,7 @@ function IngrRecSplit() {
             
         </div>
         <div className='right-split'>
-            <a href="/ingredients" className='ingrRec-split'>
+            <a href="/ingredientsAdmin" className='ingrRec-split'>
               <label className='recLeb'>Ingredients</label>
               <img src={ingredients} alt={ingredients} className='img-rec'></img>
             </a>

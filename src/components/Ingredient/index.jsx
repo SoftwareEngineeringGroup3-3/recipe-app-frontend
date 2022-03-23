@@ -1,5 +1,9 @@
 import React from 'react'
 import styles from './styles.css'
+import useEffect from 'react';
+
+
+
 
 function Ingredient() {
   return (
@@ -40,10 +44,13 @@ function IngredientForm(){
 }
 
 function StoredIngredients(){
+
+
+
   return(
-    <div class="StoredIngredients">
+    <div class="StoredIngredients" >
       <div id="StoredTitle">Stored Ingredients</div>
-      <div class="StoredElement">Stored Element</div>
+      <div class="StoredElement">ingredients</div>
     </div>
   )
 }

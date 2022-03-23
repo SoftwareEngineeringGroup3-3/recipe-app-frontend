@@ -56,6 +56,10 @@ function App() {
                         <Navbar /> 
                         <Ingredient />
                       </Route>,
+                      <Route path="/ingredientsAdmin">
+                        <Navbar /> 
+                        <IngredientAdmin />
+                      </Route>,
                       <Route path="/addingredient">
                         <Navbar />
                         <AddIngredient />
