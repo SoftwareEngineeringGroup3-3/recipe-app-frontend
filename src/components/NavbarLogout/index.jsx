@@ -17,12 +17,12 @@ function NavbarLogOut() {
     };
     return (
       <nav className="nav">
-        <a href="/logStart" className="nav__brand">
+        <a href="/" className="nav__brand">
           recipe app
         </a>
         <ul className={active}>
           <li className="nav__item">
-            <a href="/logStart" className="nav__link">
+            <a href="/" className="nav__link">
               Home
             </a>
           </li>

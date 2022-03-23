@@ -22,10 +22,11 @@ function IngredientAdmin() {
 }
 
 function IngredientForm() {
-  const [recipes, setRecipes] = useState([]);
+  const [ingredients, setIngredients] = useState([]);
+
   const [error, setError] = useState(false);
   let navigate = useHistory();
-
+  var stringTmp = 1;
 
   function getIngredients() {
     fetch(`${apiUrl}/ingredients`, {
@@ -35,7 +36,7 @@ function IngredientForm() {
         if (data.error) {
           setError(data.message);
         } else {
-          setRecipes(data);
+          setIngredients(data);
           //return data;
         }
       }).catch(error => {
@@ -51,18 +52,71 @@ function IngredientForm() {
   document.addEventListener("DOMContentLoaded", function(){
     getIngredients();
   });
+  document.addEventListener("DOMContentLoaded", function(){
+    deleteIngredient();
+  });
+  // function deleteIngredient(el) {
+  //   var ingFormChildren = document.getElementById("IngForm").children;
+  //   var isThere = false;
+  //   for (let item in ingFormChildren) {
+  //     for (let tmp in item.children) {
+  //       if(tmp==el){
+  //         isThere=true;
+  //         break;
+  //       }
+  //     }
+  //     if(isThere==true){
+  //       var name = item.firstChild.useContext;
+  //       console.log(name);
+  //     }
+  //   }
+  // }
 
+  function deleteIngredient(id) {
+    fetch(`${apiUrl}/ingredients/${id}`, {
+      method: 'DELETE'
+    }).then(res => {
+      res.json().then((data) => {
+        if (data.error) {
+          setError(data.message);
+        } else {
+          //setRecipes(data);
+          //return data;
+        }
+      }).catch(error => {
+        console.error(error);
+        setError('Invalid server response');
+      }).catch(error => {
+        console.error(error);
+        setError('Failed to connect');
+      })
+    });
+    
+  }
+  
+  // function EditIngredient(id){
+  //   const newState = this.state;
+  //   const index = newState.players.findIndex(a => a.id === id);
+
+  //   if (index === -1) return;
+  //   newState.players.splice(index, 1);
+
+  //   this.setState(newState);
+  // }
+  
     return (
-      <div class="IngredientForm" >
+      <div id="IngForm" class="IngredientForm" >
         {
-          recipes.map(element => <div class="IngredientElement">
-            <div class="IngredientName">{element.name}
+          ingredients.map(element => <div class="IngredientElement">
+            <div class="IngredientName" >{element.name}
 
             </div>
-            <button href="/EditIngredient" class="EditButton" type="submit"> Edit
-
+            <button  className="EditButton" type="submit"> 
+              <a href={"/EditIngredient/"} className="EditButton" >
+                Edit
+              </a>
             </button>
-            <button class="DeleteButton" type="submit"> Delete
+            <button className="DeleteButton" type="submit" onClick={deleteIngredient(element.id)}> Delete
 
             </button>
           </div>)

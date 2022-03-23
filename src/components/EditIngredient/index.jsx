@@ -12,7 +12,7 @@ function EditIngredient() {
           <legend>Edit an ingredient</legend>
           <div className="input-block">
             <label class="label1">Name of ingredient</label>
-            <input id="name" type="text"/>
+            <input id="name" type="text" readonly/>
           </div>
           <div className="input-block">
             <label class="label1">New name</label>

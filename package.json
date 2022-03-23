@@ -12,6 +12,8 @@
     "react-icons": "^4.3.1",
     "react-router-dom": "^5.3.0",
     "react-scripts": "^5.0.0",
+    "requests": "^0.3.0",
+    "selenium": "^2.20.0",
     "start": "^5.1.0",
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.4"

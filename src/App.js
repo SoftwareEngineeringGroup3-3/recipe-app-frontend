@@ -77,14 +77,17 @@ function App() {
                   ]
                 } else if (!session || !session.valid) {
                   return [
-                   <Route path="/login">
+                    <Switch>
+                        <Route path="/login">
                      <NavbarLogOut/>
                     <LoginRegister/>
                     </Route>,
-                    <Route path="/logStart">
+                    <Route path="/">
                       <NavbarLogOut/>
                       <LogOutStart/>
                     </Route>
+                    </Switch>
+                   
                   ]
                 }
                  else if(session.isAdmin && session){
