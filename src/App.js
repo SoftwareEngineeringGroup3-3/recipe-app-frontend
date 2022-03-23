@@ -53,7 +53,7 @@ function App() {
                         <AddRecipe /> 
                       </Route>,
                       <Route path="/ingredients">
-                        <Navbar />
+                        <Navbar /> 
                         <Ingredient />
                       </Route>,
                       <Route path="/addingredient">
