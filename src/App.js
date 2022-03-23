@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import LoginRegister from './components/Login/';
@@ -20,10 +20,10 @@ import AddRecipe from './components/AddRecipe';
 
 function App() {
   const token = getCookie('security_header');
-  const [session, setSession] = useState(new UserSession(token));
+  const [ session, setSession ] = useState(new UserSession(token));
 
   const setNewSession = (newSession) => {
-    if (!newSession) {
+    if(!newSession){
       deleteCookie('security_header');
     }
     setSession(newSession);
@@ -31,16 +31,17 @@ function App() {
   
   
   return (
-    <SessionContext.Provider value={{
+    <SessionContext.Provider value = {{
       session: session,
       setSession: setNewSession
     }}>
       <Router>
         <div className="app">
+
           {
             (
               () => {
-                if (session && session.valid) {
+                if(session && session.valid) {
                   return [
                     <Switch>
                       <Route path="/recipes">
@@ -72,16 +73,14 @@ function App() {
                   ]
                 } else if (!session || !session.valid) {
                   return [
-                    <Switch>
-                      <Route path="/login">
-                        <NavbarLogOut />
-                        <LoginRegister />
-                      </Route>,
-                      <Route path="/">
-                        <NavbarLogOut />
-                        <LogOutStart />
-                      </Route>
-                    </Switch>
+                   <Route path="/login">
+                     <NavbarLogOut/>
+                    <LoginRegister/>
+                    </Route>,
+                    <Route path="/logStart">
+                      <NavbarLogOut/>
+                      <LogOutStart/>
+                    </Route>
                   ]
                 }
                  else if(session.isAdmin && session){
@@ -116,11 +115,11 @@ function App() {
             )()
           }
         </div>
-
-
+      
+      
       </Router>
     </SessionContext.Provider>
-
+    
   );
 }
 

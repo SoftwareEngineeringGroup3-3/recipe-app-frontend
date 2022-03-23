@@ -6,6 +6,7 @@ import { useContext, useState } from 'react';
 
 function IngredientAdmin() {
   return (
+<<<<<<< HEAD
     <div>
       <div class="IngredientBar">
         <div id="Title"><h4>List of ingredients:</h4></div>
@@ -13,6 +14,19 @@ function IngredientAdmin() {
         <a type="submit" id="AddIngredient" href='/addingredient'>
           Add Ingredient
         </a>
+=======
+      <div class="All">
+        <div class="IngredientBar">
+          <div id="Title"><h4>List of ingredients:</h4></div>
+          <input id="Filter" type="text" placeholder='Start writting ingredient'></input>
+          <a type="submit" id="AddIngredient" href='/addingredient'>
+              Add Ingredient
+            </a>
+        </div>
+        <IngredientForm>
+        </IngredientForm>
+
+>>>>>>> 37f502024a492eff8774638c0ffb05f041833b78
       </div>
       <IngredientForm>
       </IngredientForm>
