@@ -11,15 +11,15 @@ function EditIngredient() {
         <fieldset>
           <legend>Edit an ingredient</legend>
           <div className="input-block">
-            <label class="label1">Name of ingredient</label>
+            <label className="label1">Name of ingredient</label>
             <input id="name" type="text" readonly/>
           </div>
           <div className="input-block">
-            <label class="label1">New name</label>
+            <label className="label1">New name</label>
             <input id="confirm-name" type="text" />
           </div>
           <div className="input-block">
-            <label class="label1">New link to photo</label>
+            <label className="label1">New link to photo</label>
             <input id="confirm-name" type="text" />
           </div>
         </fieldset>

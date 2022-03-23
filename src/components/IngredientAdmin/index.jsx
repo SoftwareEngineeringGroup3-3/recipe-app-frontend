@@ -23,7 +23,6 @@ function IngredientAdmin() {
 
 function IngredientForm() {
   const [ingredients, setIngredients] = useState([]);
-
   const [error, setError] = useState(false);
   let navigate = useHistory();
   var stringTmp = 1;
@@ -48,13 +47,13 @@ function IngredientForm() {
       })
     });
   }
-  
-  document.addEventListener("DOMContentLoaded", function(){
+
+  document.addEventListener("DOMContentLoaded", function () {
     getIngredients();
   });
-  document.addEventListener("DOMContentLoaded", function(){
-    deleteIngredient();
-  });
+  // document.addEventListener("DOMContentLoaded", function(){
+  //   deleteIngredient();
+  // });
   // function deleteIngredient(el) {
   //   var ingFormChildren = document.getElementById("IngForm").children;
   //   var isThere = false;
@@ -72,16 +71,18 @@ function IngredientForm() {
   //   }
   // }
 
+
   function deleteIngredient(id) {
-    fetch(`${apiUrl}/ingredients/${id}`, {
+    fetch(`${apiUrl}/ingredients/${id}}`, {
       method: 'DELETE'
     }).then(res => {
       res.json().then((data) => {
         if (data.error) {
           setError(data.message);
         } else {
-          //setRecipes(data);
-          //return data;
+          var item = document.getElementById(data);
+          item.parentNode.removeChild(item);
+          console.log(100);
         }
       }).catch(error => {
         console.error(error);
@@ -91,9 +92,18 @@ function IngredientForm() {
         setError('Failed to connect');
       })
     });
-    
   }
-  
+
+
+
+  // document.getElementsByClassName("DeleteButton").addEventListener("click", function () {
+  //   deleteIngredient(0);
+  // });
+  // // var item = document.getElementById(id);
+
+  // // item.parentNode.removeChild(item)
+  //  }
+
   // function EditIngredient(id){
   //   const newState = this.state;
   //   const index = newState.players.findIndex(a => a.id === id);
@@ -103,27 +113,27 @@ function IngredientForm() {
 
   //   this.setState(newState);
   // }
-  
-    return (
-      <div id="IngForm" class="IngredientForm" >
-        {
-          ingredients.map(element => <div class="IngredientElement">
-            <div class="IngredientName" >{element.name}
 
-            </div>
-            <button  className="EditButton" type="submit"> 
-              <a href={"/EditIngredient/"} className="EditButton" >
-                Edit
-              </a>
-            </button>
-            <button className="DeleteButton" type="submit" onClick={deleteIngredient(element.id)}> Delete
+  return (
+    <div id="IngForm" class="IngredientForm" >
+      {
+        ingredients.map(element => <div className="IngredientElement" >
+          <div className="IngredientName" >{element.name}
 
-            </button>
-          </div>)
-    }
-      </div>
+          </div>
+          <button className="EditButton" type="submit">
+            <a href={"/EditIngredient/"} className="EditButton" >
+              Edit {element.id}
+            </a>
+          </button>
+          <button className="DeleteButton" onClick={deleteIngredient(element.id)} type="submit" > Delete
 
-    );
+          </button>
+        </div>)
+      }
+    </div>
+
+  );
 }
 
 export default IngredientAdmin

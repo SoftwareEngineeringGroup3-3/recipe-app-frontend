@@ -7,12 +7,12 @@ import useEffect from 'react';
 
 function Ingredient() {
   return (
-      <div class="All">
+      <div className="All">
          <StoredIngredients></StoredIngredients>
-        <div class="IngredientBar">
+        <div className="IngredientBar">
           <div id="Title"><h4>List of ingredients:</h4></div>
-          <button class="BarButton" type="submit">Next</button>
-          <button class="BarButton" type="submit">Finish</button>
+          <button className="BarButton" type="submit">Next</button>
+          <button className="BarButton" type="submit">Finish</button>
             
           
         </div>
@@ -29,11 +29,11 @@ function IngredientForm(){
   
 
   return(
-    <div class="IngredientForm">
+    <div className="IngredientForm">
     {
-      recipes.map(name => <div class="IngredientElement">
-          <div class="Name">{name}</div>
-          <button class="AddToStoreButton" type="submit">Add to stored</button>
+      recipes.map(name => <div className="IngredientElement">
+          <div className="Name">{name}</div>
+          <button className="AddToStoreButton" type="submit">Add to stored</button>
           
         </div>)
     }
@@ -48,9 +48,9 @@ function StoredIngredients(){
 
 
   return(
-    <div class="StoredIngredients" >
+    <div className="StoredIngredients" >
       <div id="StoredTitle">Stored Ingredients</div>
-      <div class="StoredElement">ingredients</div>
+      <div className="StoredElement">ingredients</div>
     </div>
   )
 }
