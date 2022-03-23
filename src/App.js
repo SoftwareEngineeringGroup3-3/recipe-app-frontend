@@ -28,7 +28,8 @@ function App() {
     }
     setSession(newSession);
   }
-
+  
+  
   return (
     <SessionContext.Provider value={{
       session: session,
@@ -36,9 +37,6 @@ function App() {
     }}>
       <Router>
         <div className="app">
-
-
-
           {
             (
               () => {
@@ -51,7 +49,7 @@ function App() {
                       </Route>,
                       <Route path="/addrecipe">
                         <Navbar />
-                        <AddRecipe />
+                        <AddRecipe /> 
                       </Route>,
                       <Route path="/ingredients">
                         <Navbar />
@@ -85,6 +83,34 @@ function App() {
                       </Route>
                     </Switch>
                   ]
+                }
+                 else if(session.isAdmin && session){
+                  <Switch>
+                      <Route path="/recipes">
+                        <Navbar />
+                        <RecipesAdmin />
+                      </Route>,
+                      <Route path="/addrecipe">
+                        <Navbar />
+                        <AddRecipe />
+                      </Route>,
+                      <Route path="/ingredients">
+                        <Navbar />
+                        <Ingredient />
+                      </Route>,
+                      <Route path="/addingredient">
+                        <Navbar />
+                        <AddIngredient />
+                      </Route>,
+                      <Route path="/editingredient">
+                        <Navbar />
+                        <EditIngredient />
+                      </Route>,
+                      <Route path="/">
+                        <Navbar />
+                        <IngrRecSplit />
+                      </Route>
+                    </Switch>
                 }
               }
             )()
