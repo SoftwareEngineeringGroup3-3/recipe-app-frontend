@@ -29,6 +29,7 @@ function IngredientForm() {
 
   function getIngredients() {
     fetch(`${apiUrl}/ingredients`, {
+      credentials: 'include',
       method: 'GET'
     }).then(res => {
       res.json().then((data) => {

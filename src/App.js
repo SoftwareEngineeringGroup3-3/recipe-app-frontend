@@ -90,7 +90,7 @@ function App() {
                    
                   ]
                 }
-                 else if(session.isAdmin && session){
+                 else if(session.isAdmin && session){ //I don't think it will work this way
                   <Switch>
                       <Route path="/recipes">
                         <Navbar />

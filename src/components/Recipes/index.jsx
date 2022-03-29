@@ -31,6 +31,7 @@ function RecipeForm(){
 
   function getRecipes() {
     fetch(`${apiUrl}/recipes`, {
+      credentials: 'include',
       method: 'GET'
     }).then(res => {
       res.json().then((data) => {

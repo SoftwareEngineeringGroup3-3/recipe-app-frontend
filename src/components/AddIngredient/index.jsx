@@ -14,6 +14,7 @@ function AddIngredient() {
   function submitIngredient(ev){
     ev.preventDefault();
     fetch(`${apiUrl}/ingredients`, {
+      credentials: 'include',
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({name: name})

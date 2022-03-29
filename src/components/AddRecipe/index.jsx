@@ -32,6 +32,7 @@ function IngForm() {
 
   function getIngredients() {
     fetch(`${apiUrl}/ingredients`, {
+      credentials: 'include',
       method: 'GET'
     }).then(res => {
       res.json().then((data) => {
@@ -53,6 +54,7 @@ function IngForm() {
 
   function addRecipe() {
     fetch(`${apiUrl}/recipes`, {
+      credentials: 'include',
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: name, ingredients: ingredients })
