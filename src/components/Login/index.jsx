@@ -22,7 +22,7 @@ function LoginRegister() {
 
   function submitLogin(ev) {
     ev.preventDefault();
-    fetch(`${apiUrl}/logging`, {
+    fetch(`${apiUrl}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username: username, password: password })
