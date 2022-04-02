@@ -1,6 +1,7 @@
 import React, {useState, useContext}  from 'react';
 import './styles.css';
 import { SessionContext, Session, UserSession } from '../../session';
+import { deleteCookie } from '../../cookie';
 //import { Link } from 'react-router-dom/match';
 
 function Navbar() {
@@ -24,6 +25,7 @@ function Navbar() {
     
     const logout = () => {
       setSession(null);
+      deleteCookie('admin_credentials');
     };
 
 

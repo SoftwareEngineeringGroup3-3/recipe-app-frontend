@@ -20,6 +20,8 @@ import AddRecipe from './components/AddRecipe';
 
 function App() {
   const token = getCookie('security_header');
+  const admin = getCookie('admin_credentials');
+  const isAdmin = admin != null ? (admin == encodeURIComponent(1) ? true : false) : false;
   const [ session, setSession ] = useState(new UserSession(token));
 
   const setNewSession = (newSession) => {
@@ -41,22 +43,22 @@ function App() {
           {
             (
               () => {
-                if(session && session.valid) {
+                if(session && session.valid && !isAdmin) {
                   return [
                     <Switch>
                       <Route path="/recipes">
                         <Navbar />
                         <RecipesAdmin />
                       </Route>,
-                      <Route path="/addrecipe">
+                      {/* <Route path="/addrecipe">
                         <Navbar />
                         <AddRecipe /> 
-                      </Route>,
+                      </Route>, */}
                       <Route path="/ingredients">
                         <Navbar /> 
                         <Ingredient />
                       </Route>,
-                      <Route path="/ingredientsAdmin">
+                      {/* <Route path="/ingredientsAdmin">
                         <Navbar /> 
                         <IngredientAdmin />
                       </Route>,
@@ -67,7 +69,7 @@ function App() {
                       <Route path="/editingredient">
                         <Navbar />
                         <EditIngredient />
-                      </Route>,
+                      </Route>, */}
                       <Route path="/">
                         <Navbar />
                         <IngrRecSplit />
@@ -78,20 +80,19 @@ function App() {
                 } else if (!session || !session.valid) {
                   return [
                     <Switch>
-                        <Route path="/login">
-                     <NavbarLogOut/>
-                    <LoginRegister/>
-                    </Route>,
-                    <Route path="/">
-                      <NavbarLogOut/>
-                      <LogOutStart/>
-                    </Route>
+                      <Route path="/login">
+                        <NavbarLogOut/>
+                        <LoginRegister/>
+                      </Route>,
+                      <Route path="/">
+                        <NavbarLogOut/>
+                        <LogOutStart/>
+                      </Route>
                     </Switch>
-                   
                   ]
-                }
-                 else if(session.isAdmin && session){ //I don't think it will work this way
-                  <Switch>
+                } else if(session && session.valid && isAdmin){ //admin
+                  return [
+                    <Switch>
                       <Route path="/recipes">
                         <Navbar />
                         <RecipesAdmin />
@@ -99,6 +100,10 @@ function App() {
                       <Route path="/addrecipe">
                         <Navbar />
                         <AddRecipe />
+                      </Route>,
+                      <Route path="/ingredientsAdmin">
+                        <Navbar /> 
+                        <IngredientAdmin />
                       </Route>,
                       <Route path="/ingredients">
                         <Navbar />
@@ -117,6 +122,7 @@ function App() {
                         <IngrRecSplit />
                       </Route>
                     </Switch>
+                  ]
                 }
               }
             )()

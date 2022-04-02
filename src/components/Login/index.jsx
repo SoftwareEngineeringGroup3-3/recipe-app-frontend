@@ -32,6 +32,7 @@ function LoginRegister() {
           setError(data.message);
         } else {
           setCookie('security_header', data.security_header, 1000 * 3600 * 2); //expires after 2 hours
+          setCookie('admin_credentials', data.user.user_is_admin, 1000 * 3600 * 2);
           setSession(new UserSession(data.security_header));
           navigate.push('/start');
         }
