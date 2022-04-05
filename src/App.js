@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import LoginRegister from './components/Login/';
@@ -10,6 +10,8 @@ import Recipes from './components/Recipes';
 import LogOutStart from './components/LogOutStart';
 import IngrRecSplit from './components/IngeRec-split';
 import NavbarLogOut from './components/NavbarLogout';
+import NavbarAdmin from './components/NavbarAdmin';
+import DisplayUsers from './components/DisplayUsers';
 import { SessionContext, UserSession } from './session';
 import { useState } from 'react';
 import { deleteCookie, getCookie, setCookie } from './cookie';
@@ -22,18 +24,18 @@ function App() {
   const token = getCookie('security_header');
   const admin = getCookie('admin_credentials');
   const isAdmin = admin != null ? (admin == encodeURIComponent(1) ? true : false) : false;
-  const [ session, setSession ] = useState(new UserSession(token));
+  const [session, setSession] = useState(new UserSession(token));
 
   const setNewSession = (newSession) => {
-    if(!newSession){
+    if (!newSession) {
       deleteCookie('security_header');
     }
     setSession(newSession);
   }
-  
-  
+
+
   return (
-    <SessionContext.Provider value = {{
+    <SessionContext.Provider value={{
       session: session,
       setSession: setNewSession
     }}>
@@ -43,7 +45,7 @@ function App() {
           {
             (
               () => {
-                if(session && session.valid && !isAdmin) {
+                if (session && session.valid && !isAdmin) {
                   return [
                     <Switch>
                       <Route path="/recipes">
@@ -55,7 +57,7 @@ function App() {
                         <AddRecipe /> 
                       </Route>, */}
                       <Route path="/ingredients">
-                        <Navbar /> 
+                        <Navbar />
                         <Ingredient />
                       </Route>,
                       {/* <Route path="/ingredientsAdmin">
@@ -81,46 +83,52 @@ function App() {
                   return [
                     <Switch>
                       <Route path="/login">
-                        <NavbarLogOut/>
-                        <LoginRegister/>
+                        <NavbarLogOut />
+                        <LoginRegister />
                       </Route>,
                       <Route path="/">
-                        <NavbarLogOut/>
-                        <LogOutStart/>
+                        <NavbarLogOut />
+                        <LogOutStart />
                       </Route>
                     </Switch>
                   ]
-                } else if(session && session.valid && isAdmin){ //admin
+                } else if (session && session.valid && isAdmin) { //admin
                   return [
                     <Switch>
                       <Route path="/recipes">
-                        <Navbar />
+                        <NavbarAdmin />
                         <RecipesAdmin />
                       </Route>,
                       <Route path="/addrecipe">
-                        <Navbar />
+                        <NavbarAdmin />
                         <AddRecipe />
                       </Route>,
                       <Route path="/ingredientsAdmin">
-                        <Navbar /> 
+                        <NavbarAdmin />
                         <IngredientAdmin />
                       </Route>,
                       <Route path="/ingredients">
-                        <Navbar />
+                        <NavbarAdmin />
                         <Ingredient />
                       </Route>,
                       <Route path="/addingredient">
-                        <Navbar />
+                        <NavbarAdmin />
                         <AddIngredient />
                       </Route>,
                       <Route path="/editingredient">
-                        <Navbar />
+                        <NavbarAdmin />
                         <EditIngredient />
                       </Route>,
+                      <Route path="/users">
+                        <NavbarAdmin />
+                        <DisplayUsers />
+                      </Route>,
                       <Route path="/">
-                        <Navbar />
+                        <NavbarAdmin />
                         <IngrRecSplit />
-                      </Route>
+                      </Route>,
+                      
+
                     </Switch>
                   ]
                 }
@@ -128,11 +136,11 @@ function App() {
             )()
           }
         </div>
-      
-      
+
+
       </Router>
     </SessionContext.Provider>
-    
+
   );
 }
 
