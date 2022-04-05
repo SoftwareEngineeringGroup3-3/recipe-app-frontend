@@ -4,13 +4,21 @@ import { useContext, useState } from 'react';
 import { apiUrl } from '../../api';
 import { useHistory } from 'react-router-dom';
 
+var ing = ['a','b'];
+
 function AddRecipe() {
   return (
     <div class="Everything">
       <Recipe></Recipe>
       <div class="IngBar">
-        <div id="Title"><h4>List of ingredients:</h4></div>
-
+        <div id="Title"><h4>List of ingredients:</h4>
+        {/* {
+          ing.map(element => <div className="IngElement">
+            {element.value}
+            </div>
+          )} */}
+        </div>
+        
         <input id="Filter" type="text" placeholder='Start writting ingredient'></input>
 
       </div>
@@ -81,16 +89,27 @@ function IngForm() {
     getIngredients();
   });
 
+  function pushRules(list){
+    
+    var w1 = document.getElementById("Namee");
+    console.log(ingredients.id);
+    var w = w1.innerHTML;
+    var li = document.createElement("li");
 
+    var rule = document.createTextNode(w);
+    li.appendChild(rule);
+    console.log(rule)
+    
+  }
 
   return (
     <div className="IngForm" onSubmit={addRecipe}>
       {
         ingredients.map(element => <div className="IngElement">
 
-          <div className="Namee">{element.name}</div>
-          <button className="AddToRecipe" type="submit">Add to recipe</button>
-
+          <div className="Namee" id="Namee" >{element.name}</div>
+          <button className="AddToRecipe" id="AddToRecipe" type="submit" onClick={pushRules}>Add to recipe</button>
+          
         </div>)
       }
     </div>
@@ -100,11 +119,17 @@ function IngForm() {
 }
 
 function Recipe() {
+  
   return (
     <div className="IngShow">
       {
         <div className="Recipe">Stored ingredients:
-          <div className="StoredIng"> Here will be stored</div>
+        {
+          ing.map(element => <div className="IngElement" id="tempList">
+            {element}
+            </div>
+          )}
+          {/* <div className="StoredIng"> Here will be stored</div> */}
         </div>
       }
     </div>

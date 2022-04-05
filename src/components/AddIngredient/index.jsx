@@ -48,12 +48,16 @@ function AddIngredient() {
             <input id="confirm-name" type="text" />
           </div> */}
         </fieldset>
-        <button type="submit" id="UpdateButton">
-          <a id="link" href="/ingredientsAdmin">
-          Add
-          </a>
-          </button>
+
+        
+        <button type="submit" id="UpdateButton" >Add
           
+        </button>
+        <button>
+            <a id="link" type="submit" href="/ingredientsAdmin">
+          Back
+          </a>
+        </button>
       </form>
   )
 }

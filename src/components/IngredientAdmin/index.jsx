@@ -4,6 +4,7 @@ import { useContext, useState } from 'react';
 import { apiUrl } from '../../api';
 import { useHistory } from 'react-router-dom';
 
+
 function IngredientAdmin() {
   return (
     <div class="All">
@@ -23,6 +24,7 @@ function IngredientAdmin() {
 
 function IngredientForm() {
   const [ingredients, setIngredients] = useState([]);
+  const [ingredientId, setIngredientId] = useState(0);
   const [error, setError] = useState(false);
   let navigate = useHistory();
   var stringTmp = 1;
@@ -48,54 +50,60 @@ function IngredientForm() {
       })
     });
   }
+  
+  function deleteIngredient() {
+    fetch(`${apiUrl}/ingredients/${ingredientId}}`, {
+      credentials: 'include',
+      method: 'DELETE'
+    }).then(res => {
+      res.json().then((data) => {
+        if (data.error) {
+          setError(data.message);
+        } else {
+          var item = document.getElementById(data);
+          item.parentNode.removeChild(item);
+          console.log(100);
+        }
+      }).catch(error => {
+        console.error(error);
+        setError('Invalid server response');
+      }).catch(error => {
+        console.error(error);
+        setError('Failed to connect');
+      })
+    });
+  }
 
   document.addEventListener("DOMContentLoaded", function () {
     getIngredients();
+    document.getElementById("DeleteButton").addEventListener("click", deleteIngredient())
   });
-  // document.addEventListener("DOMContentLoaded", function(){
-  //   deleteIngredient();
-  // });
-  // function deleteIngredient(el) {
-  //   var ingFormChildren = document.getElementById("IngForm").children;
-  //   var isThere = false;
-  //   for (let item in ingFormChildren) {
-  //     for (let tmp in item.children) {
-  //       if(tmp==el){
-  //         isThere=true;
-  //         break;
-  //       }
-  //     }
-  //     if(isThere==true){
-  //       var name = item.firstChild.useContext;
-  //       console.log(name);
-  //     }
-  //   }
-  // }
 
+  
+  
+  return (
+    <form id="IngForm" class="IngredientForm" onSubmit={deleteIngredient}>
+      {
+        ingredients.map(element => <div className="IngredientElement">
+          <div className="IngredientName" >{element.name}
 
-  // function deleteIngredient(id) {
-  //   fetch(`${apiUrl}/ingredients/${id}}`, {
-  //     method: 'DELETE'
-  //   }).then(res => {
-  //     res.json().then((data) => {
-  //       if (data.error) {
-  //         setError(data.message);
-  //       } else {
-  //         var item = document.getElementById(data);
-  //         item.parentNode.removeChild(item);
-  //         console.log(100);
-  //       }
-  //     }).catch(error => {
-  //       console.error(error);
-  //       setError('Invalid server response');
-  //     }).catch(error => {
-  //       console.error(error);
-  //       setError('Failed to connect');
-  //     })
-  //   });
-  // }
+          </div>
+          <button className="EditButton" type="submit">
+            <a href={"/EditIngredient/"} className="EditButton" >
+              Edit {element.id}
+            </a>
+          </button>
+          {/* <button className="DeleteButton" id="DeleteButton" type="submit" > Delete */}
+          <button className="DeleteButton" id="DeleteButton" type="submit" onClick={(e) => {this.setIngredientId(element.id)}}> Delete
+          </button>
+        </div>)
+      }
+    </form>
 
+  );
+}
 
+export default IngredientAdmin
 
   // document.getElementsByClassName("DeleteButton").addEventListener("click", function () {
   //   deleteIngredient(0);
@@ -115,26 +123,22 @@ function IngredientForm() {
   //   this.setState(newState);
   // }
 
-  return (
-    <div id="IngForm" class="IngredientForm" >
-      {
-        ingredients.map(element => <div className="IngredientElement" >
-          <div className="IngredientName" >{element.name}
-
-          </div>
-          <button className="EditButton" type="submit">
-            <a href={"/EditIngredient/"} className="EditButton" >
-              Edit {element.id}
-            </a>
-          </button>
-          <button className="DeleteButton"  type="submit" > Delete
-
-          </button>
-        </div>)
-      }
-    </div>
-
-  );
-}
-
-export default IngredientAdmin
+  // document.addEventListener("DOMContentLoaded", function(){
+  //   deleteIngredient();
+  // });
+  // function deleteIngredient(el) {
+  //   var ingFormChildren = document.getElementById("IngForm").children;
+  //   var isThere = false;
+  //   for (let item in ingFormChildren) {
+  //     for (let tmp in item.children) {
+  //       if(tmp==el){
+  //         isThere=true;
+  //         break;
+  //       }
+  //     }
+  //     if(isThere==true){
+  //       var name = item.firstChild.useContext;
+  //       console.log(name);
+  //     }
+  //   }
+  // }
