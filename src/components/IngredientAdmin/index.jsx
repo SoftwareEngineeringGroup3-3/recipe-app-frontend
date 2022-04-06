@@ -52,7 +52,7 @@ function IngredientForm() {
   }
   
   function deleteIngredient(id) {
-    fetch(`${apiUrl}/ingredients/${id}}`, {
+    fetch(`${apiUrl}/ingredients/${id}`, {
       credentials: 'include',
       method: 'DELETE'
     }).then(res => {
@@ -77,7 +77,7 @@ function IngredientForm() {
   
 
   return (
-    <form id="IngForm" class="IngredientForm">
+    <form id="IngForm" class="IngredientForm" >
       {
         ingredients.map((element,i) => <div className="IngredientElement" key={i}>
           <div className="IngredientName" >{element.name}
@@ -88,7 +88,7 @@ function IngredientForm() {
               Edit {element.id}
             </a>
           </button>
-          <button className="DeleteButton" id="DeleteButton" onClick={() => deleteIngredient(element.id)}> Delete
+          <button className="DeleteButton" id="DeleteButton" type="submit" onClick={() => deleteIngredient(element.id)}> Delete
           </button>
         </div>)
       }

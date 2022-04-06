@@ -23,7 +23,8 @@ function EditIngredient() {
   function getIngredients() {
     fetch(`${apiUrl}/ingredients`, {
       credentials: 'include',
-      method: 'GET'
+      method: 'GET',
+      
     }).then(res => {
       res.json().then((data) => {
         if (data.error) {
