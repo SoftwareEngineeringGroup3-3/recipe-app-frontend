@@ -105,7 +105,7 @@ function IngForm() {
   return (
     <div className="IngForm" onSubmit={addRecipe}>
       {
-        ingredients.map(element => <div className="IngElement">
+        ingredients.map((element,i) => <div className="IngElement" key={i}>
 
           <div className="Namee" id="Namee" >{element.name}</div>
           <button className="AddToRecipe" id="AddToRecipe" type="submit" onClick={pushRules}>Add to recipe</button>
@@ -125,7 +125,7 @@ function Recipe() {
       {
         <div className="Recipe">Stored ingredients:
         {
-          ing.map(element => <div className="IngElement" id="tempList">
+          ing.map((element,i) => <div className="IngElement" id="tempList" key={i}>
             {element}
             </div>
           )}

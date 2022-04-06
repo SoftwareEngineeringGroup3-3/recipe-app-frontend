@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './styles.css'
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { apiUrl } from '../../api';
 import { useHistory } from 'react-router-dom';
 
@@ -24,11 +24,12 @@ function IngredientAdmin() {
 
 function IngredientForm() {
   const [ingredients, setIngredients] = useState([]);
-  const [ingredientId, setIngredientId] = useState(0);
   const [error, setError] = useState(false);
-  let navigate = useHistory();
-  var stringTmp = 1;
 
+  useEffect(()=>{
+    getIngredients()
+  },[])
+  
   function getIngredients() {
     fetch(`${apiUrl}/ingredients`, {
       credentials: 'include',
@@ -39,7 +40,6 @@ function IngredientForm() {
           setError(data.message);
         } else {
           setIngredients(data);
-          //return data;
         }
       }).catch(error => {
         console.error(error);
@@ -51,8 +51,8 @@ function IngredientForm() {
     });
   }
   
-  function deleteIngredient() {
-    fetch(`${apiUrl}/ingredients/${ingredientId}}`, {
+  function deleteIngredient(id) {
+    fetch(`${apiUrl}/ingredients/${id}}`, {
       credentials: 'include',
       method: 'DELETE'
     }).then(res => {
@@ -60,9 +60,9 @@ function IngredientForm() {
         if (data.error) {
           setError(data.message);
         } else {
-          var item = document.getElementById(data);
-          item.parentNode.removeChild(item);
-          console.log(100);
+          getIngredients();
+          alert(id);
+          console.log(id);
         }
       }).catch(error => {
         console.error(error);
@@ -74,17 +74,12 @@ function IngredientForm() {
     });
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    getIngredients();
-    document.getElementById("DeleteButton").addEventListener("click", deleteIngredient())
-  });
+  
 
-  
-  
   return (
-    <form id="IngForm" class="IngredientForm" onSubmit={deleteIngredient}>
+    <form id="IngForm" class="IngredientForm">
       {
-        ingredients.map(element => <div className="IngredientElement">
+        ingredients.map((element,i) => <div className="IngredientElement" key={i}>
           <div className="IngredientName" >{element.name}
 
           </div>
@@ -93,8 +88,7 @@ function IngredientForm() {
               Edit {element.id}
             </a>
           </button>
-          {/* <button className="DeleteButton" id="DeleteButton" type="submit" > Delete */}
-          <button className="DeleteButton" id="DeleteButton" type="submit" onClick={(e) => {this.setIngredientId(element.id)}}> Delete
+          <button className="DeleteButton" id="DeleteButton" onClick={() => deleteIngredient(element.id)}> Delete
           </button>
         </div>)
       }
@@ -105,40 +99,3 @@ function IngredientForm() {
 
 export default IngredientAdmin
 
-  // document.getElementsByClassName("DeleteButton").addEventListener("click", function () {
-  //   deleteIngredient(0);
-  // });
-  // // var item = document.getElementById(id);
-
-  // // item.parentNode.removeChild(item)
-  //  }
-
-  // function EditIngredient(id){
-  //   const newState = this.state;
-  //   const index = newState.players.findIndex(a => a.id === id);
-
-  //   if (index === -1) return;
-  //   newState.players.splice(index, 1);
-
-  //   this.setState(newState);
-  // }
-
-  // document.addEventListener("DOMContentLoaded", function(){
-  //   deleteIngredient();
-  // });
-  // function deleteIngredient(el) {
-  //   var ingFormChildren = document.getElementById("IngForm").children;
-  //   var isThere = false;
-  //   for (let item in ingFormChildren) {
-  //     for (let tmp in item.children) {
-  //       if(tmp==el){
-  //         isThere=true;
-  //         break;
-  //       }
-  //     }
-  //     if(isThere==true){
-  //       var name = item.firstChild.useContext;
-  //       console.log(name);
-  //     }
-  //   }
-  // }

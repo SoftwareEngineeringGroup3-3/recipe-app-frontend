@@ -15,6 +15,11 @@ function EditIngredient() {
   const [disabled, setDisabled] = useState(false);
   var stringTmp = 1;
 
+
+  // function getIngredient(){
+
+  // }
+
   function getIngredients() {
     fetch(`${apiUrl}/ingredients`, {
       credentials: 'include',
@@ -72,9 +77,9 @@ function EditIngredient() {
   }
   return (
     
-      <form className="generalForm" onSubmit={submitIngredient}>
+      <form className="generalForm" onSubmit={setIngredients} >
         {
-          ingredients.map(element => <div className='IngredientElement'>
+          ingredients.map((element,i) => <div className='IngredientElement' key={i}>
           <fieldset>
           <legend>Edit an ingredient</legend>
           <div className="IngredientElement">
@@ -83,7 +88,7 @@ function EditIngredient() {
           </div>
           <div className="IngredientElement">
             <label className="label1">New name</label>
-            <input id="confirm-name" type="text" onInput={(ev) => {setName(ev.target.value);}}/>
+            <input id="confirm-name" type="text" onInput={(ev) => {setName(element.key);}}/>
           </div>
         </fieldset>
         </div>)
