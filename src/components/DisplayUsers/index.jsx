@@ -15,11 +15,17 @@ function DisplayUsers() {
                 <tr className='user-rows'>
                     <th>Username</th>
                     <th>Email</th>
+                    <th>Id</th>
+                    <th>Admin</th>
                 </tr>
                     {
                         users.map((element,i) => <tr className='user-rows' key={i}>
                             <td className='user-cols'>{element}</td>
                             <td className='user-cols'>{element}</td>
+                            <td className='user-cols'>{element}</td>
+                            <td className='user-cols'>{element}</td>
+                            <button>Edit</button>
+                            <button>Delete</button>
                         </tr>)
                     }
                 

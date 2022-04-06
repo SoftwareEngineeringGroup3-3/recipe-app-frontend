@@ -75,13 +75,13 @@ function RecipeFormAdmin(){
     });
   }
   
-
+  const r =["r1", "r2"];
   return(
     <div className="RecipeForm">
     {
-      recipes.map((element,i) => <div className="IngredientElement" key={i}>
+      r.map((element,i) => <div className="IngredientElement" key={i}>
           <div className="Name">{element}</div>
-          <button className="EditRecipe" type="submit">View</button>
+          <button className="ViewRecipe" type="submit">Edit</button>
           <button className="DeleteButton" id="DeleteButton" type="submit" onClick={() => deleteRecipes(element.id)}> Delete
           </button>
         </div>)
