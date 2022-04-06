@@ -26,10 +26,10 @@ function IngredientForm() {
   const [ingredients, setIngredients] = useState([]);
   const [error, setError] = useState(false);
 
-  useEffect(()=>{
+  useEffect(() => {
     getIngredients()
-  },[])
-  
+  }, [])
+
   function getIngredients() {
     fetch(`${apiUrl}/ingredients`, {
       credentials: 'include',
@@ -50,7 +50,7 @@ function IngredientForm() {
       })
     });
   }
-  
+
   function deleteIngredient(id) {
     fetch(`${apiUrl}/ingredients/${id}`, {
       credentials: 'include',
@@ -74,12 +74,36 @@ function IngredientForm() {
     });
   }
 
-  
+
 
   return (
     <form id="IngForm" class="IngredientForm" >
-      {
+      <table className='ing-disp'>
+      <tr className='ing-rows'>
+                    <th>Name</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+        {
+          ingredients.map((element, i) => <tr key={i} className='ing-cols'>
+            <td className='user-rows'>{element.name}</td>
+            <td className='user-rows'>
+              <button className="EditButton" type="submit">
+                <a href={"/EditIngredient/?id=" + element.id + "&name=" + element.name} className="EditButton" >
+                  Edit
+                </a>
+              </button>
+            </td>
+            <td className='user-rows'>
+            <button className="DeleteButton" id="DeleteButton" type="submit" onClick={() => deleteIngredient(element.id)}> Delete
+          </button>
+            </td>
+          </tr>)
+        }
+      </table>
+      {/* {
         ingredients.map((element,i) => <div className="IngredientElement" key={i}>
+          
           <div className="IngredientName" >{element.name}
 
           </div>
@@ -91,7 +115,7 @@ function IngredientForm() {
           <button className="DeleteButton" id="DeleteButton" type="submit" onClick={() => deleteIngredient(element.id)}> Delete
           </button>
         </div>)
-      }
+      } */}
     </form>
 
   );

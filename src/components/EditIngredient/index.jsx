@@ -20,13 +20,17 @@ function EditIngredient() {
   const urlParams = new URLSearchParams(queryString);
   const idIngredient = urlParams.get('id')
   const nameIngredient = urlParams.get('name')
+  var newName = "newName";
 
   function submitIngredient(){
+    // var tmp = document.getElementById("confirm-name");
+    // newName = tmp.getAttribute("text");
+    newName = document.getElementById("confirm-name").value;
     fetch(`${apiUrl}/ingredients/${idIngredient}`, {
       credentials: 'include',
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({name: nameIngredient})
+      body: JSON.stringify({name: newName})
     }).then(res => {
       res.json().then((data) => {
         if(data.error) {
@@ -55,7 +59,7 @@ function EditIngredient() {
           <legend>Edit an ingredient</legend>
           <div className="IngredientElement">
             <label className="label1">Name of ingredient</label>
-            <input id="name" type="text" defaultValue={nameIngredient} disabled={disabled}/>
+            <input id="name" type="text" defaultValue={nameIngredient} disabled={disabled} readOnly={true}/>
           </div>
           <div className="IngredientElement">
             <label className="label1">New name</label>
@@ -65,7 +69,9 @@ function EditIngredient() {
         
         }
         
-        <button type="submit" id="UpdateButton" onClick={() => submitIngredient()} >Update</button>
+        <button type="submit" id="UpdateButton" onClick={() => submitIngredient()} >
+          <a href='/ingredientsAdmin' id="UpdateButton">Update
+            </a></button>
         
       </form>
     

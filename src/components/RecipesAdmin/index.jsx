@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './styles.css'
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { apiUrl } from '../../api';
 import { useHistory } from 'react-router-dom';
 
@@ -25,10 +25,11 @@ function RecipesAdmin() {
 
 function RecipeFormAdmin(){
   const [recipes, setRecipes] = useState([]);
-
   const [error, setError] = useState(false);
-  let navigate = useHistory();
-  var stringTmp = 1;
+  
+  useEffect(() => {
+    getRecipes()
+  }, [])
 
   function getRecipes() {
     fetch(`${apiUrl}/recipes`, {
@@ -40,7 +41,6 @@ function RecipeFormAdmin(){
           setError(data.message);
         } else {
           setRecipes(data);
-          //return data;
         }
       }).catch(error => {
         console.error(error);
@@ -52,17 +52,38 @@ function RecipeFormAdmin(){
     });
   }
 
-  document.addEventListener("DOMContentLoaded", function(){
-    getRecipes();
-  });
+  function deleteRecipes(id) {
+    fetch(`${apiUrl}/recipes/${id}`, {
+      credentials: 'include',
+      method: 'DELETE'
+    }).then(res => {
+      res.json().then((data) => {
+        if (data.error) {
+          setError(data.message);
+        } else {
+          getRecipes();
+          alert(id);
+          console.log(id);
+        }
+      }).catch(error => {
+        console.error(error);
+        setError('Invalid server response');
+      }).catch(error => {
+        console.error(error);
+        setError('Failed to connect');
+      })
+    });
+  }
   
 
   return(
     <div className="RecipeForm">
     {
-      recipes.map((name,i) => <div className="IngredientElement" key={i}>
-          <div className="Name">{name}</div>
+      recipes.map((element,i) => <div className="IngredientElement" key={i}>
+          <div className="Name">{element}</div>
           <button className="ViewRecipe" type="submit">View</button>
+          <button className="DeleteButton" id="DeleteButton" type="submit" onClick={() => deleteRecipes(element.id)}> Delete
+          </button>
         </div>)
     }
     </div>

@@ -51,9 +51,8 @@ function AddIngredient() {
 
         
         <button type="submit" id="UpdateButton" >Add
-          
         </button>
-        <button>
+        <button id="UpdateButton">
             <a id="link" type="submit" href="/ingredientsAdmin">
           Back
           </a>
