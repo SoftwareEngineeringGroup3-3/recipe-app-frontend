@@ -81,7 +81,7 @@ function RecipeFormAdmin(){
     {
       recipes.map((element,i) => <div className="IngredientElement" key={i}>
           <div className="Name">{element}</div>
-          <button className="ViewRecipe" type="submit">View</button>
+          <button className="EditRecipe" type="submit">View</button>
           <button className="DeleteButton" id="DeleteButton" type="submit" onClick={() => deleteRecipes(element.id)}> Delete
           </button>
         </div>)

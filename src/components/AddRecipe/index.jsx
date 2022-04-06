@@ -1,8 +1,11 @@
 import React from 'react'
 import styles from './styles.css'
-import { useContext, useState } from 'react';
+import { useContext, useState,useEffect } from 'react';
 import { apiUrl } from '../../api';
 import { useHistory } from 'react-router-dom';
+import Posts from '../AddRecipe/Posts';
+import Pagination from '../IngredientAdmin/Pagination';
+
 
 var ing = ['a','b'];
 
@@ -31,12 +34,22 @@ function AddRecipe() {
 }
 
 function IngForm() {
-  const [name, setName] = useState('');
   const [ingredients, setIngredients] = useState([]);
-  const [recipes, setRecipes] = useState([]);
+  const [name, setName] = useState([]);
+  const [recipes , setRecipes] = useState([]);
   const [error, setError] = useState(false);
-  let navigate = useHistory();
-  var stringTmp = 1;
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
+  useEffect(() => {
+    getIngredients()
+  }, [])
 
   function getIngredients() {
     fetch(`${apiUrl}/ingredients`, {
@@ -48,7 +61,9 @@ function IngForm() {
           setError(data.message);
         } else {
           setIngredients(data);
-          //return data;
+          setLoading(true);
+          setPosts(data);
+          setLoading(false);
         }
       }).catch(error => {
         console.error(error);
@@ -59,6 +74,8 @@ function IngForm() {
       })
     });
   }
+
+  
 
   function addRecipe() {
     fetch(`${apiUrl}/recipes`, {
@@ -85,9 +102,7 @@ function IngForm() {
   }
 
   // var recipes = ['Ingredient1','Ingredient2','Ingredient3','Ingredient2','Ingredient3','Ingredient2','Ingredient3','Ingredient2']
-  document.addEventListener("DOMContentLoaded", function () {
-    getIngredients();
-  });
+  
 
   function pushRules(list){
     
@@ -104,14 +119,14 @@ function IngForm() {
 
   return (
     <div className="IngForm" onSubmit={addRecipe}>
-      {
-        ingredients.map((element,i) => <div className="IngElement" key={i}>
-
-          <div className="Namee" id="Namee" >{element.name}</div>
-          <button className="AddToRecipe" id="AddToRecipe" type="submit" onClick={pushRules}>Add to recipe</button>
-          
-        </div>)
-      }
+       {
+          <div>
+          <Posts posts={currentPosts} loading={loading} />
+          <Pagination postsPerPage={postsPerPage}
+            totalPosts={posts.length}
+            paginate={paginate}
+          />
+          </div>}
     </div>
 
   )
