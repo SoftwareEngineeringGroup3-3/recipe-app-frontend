@@ -48,6 +48,9 @@ function IngredientForm() {
           setError(data.message);
         } else {
           setIngredients(data);
+          setLoading(true);
+          setPosts(data);
+          setLoading(false);
         }
       }).catch(error => {
         console.error(error);
@@ -96,24 +99,13 @@ function IngredientForm() {
   return (
     <form id="IngForm" class="IngredientForm" onSubmit={deleteIngredient}>
       {
-        ingredients.map((element) =>
-          <div className="IngredientElement">
-            <div className="IngredientName" >{element.name}
-            </div>
-            <Posts posts={currentPosts} loading={loading}/>
-            <Pagination postsPerPage={postsPerPage}
-                        totalPosts={posts.length}
-                        paginate={paginate}
-            />
-            <button className="EditButton" type="submit">
-              <a href={"/EditIngredient/"} className="EditButton" >
-                Edit {element.id}
-              </a>
-            </button>
-            <button className="DeleteButton" id="DeleteButton" type="submit" onClick={(e) => { this.setIngredientId(element.id) }}> Delete
-            </button>
-          </div>
-        )
+        <div>
+          <Posts posts={currentPosts} loading={loading} />
+          <Pagination postsPerPage={postsPerPage}
+            totalPosts={posts.length}
+            paginate={paginate}
+          />
+        </div>
       }
     </form>
   );

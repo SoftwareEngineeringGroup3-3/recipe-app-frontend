@@ -6,13 +6,19 @@ const Posts = ({ posts, loading }) => {
   }
 
   return (
-    <ul className='list-group mb-4'>
-      {posts.map(post => (
-        <li key={post.id} className='list-group-item'>
-          {post.name}
-        </li>
-      ))}
-    </ul>
+        posts.map((element) =>
+          <div className="IngredientElement">
+            <div className="IngredientName" >{element.name}
+            </div>
+            <button className="EditButton" type="submit">
+              <a href={"/EditIngredient/"} className="EditButton" >
+                Edit {element.id}
+              </a>
+            </button>
+            <button className="DeleteButton" id="DeleteButton" type="submit" onClick={(e) => { this.setIngredientId(element.id) }}> Delete
+            </button>
+          </div>
+        )
   );
 };
 
