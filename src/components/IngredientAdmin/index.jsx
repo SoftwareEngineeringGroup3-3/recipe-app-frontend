@@ -3,7 +3,7 @@ import styles from './styles.css'
 import { useContext, useState, useEffect } from 'react';
 import { apiUrl } from '../../api';
 import { useHistory } from 'react-router-dom';
-
+import Posts from '../EditIngredient/Posts';
 
 function IngredientAdmin() {
   return (
@@ -84,8 +84,8 @@ function IngredientForm() {
 
           </div>
           <button className="EditButton" type="submit">
-            <a href={"/EditIngredient/"} className="EditButton" >
-              Edit {element.id}
+            <a href={"/EditIngredient/?id="+ element.id+"&name="+element.name} className="EditButton" >
+              Edit
             </a>
           </button>
           <button className="DeleteButton" id="DeleteButton" type="submit" onClick={() => deleteIngredient(element.id)}> Delete

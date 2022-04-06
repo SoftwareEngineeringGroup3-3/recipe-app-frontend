@@ -16,38 +16,15 @@ function EditIngredient() {
   var stringTmp = 1;
 
 
-  // function getIngredient(){
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  const idIngredient = urlParams.get('id')
+  const nameIngredient = urlParams.get('name')
 
-  // }
-
-  function getIngredients() {
-    fetch(`${apiUrl}/ingredients`, {
+  function submitIngredient(){
+    fetch(`${apiUrl}/ingredients/${idIngredient}`, {
       credentials: 'include',
-      method: 'GET',
-      
-    }).then(res => {
-      res.json().then((data) => {
-        if (data.error) {
-          setError(data.message);
-        } else {
-          setIngredients(data);
-          //return data;
-        }
-      }).catch(error => {
-        console.error(error);
-        setError('Invalid server response');
-      }).catch(error => {
-        console.error(error);
-        setError('Failed to connect');
-      })
-    });
-  }
-
-  function submitIngredient(ev){
-    ev.preventDefault();
-    fetch(`${apiUrl}/ingredients`, {
-      credentials: 'include',
-      method: 'POST',
+      method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({name: name})
     }).then(res => {
@@ -68,34 +45,27 @@ function EditIngredient() {
     });
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    getIngredients();
-    
-  });
 
-  function changeName(){
-    document.getElementById(ingredientId).setAttribute(setIngredients);
-  }
   return (
     
       <form className="generalForm" onSubmit={setIngredients} >
         {
-          ingredients.map((element,i) => <div className='IngredientElement' key={i}>
+          
           <fieldset>
           <legend>Edit an ingredient</legend>
           <div className="IngredientElement">
             <label className="label1">Name of ingredient</label>
-            <input id="name" type="text" defaultValue={element.name} disabled={disabled}/>
+            <input id="name" type="text" defaultValue={nameIngredient} disabled={disabled}/>
           </div>
           <div className="IngredientElement">
             <label className="label1">New name</label>
-            <input id="confirm-name" type="text" onInput={(ev) => {setName(element.key);}}/>
+            <input id="confirm-name" type="text"/>
           </div>
         </fieldset>
-        </div>)
+        
         }
         
-        <button type="submit" id="UpdateButton">Update</button>
+        <button type="submit" id="UpdateButton" onClick={submitIngredient()} >Update</button>
         
       </form>
     
