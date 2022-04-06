@@ -26,7 +26,7 @@ function EditIngredient() {
       credentials: 'include',
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({name: name})
+      body: JSON.stringify({name: nameIngredient})
     }).then(res => {
       res.json().then((data) => {
         if(data.error) {
@@ -65,7 +65,7 @@ function EditIngredient() {
         
         }
         
-        <button type="submit" id="UpdateButton" onClick={submitIngredient()} >Update</button>
+        <button type="submit" id="UpdateButton" onClick={() => submitIngredient()} >Update</button>
         
       </form>
     
