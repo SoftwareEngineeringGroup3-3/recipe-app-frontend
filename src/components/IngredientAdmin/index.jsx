@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './styles.css'
 import { useContext, useState } from 'react';
 import { apiUrl } from '../../api';
 import { useHistory } from 'react-router-dom';
+import { func } from 'prop-types';
 
+import ReactDOM from 'react-dom';
+import Posts from './Posts';
+import Pagination from './Pagination';
+import axios from 'axios';
 
 function IngredientAdmin() {
+
   return (
     <div class="All">
       <div class="IngredientBar">
@@ -18,7 +24,6 @@ function IngredientAdmin() {
       <IngredientForm>
       </IngredientForm>
     </div>
-
   )
 }
 
@@ -27,7 +32,11 @@ function IngredientForm() {
   const [ingredientId, setIngredientId] = useState(0);
   const [error, setError] = useState(false);
   let navigate = useHistory();
-  var stringTmp = 1;
+
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
 
   function getIngredients() {
     fetch(`${apiUrl}/ingredients`, {
@@ -39,7 +48,6 @@ function IngredientForm() {
           setError(data.message);
         } else {
           setIngredients(data);
-          //return data;
         }
       }).catch(error => {
         console.error(error);
@@ -50,7 +58,7 @@ function IngredientForm() {
       })
     });
   }
-  
+
   function deleteIngredient() {
     fetch(`${apiUrl}/ingredients/${ingredientId}}`, {
       credentials: 'include',
@@ -79,66 +87,36 @@ function IngredientForm() {
     document.getElementById("DeleteButton").addEventListener("click", deleteIngredient())
   });
 
-  
-  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+
   return (
     <form id="IngForm" class="IngredientForm" onSubmit={deleteIngredient}>
       {
-        ingredients.map(element => <div className="IngredientElement">
-          <div className="IngredientName" >{element.name}
-
+        ingredients.map((element) =>
+          <div className="IngredientElement">
+            <div className="IngredientName" >{element.name}
+            </div>
+            <Posts posts={currentPosts} loading={loading}/>
+            <Pagination postsPerPage={postsPerPage}
+                        totalPosts={posts.length}
+                        paginate={paginate}
+            />
+            <button className="EditButton" type="submit">
+              <a href={"/EditIngredient/"} className="EditButton" >
+                Edit {element.id}
+              </a>
+            </button>
+            <button className="DeleteButton" id="DeleteButton" type="submit" onClick={(e) => { this.setIngredientId(element.id) }}> Delete
+            </button>
           </div>
-          <button className="EditButton" type="submit">
-            <a href={"/EditIngredient/"} className="EditButton" >
-              Edit {element.id}
-            </a>
-          </button>
-          {/* <button className="DeleteButton" id="DeleteButton" type="submit" > Delete */}
-          <button className="DeleteButton" id="DeleteButton" type="submit" onClick={(e) => {this.setIngredientId(element.id)}}> Delete
-          </button>
-        </div>)
+        )
       }
     </form>
-
   );
 }
 
 export default IngredientAdmin
-
-  // document.getElementsByClassName("DeleteButton").addEventListener("click", function () {
-  //   deleteIngredient(0);
-  // });
-  // // var item = document.getElementById(id);
-
-  // // item.parentNode.removeChild(item)
-  //  }
-
-  // function EditIngredient(id){
-  //   const newState = this.state;
-  //   const index = newState.players.findIndex(a => a.id === id);
-
-  //   if (index === -1) return;
-  //   newState.players.splice(index, 1);
-
-  //   this.setState(newState);
-  // }
-
-  // document.addEventListener("DOMContentLoaded", function(){
-  //   deleteIngredient();
-  // });
-  // function deleteIngredient(el) {
-  //   var ingFormChildren = document.getElementById("IngForm").children;
-  //   var isThere = false;
-  //   for (let item in ingFormChildren) {
-  //     for (let tmp in item.children) {
-  //       if(tmp==el){
-  //         isThere=true;
-  //         break;
-  //       }
-  //     }
-  //     if(isThere==true){
-  //       var name = item.firstChild.useContext;
-  //       console.log(name);
-  //     }
-  //   }
-  // }
