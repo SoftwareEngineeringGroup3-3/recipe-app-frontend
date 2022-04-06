@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styles from './styles.css'
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { apiUrl } from '../../api';
 import { useHistory } from 'react-router-dom';
 import { func } from 'prop-types';
@@ -29,7 +29,6 @@ function IngredientAdmin() {
 
 function IngredientForm() {
   const [ingredients, setIngredients] = useState([]);
-  const [ingredientId, setIngredientId] = useState(0);
   const [error, setError] = useState(false);
   let navigate = useHistory();
 
@@ -38,6 +37,10 @@ function IngredientForm() {
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
 
+  useEffect(()=>{
+    getIngredients()
+  },[])
+  
   function getIngredients() {
     fetch(`${apiUrl}/ingredients`, {
       credentials: 'include',
@@ -62,8 +65,8 @@ function IngredientForm() {
     });
   }
 
-  function deleteIngredient() {
-    fetch(`${apiUrl}/ingredients/${ingredientId}}`, {
+  function deleteIngredient(id) {
+    fetch(`${apiUrl}/ingredients/${id}`, {
       credentials: 'include',
       method: 'DELETE'
     }).then(res => {
@@ -71,9 +74,9 @@ function IngredientForm() {
         if (data.error) {
           setError(data.message);
         } else {
-          var item = document.getElementById(data);
-          item.parentNode.removeChild(item);
-          console.log(100);
+          getIngredients();
+          alert(id);
+          console.log(id);
         }
       }).catch(error => {
         console.error(error);
@@ -85,11 +88,6 @@ function IngredientForm() {
     });
   }
 
-  document.addEventListener("DOMContentLoaded", function () {
-    getIngredients();
-    document.getElementById("DeleteButton").addEventListener("click", deleteIngredient())
-  });
-
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
@@ -97,7 +95,7 @@ function IngredientForm() {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   return (
-    <form id="IngForm" class="IngredientForm" onSubmit={deleteIngredient}>
+    <form id="IngForm" class="IngredientForm" >
       {
         <div>
           <Posts posts={currentPosts} loading={loading} />

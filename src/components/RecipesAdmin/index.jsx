@@ -60,7 +60,7 @@ function RecipeFormAdmin(){
   return(
     <div className="RecipeForm">
     {
-      recipes.map(name => <div className="IngredientElement">
+      recipes.map((name,i) => <div className="IngredientElement" key={i}>
           <div className="Name">{name}</div>
           <button className="ViewRecipe" type="submit">View</button>
         </div>)

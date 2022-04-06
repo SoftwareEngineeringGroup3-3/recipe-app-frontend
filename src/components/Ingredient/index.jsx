@@ -31,7 +31,7 @@ function IngredientForm(){
   return(
     <div className="IngredientForm">
     {
-      recipes.map(name => <div className="IngredientElement">
+      recipes.map((name,i) => <div className="IngredientElement" key={i}>
           <div className="Name">{name}</div>
           <button className="AddToStoreButton" type="submit">Add to stored</button>
           
