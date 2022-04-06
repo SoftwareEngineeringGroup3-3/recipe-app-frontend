@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './styles.css'
 import { useContext, useState, useEffect } from 'react';
 import { apiUrl } from '../../api';
 import { useHistory } from 'react-router-dom';
-import Posts from '../EditIngredient/Posts';
+import { func } from 'prop-types';
+
+import ReactDOM from 'react-dom';
+import Posts from './Posts';
+import Pagination from './Pagination';
+import axios from 'axios';
 
 function IngredientAdmin() {
+
   return (
     <div class="All">
       <div class="IngredientBar">
@@ -18,13 +24,18 @@ function IngredientAdmin() {
       <IngredientForm>
       </IngredientForm>
     </div>
-
   )
 }
 
 function IngredientForm() {
   const [ingredients, setIngredients] = useState([]);
   const [error, setError] = useState(false);
+  let navigate = useHistory();
+
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
 
   useEffect(()=>{
     getIngredients()
@@ -40,6 +51,9 @@ function IngredientForm() {
           setError(data.message);
         } else {
           setIngredients(data);
+          setLoading(true);
+          setPosts(data);
+          setLoading(false);
         }
       }).catch(error => {
         console.error(error);
@@ -50,7 +64,7 @@ function IngredientForm() {
       })
     });
   }
-  
+
   function deleteIngredient(id) {
     fetch(`${apiUrl}/ingredients/${id}`, {
       credentials: 'include',
@@ -74,28 +88,25 @@ function IngredientForm() {
     });
   }
 
-  
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
 
   return (
     <form id="IngForm" class="IngredientForm" >
       {
-        ingredients.map((element,i) => <div className="IngredientElement" key={i}>
-          <div className="IngredientName" >{element.name}
-
-          </div>
-          <button className="EditButton" type="submit">
-            <a href={"/EditIngredient/?id="+ element.id+"&name="+element.name} className="EditButton" >
-              Edit
-            </a>
-          </button>
-          <button className="DeleteButton" id="DeleteButton" type="submit" onClick={() => deleteIngredient(element.id)}> Delete
-          </button>
-        </div>)
+        <div>
+          <Posts posts={currentPosts} loading={loading} />
+          <Pagination postsPerPage={postsPerPage}
+            totalPosts={posts.length}
+            paginate={paginate}
+          />
+        </div>
       }
     </form>
-
   );
 }
 
 export default IngredientAdmin
-
