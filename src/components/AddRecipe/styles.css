@@ -23,7 +23,7 @@
 	justify-content: space-between;
 	min-width: fit-content;
 }
-#Title{
+/* #Title{
 	width: 200px;
 	min-width: 200px;
 	border-radius: 50px;
@@ -33,7 +33,7 @@
 	border-style: double;
 	border-color: #16344E;
 	border-width: 5px;
-}
+} */
 .IngElement{
 	width: 50%;
 	border-radius: 50px;

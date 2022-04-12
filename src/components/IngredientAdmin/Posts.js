@@ -63,16 +63,16 @@ const Posts = ({ posts, loading }) => {
     <table className='styled-table'>
       <thead>
         <tr>
-          <th>Name</th>
+          <th className='first-column'>Name</th>
           <th><img src={editImg} className="editImg"/></th>
           <th><img src={deleteImg} className="editImg"/></th>
         </tr>
       </thead>
       <tbody>
         {posts.map((element, i) => <tr key={i} className='ing-cols'>
-          <td className='user-rows'>{element.name}</td>
+          <td className='first-column'>{element.name}</td>
           <td className='user-rows'>
-            <button className="EditButton" type="submit">
+            <button className="EditButton" >
               <a href={"/EditIngredient/?id=" + element.id + "&name=" + element.name} className="EditButton" >
                 Edit
               </a>

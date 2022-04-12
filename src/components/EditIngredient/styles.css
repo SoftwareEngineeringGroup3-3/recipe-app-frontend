@@ -1,4 +1,4 @@
-.generalForm{
+.edit-ing-form{
 	width: 40%;
 	border-radius: 50px;
 	margin: auto;
@@ -11,7 +11,7 @@
 	border-color: #16344E;
 	border-width: 5px;
 }
-.label1{
+.edit-ing-name{
 	font-size: large;
 }
 

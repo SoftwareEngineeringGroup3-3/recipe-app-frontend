@@ -52,18 +52,19 @@ function EditIngredient() {
 
   return (
     
-      <form className="generalForm" onSubmit={setIngredients} >
+      <form className="edit-ing-form" onSubmit={setIngredients} >
         {
           
           <fieldset>
           <legend>Edit an ingredient</legend>
-          <div className="IngredientElement">
-            <label className="label1">Name of ingredient</label>
-            <input id="name" type="text" defaultValue={nameIngredient} disabled={disabled} readOnly={true}/>
+          <div className="edit-ing-elem">
+            <label className="edit-ing-name">Name of ingredient</label>
+            <input  type="text" defaultValue={nameIngredient} disabled={disabled} readOnly={true}/>
+            <br/>
           </div>
-          <div className="IngredientElement">
+          <div className="edit-ing-elem">
             <label className="label1">New name</label>
-            <input id="confirm-name" type="text"/>
+            <input  type="text"/>
           </div>
         </fieldset>
         

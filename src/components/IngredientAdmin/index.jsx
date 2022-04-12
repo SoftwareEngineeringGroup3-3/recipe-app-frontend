@@ -10,7 +10,7 @@ function IngredientAdmin() {
   return (
     <div class="All">
       <div class="IngredientBar">
-        <div id="Title"><h4>List of ingredients:</h4></div>
+        <div className='ing-admin-title'><h4>List of ingredients</h4></div>
         <input id="Filter" type="text" placeholder='Start writting ingredient'></input>
         <a type="submit" id="AddIngredient" href='/addingredient'>
           Add Ingredient
