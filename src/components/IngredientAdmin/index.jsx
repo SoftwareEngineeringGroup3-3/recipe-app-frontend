@@ -68,47 +68,14 @@ function IngredientForm() {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   return (
-    <form id="IngForm" class="IngredientForm" >
-      <table className='ing-disp'>
-        {
-          <div>
+    <form className='ing-admin-form'>
+      <div>
           <Posts posts={currentPosts} loading={loading} />
           <Pagination postsPerPage={postsPerPage}
             totalPosts={posts.length}
             paginate={paginate}
           />
-        </div>
-          // ingredients.map((element, i) => <tr key={i} className='ing-cols'>
-          //   <td className='user-rows'>{element.name}</td>
-          //   <td className='user-rows'>
-          //     <button className="EditButton" type="submit">
-          //       <a href={"/EditIngredient/?id=" + element.id + "&name=" + element.name} className="EditButton" >
-          //         Edit
-          //       </a>
-          //     </button>
-          //   </td>
-          //   <td className='user-rows'>
-          //   <button className="DeleteButton" id="DeleteButton" type="submit" onClick={() => deleteIngredient(element.id)}> Delete
-          // </button>
-          //   </td>
-          // </tr>)
-        }
-      </table>
-      {/* {
-        ingredients.map((element,i) => <div className="IngredientElement" key={i}>
-          
-          <div className="IngredientName" >{element.name}
-
           </div>
-          <button className="EditButton" type="submit">
-            <a href={"/EditIngredient/?id="+ element.id+"&name="+element.name} className="EditButton" >
-              Edit
-            </a>
-          </button>
-          <button className="DeleteButton" id="DeleteButton" type="submit" onClick={() => deleteIngredient(element.id)}> Delete
-          </button>
-        </div>)
-      } */}
     </form>
 
   );

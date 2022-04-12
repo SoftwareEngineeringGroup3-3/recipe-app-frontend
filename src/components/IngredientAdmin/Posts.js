@@ -1,7 +1,8 @@
 import React from 'react';
 import { useContext, useState, useEffect } from 'react';
 import { apiUrl } from '../../api';
-import { useHistory } from 'react-router-dom';
+import editImg from '../../images/edit.png';
+import deleteImg from '../../images/delete.png';
 
 const Posts = ({ posts, loading }) => {
   const [ingredients, setIngredients] = useState([]);
@@ -59,22 +60,32 @@ const Posts = ({ posts, loading }) => {
   }
 
   return (
-    <ul className='list-group mb-4'>
-      {posts.map((element, i) => <tr key={i} className='ing-cols'>
-            <td className='user-rows'>{element.name}</td>
-            <td className='user-rows'>
-              <button className="EditButton" type="submit">
-                <a href={"/EditIngredient/?id=" + element.id + "&name=" + element.name} className="EditButton" >
-                  Edit
-                </a>
-              </button>
-            </td>
-            <td className='user-rows'>
+    <table className='styled-table'>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th><img src={editImg} className="editImg"/></th>
+          <th><img src={deleteImg} className="editImg"/></th>
+        </tr>
+      </thead>
+      <tbody>
+        {posts.map((element, i) => <tr key={i} className='ing-cols'>
+          <td className='user-rows'>{element.name}</td>
+          <td className='user-rows'>
+            <button className="EditButton" type="submit">
+              <a href={"/EditIngredient/?id=" + element.id + "&name=" + element.name} className="EditButton" >
+                Edit
+              </a>
+            </button>
+          </td>
+          <td className='user-rows'>
             <button className="DeleteButton" id="DeleteButton" type="submit" onClick={() => deleteIngredient(element.id)}> Delete
-          </button>
-            </td>
-          </tr>)}
-    </ul>
+            </button>
+          </td>
+        </tr>)}
+      </tbody>
+
+    </table>
   );
 };
 

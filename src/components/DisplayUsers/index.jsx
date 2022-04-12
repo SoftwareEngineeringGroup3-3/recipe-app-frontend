@@ -3,8 +3,6 @@ import styles from './styles.css'
 import { useContext, useState } from 'react';
 import { apiUrl } from '../../api';
 import { useHistory } from 'react-router-dom';
-import { email } from 'react-admin';
-
 function DisplayUsers() {
     var users = ['user1', 'user2'];
     var email = ['email1', 'email2'];
