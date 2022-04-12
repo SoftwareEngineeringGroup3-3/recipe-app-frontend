@@ -1,15 +1,74 @@
-.user-rows, .user-cols{
-    border: 1px solid rgb(190, 190, 190);
-    padding: 10px;
+.styled-table-users {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    
+}
+.styled-table-users thead tr {
+    background-color: #16344E;
+    color: #ffffff;
     text-align: center;
 }
+.styled-table-users th,
+.styled-table-users td {
+    padding: 12px 15px;
+}
+.styled-table-users tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table-users tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table-users tbody tr:last-of-type {
+    border-bottom: 2px solid #16344E;
+}
+.styled-table-users tbody tr.active-row {
+    font-weight: bold;
+    color: #16344E;
+}
+.editImg{
+	height: 1.2vw;
+}
+.edit-first-column{
+	width: 20vw;
+}
 .user-disp{
-    border-collapse: collapse;
-    border: 2px solid rgb(200, 200, 200);
-    letter-spacing: 1px;
+    width: 50vw; margin-left : 25vw;
+	margin-top: 30px;
+	padding: 25px;
+	display: inline-block;
+	
+	max-height: 75vh;
+	min-width: fit-content;
     font-family: sans-serif;
     font-size: 3rem;
-    display: inline-block;
-    margin-top: 10%;
-    margin-left: 30%;
 }
+.user-edit-button{
+	color: #fbfdff;
+	background: #16344E;
+	/* box-shadow: 0 0 20px gray; */
+	padding: 5px;
+	border-radius: 15px;
+	min-width: fit-content;
+	text-decoration: none;
+}
+.DeleteButton{
+	color: #fbfdff;
+	background: #16344E;
+	box-shadow: 0 0 20px gray;
+	padding: 5px;
+	border-radius: 15px;
+	min-width: fit-content;
+}
+
+.DeleteButton:hover {
+    cursor: pointer;
+}
+.user-edit-button:hover {
+    cursor: pointer;
+} 
