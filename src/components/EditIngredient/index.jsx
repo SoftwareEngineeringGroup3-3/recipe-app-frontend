@@ -22,22 +22,22 @@ function EditIngredient() {
   const nameIngredient = urlParams.get('name')
   var newName = "newName";
 
-  function submitIngredient(){
-    // var tmp = document.getElementById("confirm-name");
-    // newName = tmp.getAttribute("text");
+  function submitIngredient() {
+    var tmp = document.getElementById("confirm-name");
+    newName = tmp.getAttribute("text");
     newName = document.getElementById("confirm-name").value;
     fetch(`${apiUrl}/ingredients/${idIngredient}`, {
       credentials: 'include',
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({name: newName})
+      body: JSON.stringify({ name: newName })
     }).then(res => {
       res.json().then((data) => {
-        if(data.error) {
+        if (data.error) {
           setError(data.message);
         } else {
           window.location.reload();
-          this.setName({data});
+          this.setName({ data });
         }
       }).catch(error => {
         console.error(error);
@@ -51,9 +51,49 @@ function EditIngredient() {
 
 
   return (
-    
-      <form className="edit-ing-form" onSubmit={setIngredients} >
-        {
+
+    <form className="edit-ing-form" onSubmit={setIngredients} >
+
+      <table className='styled-table-edit-ing'>
+        <thead>
+          <tr>
+            <th>Edit Ingredient</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <label className="edit-ing-name">Name of ingredient</label>
+              <tr>
+                <input type="text" defaultValue={nameIngredient} disabled={disabled} readOnly={true} />
+              </tr>
+
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label className="">New name</label>
+              <tr>
+                <input type="text" />
+              </tr>
+
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <button type="submit" className="ing-update-btn" onClick={() => submitIngredient()} >
+                <a href='/ingredientsAdmin' className="ing-update-btn">Update
+                </a>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      {/* previous version */}
+      {/* {
           
           <fieldset>
           <legend>Edit an ingredient</legend>
@@ -73,10 +113,10 @@ function EditIngredient() {
         <button type="submit" id="UpdateButton" onClick={() => submitIngredient()} >
           <a href='/ingredientsAdmin' id="UpdateButton">Update
             </a></button>
-        
-      </form>
-    
-      
+         */}
+    </form>
+
+
   )
 }
 

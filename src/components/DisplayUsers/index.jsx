@@ -28,7 +28,7 @@ function DisplayUsers() {
                         <td className='user-cols'>{element}</td>
                         <td className='user-cols'>{element}</td>
                         <td><button className="user-edit-button">Edit</button></td>
-                        <td><button className="DeleteButton" id="DeleteButton" type="submit" >Delete</button></td>
+                        <td><button className="user-delete-button" id="DeleteButton" type="submit" >Delete</button></td>
                     </tr>)
                 }
             </tbody>

@@ -87,7 +87,7 @@
 #AddIngredient{
 	color: #fbfdff;
 	background: #16344E;
-	box-shadow: 0 0 20px gray;
+	/* box-shadow: 0 0 20px gray; */
 	padding: 15px;
 	font-size: large;
 	border-radius: 15px;
@@ -102,7 +102,7 @@
 .EditButton{
 	color: #fbfdff;
 	background: #16344E;
-	box-shadow: 0 0 20px gray;
+	/* box-shadow: 0 0 20px gray; */
 	padding: 5px;
 	border-radius: 15px;
 	min-width: fit-content;
