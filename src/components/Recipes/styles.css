@@ -13,11 +13,11 @@
 	margin: auto;
 	margin-top: 30px;
 	padding: 25px;
-	border-style: double;
-	border-color: rgb(0, 75, 65);
+	/* border-style: double;
+	border-color: rgb(0, 75, 65); */
 	border-width: 5px;
 	max-height: 75vh;
-	overflow-y: scroll;
+	/* overflow-y: scroll; */
 	min-width: fit-content;
 }
 .RecipeBar{
@@ -59,8 +59,8 @@
 	margin: auto;
 	margin-top: 30px;
 	padding: 25px;
-	border-style: double;
-	border-color: rgb(0, 75, 65);
+	/* border-style: double;
+	border-color: rgb(0, 75, 65); */
 	border-width: 5px;
 	min-width: fit-content;
 	display: inline;

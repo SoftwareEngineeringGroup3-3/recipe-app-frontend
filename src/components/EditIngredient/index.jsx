@@ -23,9 +23,9 @@ function EditIngredient() {
   var newName = "newName";
 
   function submitIngredient() {
-    var tmp = document.getElementById("confirm-name");
-    newName = tmp.getAttribute("text");
-    newName = document.getElementById("confirm-name").value;
+    // var tmp = document.getElementById("confirm-name");
+    // newName = tmp.getAttribute("text");
+    newName = document.getElementById("edit-ing-name").value;
     fetch(`${apiUrl}/ingredients/${idIngredient}`, {
       credentials: 'include',
       method: 'PUT',
@@ -73,17 +73,17 @@ function EditIngredient() {
           </tr>
           <tr>
             <td>
-              <label className="">New name</label>
+              <label className="edit-ing-name">New name</label>
               <tr>
-                <input type="text" />
+                <input type="text" id="edit-ing-name"/>
               </tr>
 
             </td>
           </tr>
           <tr>
             <td>
-              <button type="submit" className="ing-update-btn" onClick={() => submitIngredient()} >
-                <a href='/ingredientsAdmin' className="ing-update-btn">Update
+              <button type="submit" className="ing-update-btn" onClick={() => submitIngredient()}>
+                <a href='/ingredientsAdmin' className="ing-update-btn" >Update
                 </a>
               </button>
             </td>

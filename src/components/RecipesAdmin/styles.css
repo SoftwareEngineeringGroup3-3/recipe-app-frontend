@@ -1,26 +1,63 @@
-.SearchingBar{
+.styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+    background-color: #16344E;
+    color: #ffffff;
+    text-align: center;
+}
+.styled-table th,
+.styled-table td {
+    padding: 12px 15px;
+}
+.styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+    border-bottom: 2px solid #16344E;
+}
+.styled-table tbody tr.active-row {
+    font-weight: bold;
+    color: #16344E;
+}
+.editImg{
+	height: 1.2vw;
+}
+.first-column{
+	width: 40vw;
+}
+/* .SearchingBar{
 	background-color: aqua;
 	width: 40%;
 	border-radius: 50px;
 	height: 30px;
 	left: 50%;
 	margin: auto;
-}
+} */
 
-.RecipeForm{
-	width: 60%;
-	border-radius: 50px;
-	margin: auto;
+.ing-admin-form{
+	width: 50vw; margin-left : 25vw;
 	margin-top: 30px;
 	padding: 25px;
-	border-style: double;
-	border-color: #16344E;
-	border-width: 5px;
+	display: inline-block;
+	
 	max-height: 75vh;
-	overflow-y: scroll;
 	min-width: fit-content;
+    font-family: sans-serif;
+    font-size: 3rem;
+    
 }
-.RecipeBar{
+/* .IngredientBar{
 	width: 60%;
 	border-radius: 50px;
 	height: auto+30px;
@@ -29,102 +66,95 @@
 	padding: 10px;
 	display: flex;
 	justify-content: space-between;
-	min-width: fit-content;
-}
+} */
 /* #Title{
 	width: 200px;
 	min-width: 200px;
-	border-radius: 50px;
+	
 	height: auto;
 	font-size: large;
 	padding: 10px;
-	border-style: double;
-	border-color: #16344E;
-	border-width: 5px;
+	
+	
+	
 } */
+.rec-admin-title{
+	color:#16344E;
+	font-size: 2vw;
+	
+}
 #AddRecipe{
 	color: #fbfdff;
 	background: #16344E;
-	box-shadow: 0 0 20px gray;
+	/* box-shadow: 0 0 20px gray; */
 	padding: 15px;
 	font-size: large;
 	border-radius: 15px;
 	min-width: fit-content;
     text-decoration: none;
 }
-.RecipeElement{
-	width: 30%;
-	border-radius: 50px;
-	height: auto;
-	margin: auto;
-	margin-top: 30px;
-	padding: 25px;
-	border-style: double;
-	border-color: #16344E;
-	border-width: 5px;
-	min-width: fit-content;
-	display: inline;
-	justify-content: center;
-}
+
 #AddRecipe:hover {
     cursor: pointer;
 }
-::-webkit-scrollbar {
-	width: 3px;
-}
 
-  /* Track */
-::-webkit-scrollbar-track {
+.EditButton{
+	color: #fbfdff;
 	background: #16344E;
-}
-
-  /* Handle */
-::-webkit-scrollbar-thumb {
-	background: #888;
-}
-
-  /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-	background: rgb(184, 67, 67);
-}
-.StoredIngredients{
-	left: 0.5%;
-	width: 18%;
+	/* box-shadow: 0 0 20px gray; */
+	padding: 5px;
+	border-radius: 15px;
 	min-width: fit-content;
-	position: absolute;
-	height: 35%;
-	border-style: double;
-	border-color: rgb(179, 96, 48);
-	border-width: 5px;
-	border-radius: 20px;
-	text-align: center;
-	font-size: large;
-	overflow-y: scroll;
+	text-decoration: none;
 }
-.ViewRecipe{
+.DeleteButton{
 	color: #fbfdff;
 	background: #16344E;
 	box-shadow: 0 0 20px gray;
-	padding: 10px;
+	padding: 5px;
 	border-radius: 15px;
 	min-width: fit-content;
-    text-decoration: none;
-	cursor: pointer;
 }
-.Name{
-	padding: 10px;
+
+.DeleteButton:hover {
+    cursor: pointer;
 }
-#Filter{
+.EditButton:hover {
+    cursor: pointer;
+} 
+/* #Filter{
 	font-size: large;
 	border-radius: 5px;
+} */
+.pagination{
+	font-size: 2rem;
+	color: #16344E;
+	display: inline;
+	margin-left: 20vw;
 }
-#AddRecipe{
-    color: #fbfdff;
-	background: #16344E;
-	box-shadow: 0 0 20px gray;
-	padding: 15px;
-	font-size: large;
-	border-radius: 15px;
-	min-width: fit-content;
-    text-decoration: none;
+.page-item{
+	display: inline;
+	padding: 0.4rem;
+	margin-left: auto;
+	margin-right: auto;
 }
+.page-link:hover{
+	cursor: pointer;
+	text-decoration: underline;
+}
+.arrow {
+	border: solid #16344E;
+	border-width: 0 0.5rem 0.5rem 0;
+	display: inline-block;
+	padding: 0.5rem;
+  }
+  
+  .right {
+	transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+  }
+  
+  .left {
+	transform: rotate(135deg);
+	-webkit-transform: rotate(135deg);
+  }

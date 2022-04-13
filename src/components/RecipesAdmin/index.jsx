@@ -3,17 +3,19 @@ import styles from './styles.css'
 import { useContext, useState, useEffect } from 'react';
 import { apiUrl } from '../../api';
 import { useHistory } from 'react-router-dom';
+import Posts from '../RecipesAdmin/Posts';
+import Pagination from '../RecipesAdmin/Pagination'
 
 function RecipesAdmin() {
   return (
-      <div className="All">
+      <div >
         <div className="RecipeBar">
-          <div id="Title"><h4>List of recipes:</h4></div>
-          <a type="submit" id="AddRecipe" href='/addrecipe'>
+          <div className='rec-admin-title'><h4>List of recipes:</h4></div>
+          
+            <input id="Filter" type="text" placeholder='Start writting recipe'></input>
+            <a type="submit" id="AddRecipe" href='/addrecipe'>
               Add recipe
             </a>
-            <input id="Filter" type="text" placeholder='Start writting recipe'></input>
-          
         </div>
         <RecipeFormAdmin>
         </RecipeFormAdmin>
@@ -26,6 +28,10 @@ function RecipesAdmin() {
 function RecipeFormAdmin(){
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
   
   useEffect(() => {
     getRecipes()
@@ -52,40 +58,20 @@ function RecipeFormAdmin(){
     });
   }
 
-  function deleteRecipes(id) {
-    fetch(`${apiUrl}/recipes/${id}`, {
-      credentials: 'include',
-      method: 'DELETE'
-    }).then(res => {
-      res.json().then((data) => {
-        if (data.error) {
-          setError(data.message);
-        } else {
-          getRecipes();
-          alert(id);
-          console.log(id);
-        }
-      }).catch(error => {
-        console.error(error);
-        setError('Invalid server response');
-      }).catch(error => {
-        console.error(error);
-        setError('Failed to connect');
-      })
-    });
-  }
-  
-  const r =["r1", "r2"];
+ const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
   return(
     <div className="RecipeForm">
-    {
-      r.map((element,i) => <div className="IngredientElement" key={i}>
-          <div className="Name">{element}</div>
-          <button className="ViewRecipe" type="submit">Edit</button>
-          <button className="DeleteButton" id="DeleteButton" type="submit" onClick={() => deleteRecipes(element.id)}> Delete
-          </button>
-        </div>)
-    }
+    <div>
+          <Posts posts={currentPosts} loading={loading} />
+          <Pagination postsPerPage={postsPerPage}
+            totalPosts={posts.length}
+            paginate={paginate}
+          />
+          </div>
     </div>
 
   )
