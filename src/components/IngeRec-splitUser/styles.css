@@ -1,0 +1,55 @@
+.split-rec-ing {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    position: absolute;
+    height: 100%;
+  }
+  .left-split:hover {
+    border: 1px solid #777;
+    opacity: 1;
+  }
+  .right-split:hover {
+    border: 1px solid #777;
+    opacity: 1;
+    /* cursor: pointer; */
+  }
+
+  .left-split {
+    grid-column: 1;
+    grid-row: 1;
+    background-color: rgb(204, 204, 204);
+    opacity: 0.4;
+  }
+
+  .right-split {
+    grid-column: 2;
+    grid-row: 1;
+    background-color: rgb(204, 204, 204);
+    opacity: 0.4;
+  }
+
+  .ingrRec-split{
+      margin-top: 40px;
+      text-align: center;
+     
+  }
+  .img-rec{
+    width: 100%;
+    height: 100%;
+    display: block;
+    /* opacity: 0.4; */
+    object-fit: cover;
+  }
+
+ 
+
+  .recLeb{
+    position: absolute;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 8vw;
+    text-align: center;
+    cursor: pointer;
+  }

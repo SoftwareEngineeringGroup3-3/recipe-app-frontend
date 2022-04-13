@@ -7,7 +7,7 @@ function IngrRecSplit() {
   return (
     <div className='split-rec-ing'>
         <div className='left-split'>
-            <a href="/recipes" className='ingrRec-split'>
+            <a href="/recipesAdmin" className='ingrRec-split'>
               <label className='recLeb'>Recipes</label>
               <img src={recipes} alt={recipes} className='img-rec'></img>
             </a>

@@ -1,9 +1,9 @@
 import React from 'react'
 import styles from './styles.css'
-import useEffect from 'react';
-
-
-
+import Posts from '../Ingredient/Posts';
+import Pagination from '../Ingredient/Pagination'
+import { useContext, useState, useEffect } from 'react';
+import { apiUrl } from '../../api';
 
 function Ingredient() {
   return (
@@ -25,19 +25,57 @@ function Ingredient() {
 }
 
 function IngredientForm(){
-  var recipes = ['Ingredient1','Ingredient2','Ingredient3','Ingredient2','Ingredient3','Ingredient2','Ingredient3','Ingredient2']
-  
+  const [ingredients, setIngredients] = useState([]);
+  const [error, setError] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
 
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = pageNumber => setCurrentPage(pageNumber);
+  useEffect(() => {
+    getIngredients()
+  }, [])
+
+  function getIngredients() {
+    fetch(`${apiUrl}/ingredients`, {
+      credentials: 'include',
+      method: 'GET'
+    }).then(res => {
+      res.json().then((data) => {
+        if (data.error) {
+          setError(data.message);
+        } else {
+          setIngredients(data);
+          setLoading(true);
+          setPosts(data);
+          setLoading(false);
+        }
+      }).catch(error => {
+        console.error(error);
+        setError('Invalid server response');
+      }).catch(error => {
+        console.error(error);
+        setError('Failed to connect');
+      })
+    });
+  }
   return(
-    <div className="IngredientForm">
+    <form className="IngredientForm">
     {
-      recipes.map((name,i) => <div className="IngredientElement" key={i}>
-          <div className="Name">{name}</div>
-          <button className="AddToStoreButton" type="submit">Add to stored</button>
-          
-        </div>)
+      <div>
+        <Posts posts={currentPosts} loading={loading} />
+       <Pagination postsPerPage={postsPerPage}
+         totalPosts={posts.length}
+         paginate={paginate}
+       /> 
+      </div>
     }
-    </div>
+    </form>
 
   )
   

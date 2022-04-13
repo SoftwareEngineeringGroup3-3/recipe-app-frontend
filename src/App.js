@@ -9,6 +9,7 @@ import AddIngredient from './components/AddIngredient';
 import Recipes from './components/Recipes';
 import LogOutStart from './components/LogOutStart';
 import IngrRecSplit from './components/IngeRec-split';
+import IngrRecSplitUser from './components/IngeRec-splitUser';
 import NavbarLogOut from './components/NavbarLogout';
 import NavbarAdmin from './components/NavbarAdmin';
 import DisplayUsers from './components/DisplayUsers';
@@ -74,7 +75,7 @@ function App() {
                       </Route>, */}
                       <Route path="/">
                         <Navbar />
-                        <IngrRecSplit />
+                        <IngrRecSplitUser />
                       </Route>
                     </Switch>
 
@@ -95,7 +96,7 @@ function App() {
                 } else if (session && session.valid && isAdmin) { //admin
                   return [
                     <Switch>
-                      <Route path="/recipes">
+                      <Route path="/recipesAdmin">
                         <NavbarAdmin />
                         <RecipesAdmin />
                       </Route>,
