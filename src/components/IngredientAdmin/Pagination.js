@@ -26,15 +26,15 @@ function decrementValue()
   return (
     <nav className='pagination'>
       
-       <a onClick={() => paginate(pagenumber - 1 > 0 ? pagenumber - 1 : 1)}><i class="arrow left"></i></a>
-       {pageNumbers.map(number => (
-          <li key={number} className='page-item' >
-            <a onClick={() => paginate(number)} className='page-link'>
-              {number}
+      <i className="arrow left" id='decrement' onClick={()=>decrementValue()}></i>
+        
+        <a onClick={() => paginate(pagenumber - 1 > 0 ? pagenumber - 1 : 1)}></a>
+          <li key={pagenumber} className='page-item' >
+            <a onClick={() => paginate(pagenumber)} className='page-link'>
+              {pagenumber}
             </a>
           </li>
-        ))}
-        <a onClick={() => paginate(pagenumber + 1)}><i class="arrow right"></i></a>
+        <a onClick={() => paginate(pagenumber + 1)}><i class="arrow right" id='increment' onClick={()=>decrementValue()}></i></a>
     </nav>
   );
 };

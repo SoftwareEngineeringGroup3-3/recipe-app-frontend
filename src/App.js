@@ -46,41 +46,82 @@ function App() {
           {
             (
               () => {
-                if (session && session.valid && !isAdmin) {
-                  return [
+                if (session && session.valid){
+                  return[
                     <Switch>
-                      <Route path="/recipes">
-                        <Navbar />
-                        <RecipesAdmin />
-                      </Route>,
-                      {/* <Route path="/addrecipe">
-                        <Navbar />
-                        <AddRecipe /> 
-                      </Route>, */}
-                      <Route path="/ingredients">
-                        <Navbar />
-                        <Ingredient />
-                      </Route>,
-                      {/* <Route path="/ingredientsAdmin">
-                        <Navbar /> 
-                        <IngredientAdmin />
-                      </Route>,
-                      <Route path="/addingredient">
-                        <Navbar />
-                        <AddIngredient />
-                      </Route>,
-                      <Route path="/editingredient">
-                        <Navbar />
-                        <EditIngredient />
-                      </Route>, */}
-                      <Route path="/">
-                        <Navbar />
-                        <IngrRecSplitUser />
-                      </Route>
-                    </Switch>
+                    <Route path="/recipesAdmin">
+                      <NavbarAdmin />
+                      <RecipesAdmin />
+                    </Route>,
+                    <Route path="/addrecipe">
+                      <NavbarAdmin />
+                      <AddRecipe />
+                    </Route>,
+                    <Route path="/ingredientsAdmin">
+                      <NavbarAdmin />
+                      <IngredientAdmin />
+                    </Route>,
+                    <Route path="/ingredients">
+                      <NavbarAdmin />
+                      <Ingredient />
+                    </Route>,
+                    <Route path="/addingredient">
+                      <NavbarAdmin />
+                      <AddIngredient />
+                    </Route>,
+                    <Route path="/editingredient">
+                      <NavbarAdmin />
+                      <EditIngredient />
+                    </Route>,
+                    <Route path="/users">
+                      <NavbarAdmin />
+                      <DisplayUsers />
+                    </Route>,
+                    <Route path="/">
+                      <NavbarAdmin />
+                      <IngrRecSplit />
+                    </Route>,
+                    
 
+                  </Switch>
                   ]
-                } else if (!session || !session.valid) {
+                }
+                // if (session && session.valid && !isAdmin) {
+                //   return [
+                //     <Switch>
+                //       <Route path="/recipes">
+                //         <Navbar />
+                //         <RecipesAdmin />
+                //       </Route>,
+                //       {/* <Route path="/addrecipe">
+                //         <Navbar />
+                //         <AddRecipe /> 
+                //       </Route>, */}
+                //       <Route path="/ingredients">
+                //         <Navbar />
+                //         <Ingredient />
+                //       </Route>,
+                //       {/* <Route path="/ingredientsAdmin">
+                //         <Navbar /> 
+                //         <IngredientAdmin />
+                //       </Route>,
+                //       <Route path="/addingredient">
+                //         <Navbar />
+                //         <AddIngredient />
+                //       </Route>,
+                //       <Route path="/editingredient">
+                //         <Navbar />
+                //         <EditIngredient />
+                //       </Route>, */}
+                //       <Route path="/">
+                //         <Navbar />
+                //         <IngrRecSplitUser />
+                //       </Route>
+                //     </Switch>
+
+                //   ]
+                // } 
+                else if (!session || !session.valid) {
                   return [
                     <Switch>
                       <Route path="/login">
