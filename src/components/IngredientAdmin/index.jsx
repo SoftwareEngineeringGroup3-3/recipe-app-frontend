@@ -36,18 +36,22 @@ function IngredientForm() {
   }, [])
 
   function getIngredients() {
-    fetch(`${apiUrl}/ingredients`, {
+    fetch(`${apiUrl}/ingredients/all?page=${currentPage}&limit=${postsPerPage}`, {
       credentials: 'include',
-      method: 'GET'
+      method: 'POST'
     }).then(res => {
       res.json().then((data) => {
         if (data.error) {
           setError(data.message);
         } else {
-          setIngredients(data);
-          setLoading(true);
-          setPosts(data);
-          setLoading(false);
+          if(data.length > 0){
+            setIngredients(data);
+            setLoading(true);
+            setPosts(data);
+            setLoading(false);
+          } else {
+            setCurrentPage(currentPage > 1 ? currentPage - 1 : 1);
+          }
         }
       }).catch(error => {
         console.error(error);
@@ -61,19 +65,24 @@ function IngredientForm() {
 
   
 
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  // const indexOfLastPost = currentPage * postsPerPage;
+  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
+
+  useEffect(() => {
+    getIngredients();
+  }, [currentPage])
 
   return (
     <form className='ing-admin-form'>
       <div>
-          <Posts posts={currentPosts} loading={loading} />
+          <Posts posts={posts} loading={loading} />
           <Pagination postsPerPage={postsPerPage}
             totalPosts={posts.length}
             paginate={paginate}
+            pagenumber={currentPage}
           />
           </div>
     </form>
