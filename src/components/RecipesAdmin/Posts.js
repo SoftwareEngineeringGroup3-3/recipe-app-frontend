@@ -60,7 +60,7 @@ const Posts = ({ posts, loading }) => {
     }
     const r =["r1", "r2"];
     return (
-      <table className='styled-table'>
+      <table className='styled-table-rec'>
         <thead>
           <tr>
             <th className='first-column'>Name</th>

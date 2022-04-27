@@ -59,11 +59,11 @@ function AddIngredient() {
               <button type="submit" className="ing-add-btn" >
                 Add
               </button>
-              <button className="ing-add-btn">
+              {/* <button className="ing-add-btn">
                 <a  className="ing-add-btn" type="submit" href="/ingredientsAdmin">
                   Back
                 </a>
-              </button>
+              </button> */}
             </td>
           </tr>
         </tbody>

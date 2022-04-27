@@ -5,16 +5,39 @@ import { apiUrl } from '../../api';
 import { useHistory } from 'react-router-dom';
 import Posts from '../IngredientAdmin/Posts';
 import Pagination from '../IngredientAdmin/Pagination'
+import AddIngredient from '../AddIngredient'
 
 function IngredientAdmin() {
+  const [modal, setModal] = useState(false);
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
+  if(modal) {
+    document.body.classList.add('active-modal')
+  } else {
+    document.body.classList.remove('active-modal')
+  }
   return (
     <div class="All">
       <div class="IngredientBar">
         <div className='ing-admin-title'><h4>List of ingredients</h4></div>
         <input id="Filter" type="text" placeholder='Start writting ingredient'></input>
-        <a type="submit" id="AddIngredient" href='/addingredient'>
+        <button  onClick={toggleModal} className="AddIngredientBtn" href='/addingredient' >
           Add Ingredient
-        </a>
+        </button>
+        {modal && (
+        <div className="modal">
+          {/* <div onClick={toggleModal} className="overlay"></div> */}
+          <div className="modal-content">
+          <AddIngredient className="abc"/>
+            <button className="close-modal" onClick={toggleModal}>
+              CLOSE
+            </button>
+            
+          </div>
+        </div>
+      )}
       </div>
       <IngredientForm>
       </IngredientForm>

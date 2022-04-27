@@ -8,31 +8,31 @@ import Pagination from '../RecipesAdmin/Pagination'
 
 function RecipesAdmin() {
   return (
-      <div >
-        <div className="RecipeBar">
-          <div className='rec-admin-title'><h4>List of recipes:</h4></div>
-          
-            <input id="Filter" type="text" placeholder='Start writting recipe'></input>
-            <a type="submit" id="AddRecipe" href='/addrecipe'>
-              Add recipe
-            </a>
-        </div>
-        <RecipeFormAdmin>
-        </RecipeFormAdmin>
+    <div >
+      <div className="RecipeBar">
+        <div className='rec-admin-title'><h4>List of recipes:</h4></div>
 
+        <input id="Filter" type="text" placeholder='Start writting recipe'></input>
+        <a type="submit" id="AddRecipe" href='/addrecipe'>
+          Add recipe
+        </a>
       </div>
+      <RecipeFormAdmin>
+      </RecipeFormAdmin>
+
+    </div>
 
   )
 }
 
-function RecipeFormAdmin(){
+function RecipeFormAdmin() {
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(false);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
-  
+
   useEffect(() => {
     getRecipes()
   }, [])
@@ -58,24 +58,24 @@ function RecipeFormAdmin(){
     });
   }
 
- const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
-  return(
-    <div className="RecipeForm">
-    <div>
-          <Posts posts={currentPosts} loading={loading} />
-          <Pagination postsPerPage={postsPerPage}
-            totalPosts={posts.length}
-            paginate={paginate}
-          />
-          </div>
-    </div>
+  return (
+    <form className="rec-admin-form">
+      <div>
+        <Posts posts={currentPosts} loading={loading} />
+        <Pagination postsPerPage={postsPerPage}
+          totalPosts={posts.length}
+          paginate={paginate}
+        />
+      </div>
+    </form>
 
   )
-  
+
 }
 
 

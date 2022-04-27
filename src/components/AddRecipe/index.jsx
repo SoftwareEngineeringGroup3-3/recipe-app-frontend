@@ -35,7 +35,7 @@ function AddRecipe() {
 
 function IngForm() {
   const [ingredients, setIngredients] = useState([]);
-  const [name, setName] = useState([]);
+  const [name, setName] = useState('');
   const [recipes , setRecipes] = useState([]);
   const [error, setError] = useState(false);
   const [posts, setPosts] = useState([]);
