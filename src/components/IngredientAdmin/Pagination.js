@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './styles.css'
 
-const Pagination = ({ postsPerPage, totalPosts, paginate,currentPage }) => {
+const Pagination = ({ postsPerPage, totalPosts, paginate, currentPage, pagenumber }) => {
   const pageNumbers = [];
   function incrementValue()
 {
@@ -26,16 +26,15 @@ function decrementValue()
   return (
     <nav className='pagination'>
       
-      <i className="arrow left" id='decrement' onClick={()=>decrementValue()}></i>
-        {pageNumbers.map(number => (
+       <a onClick={() => paginate(pagenumber - 1 > 0 ? pagenumber - 1 : 1)}><i class="arrow left"></i></a>
+       {pageNumbers.map(number => (
           <li key={number} className='page-item' >
             <a onClick={() => paginate(number)} className='page-link'>
               {number}
             </a>
           </li>
         ))}
-        <i className="arrow right" id="increment" onClick={()=>incrementValue()}></i>
-      
+        <a onClick={() => paginate(pagenumber + 1)}><i class="arrow right"></i></a>
     </nav>
   );
 };

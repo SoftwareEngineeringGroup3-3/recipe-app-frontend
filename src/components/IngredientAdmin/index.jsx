@@ -30,7 +30,7 @@ function IngredientAdmin() {
         <div className="modal">
           {/* <div onClick={toggleModal} className="overlay"></div> */}
           <div className="modal-content">
-          <AddIngredient className="abc"/>
+          <AddIngredient/>
             <button className="close-modal" onClick={toggleModal}>
               CLOSE
             </button>

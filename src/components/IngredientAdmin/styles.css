@@ -185,12 +185,13 @@
 }
 .modal-content {
     position: absolute;
-    top: 50%;
-    left: 47.5%;
+    top: 60%;
+    left: 50%;
     transform: translate(-50%, -50%);
     line-height: 4vh;
-    background: #f1f1f1;
-	width: 90vw;
+	background: #ffffff;
+	width: 60vw;
+	height: 60vh;
     /* padding: 14px 28px; */
     /* border-radius: 3px; */
 	/* width: 40%; */
@@ -206,4 +207,6 @@
     top: 10px;
     right: 10px;
     padding: 5px 7px;
+	background-color: #16344E;
+	color:#dddddd
 }
