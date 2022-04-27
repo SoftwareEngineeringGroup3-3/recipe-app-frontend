@@ -1,11 +1,7 @@
 import React from 'react';
 import styles from './styles.css'
 
-<<<<<<< HEAD
 const Pagination = ({ postsPerPage, totalPosts, paginate,currentPage }) => {
-=======
-const Pagination = ({ postsPerPage, totalPosts, paginate, pagenumber }) => {
->>>>>>> 9a38c7c1e29184f70c5ed19dae4777cb8cd1120a
   const pageNumbers = [];
   function incrementValue()
 {
@@ -30,7 +26,6 @@ function decrementValue()
   return (
     <nav className='pagination'>
       
-<<<<<<< HEAD
       <i className="arrow left" id='decrement' onClick={()=>decrementValue()}></i>
         {pageNumbers.map(number => (
           <li key={number} className='page-item' >
@@ -40,15 +35,6 @@ function decrementValue()
           </li>
         ))}
         <i className="arrow right" id="increment" onClick={()=>incrementValue()}></i>
-=======
-      <a onClick={() => paginate(pagenumber - 1 > 0 ? pagenumber - 1 : 1)}><i class="arrow left"></i></a>
-          <li key={pagenumber} className='page-item' >
-            <a onClick={() => paginate(pagenumber)} className='page-link'>
-              {pagenumber}
-            </a>
-          </li>
-        <a onClick={() => paginate(pagenumber + 1)}><i class="arrow right"></i></a>
->>>>>>> 9a38c7c1e29184f70c5ed19dae4777cb8cd1120a
       
     </nav>
   );
