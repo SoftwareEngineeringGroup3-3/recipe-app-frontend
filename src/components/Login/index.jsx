@@ -6,6 +6,7 @@ import { apiUrl } from '../../api';
 import { setCookie } from '../../cookie';
 import { SessionContext, Session, UserSession } from '../../session';
 import useEffect from 'react';
+import { sha256 } from 'js-sha256';
 
 
 //TODO: wstepna walidacja pól register na froncie | wyswietanie diva z potwierdzeniem rejestracji lub bledu
@@ -22,10 +23,13 @@ function LoginRegister() {
 
   function submitLogin(ev) {
     ev.preventDefault();
+
+    const hashedPassword = sha256(password);
+
     fetch(`${apiUrl}/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: username, password: password })
+      body: JSON.stringify({ username: username, password: hashedPassword })
     }).then(res => {
       res.json().then((data) => {
         if(data.error) {
@@ -48,10 +52,14 @@ function LoginRegister() {
 
   function submitRegister(ev) {
     ev.preventDefault();
+
+    const hashedPassword = sha256(password);
+    const hashedRepPassword = sha256(repPassword);
+
     fetch(`${apiUrl}/registration`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username: username, password: password, repPassword: repPassword, email: email })
+      body: JSON.stringify({ username: username, password: hashedPassword, repPassword: hashedRepPassword, email: email })
     }).then(res => {
       res.json().then((data) => {
         if(data.error) {
