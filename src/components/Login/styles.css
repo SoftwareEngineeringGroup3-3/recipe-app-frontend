@@ -8,7 +8,7 @@
 	margin: 0;
 	font-family: Roboto, -apple-system, 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
 	background: rgb(204, 204, 204);
-	height: 60vw;
+	height: 100vh
 }
 
 .forms-section {
@@ -232,7 +232,7 @@
 }
 
 .input-block {
-	margin-bottom: 20px;
+	/* margin-bottom: 20px; */
 }
 
 .input-block label {

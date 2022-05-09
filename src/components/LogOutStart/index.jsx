@@ -8,7 +8,7 @@ function LogOutStart() {
     <div className="logOutStart-div">
         <label className="logOutStartText">Do you want to cook with us?</label>
         <a href="/login" className="logOutStart">Login to get started!</a>
-        <img src={food} alt={food} className="logFood"></img>
+        <img src={food} alt={food} className="logFood" id="logFood"></img>
         
         
     </div>
