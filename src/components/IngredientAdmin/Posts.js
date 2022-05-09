@@ -64,6 +64,7 @@ const Posts = ({ posts, loading }) => {
       <thead>
         <tr>
           <th className='first-column'>Name</th>
+          <th className='second-column'>Quantity</th>
           <th><img src={editImg} className="editImg"/></th>
           <th><img src={deleteImg} className="editImg"/></th>
         </tr>
@@ -71,6 +72,7 @@ const Posts = ({ posts, loading }) => {
       <tbody>
         {posts.map((element, i) => <tr key={i} className='ing-cols'>
           <td className='first-column'>{element.name}</td>
+          <td className='second-column'>{element.id}</td>
           <td className='user-rows'>
             <button className="EditButton" >
               <a href={"/EditIngredient/?id=" + element.id + "&name=" + element.name} className="EditButton" >
@@ -79,7 +81,8 @@ const Posts = ({ posts, loading }) => {
             </button>
           </td>
           <td className='user-rows'>
-            <button className="DeleteButton" id="DeleteButton" type="submit" onClick={() => deleteIngredient(element.id)}> Delete
+            <button className="DeleteButton" id="DeleteButton" type="submit" onClick={() => deleteIngredient(element.id)}> 
+            Delete
             </button>
           </td>
         </tr>)}

@@ -8,6 +8,7 @@ import { useContext, useState } from 'react';
 
 function AddIngredient() {
   const [name, setName] = useState('');
+  const [quantity, setQuantity] = useState('');
   const [error, setError] = useState(false);
   let navigate = useHistory();
 
@@ -35,6 +36,8 @@ function AddIngredient() {
     });
   }
 
+  
+
   return (
 
     <form className='ing-add' onSubmit={submitIngredient}>
@@ -49,9 +52,16 @@ function AddIngredient() {
             <td>
               <label className="label1">Name of ingredient</label>
               <tr>
-                <input id="name" type="text" onInput={(ev) => { setName(ev.target.value); }} />
+                <input id="name" type="text" onInput={(ev) => { setName(ev.target.value); }}>
+                
+                </input>
               </tr>
-
+              <label className="label1">Quantity</label>
+              <tr>
+                <input id="name" type="text" onInput={(ev) => { setQuantity(ev.target.value); }}>
+                
+                </input>
+              </tr>
             </td>
           </tr>
           <tr>
