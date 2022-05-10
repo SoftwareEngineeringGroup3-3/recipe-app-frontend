@@ -1,42 +1,18 @@
-import React from 'react'
-import styles from './styles.css'
-import { useContext, useState,useEffect } from 'react';
-import { apiUrl } from '../../api';
-import { useHistory } from 'react-router-dom';
-import Posts from '../AddRecipe/Posts';
-import Pagination from '../IngredientAdmin/Pagination';
+import React from "react";
+import styles from "./styles.css";
+import { useContext, useState, useEffect } from "react";
+import { apiUrl } from "../../api";
+import { useHistory } from "react-router-dom";
+import Posts from "../AddRecipe/Posts";
+import Pagination from "../IngredientAdmin/Pagination";
+import Select from "react-select";
 
-
-var ing = ['a','b'];
+var ing = ["a", "b"];
 
 function AddRecipe() {
-  return (
-    <div class="Everything">
-      <Recipe></Recipe>
-      <div class="IngBar">
-        <div id="Title"><h4>List of ingredients:</h4>
-        {/* {
-          ing.map(element => <div className="IngElement">
-            {element.value}
-            </div>
-          )} */}
-        </div>
-        
-        <input id="Filter" type="text" placeholder='Start writting ingredient'></input>
-
-      </div>
-      <IngForm>
-      </IngForm>
-
-    </div>
-
-  )
-}
-
-function IngForm() {
   const [ingredients, setIngredients] = useState([]);
-  const [name, setName] = useState('');
-  const [recipes , setRecipes] = useState([]);
+  const [name, setName] = useState("");
+  const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(false);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -45,7 +21,14 @@ function IngForm() {
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-  const paginate = pageNumber => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const actions = [
+    { label: "Vegetarian", value: 1 },
+    { label: "Gluten Free", value: 2 },
+    { label: "Low Calorie", value: 3 },
+    { label: "No Lactose", value: 4 },
+  ];
 
   useEffect(() => {
     getIngredients()
@@ -53,17 +36,121 @@ function IngForm() {
 
   function getIngredients() {
     fetch(`${apiUrl}/ingredients`, {
+      credentials: "include",
+      method: "GET",
+    }).then((res) => {
+      res
+        .json()
+        .then((data) => {
+          if (data.error) {
+            setError(data.message);
+          } else {
+            setIngredients(data);
+            setLoading(true);
+            setPosts(data);
+            setLoading(false);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          setError("Invalid server response");
+        })
+        .catch((error) => {
+          console.error(error);
+          setError("Failed to connect");
+        });
+    });
+  }
+
+  return (
+    <form className="rec-add">
+      <table className="styled-table-add-rec">
+        <thead>
+          <tr>
+            <th>Recipe Data</th>
+            <th>Available Ingredients</th>
+            <th>Stored Ingredients</th>
+          </tr>
+        </thead>
+        <tbody>
+          <td>
+            <tr>Name</tr>
+            <tr>
+              <input
+                id="name"
+                type="text"
+                onInput={(ev) => {
+                  setName(ev.target.value);
+                }}
+              />
+            </tr>
+            <tr>
+              <br/>
+            </tr>
+            <tr>Tag</tr>
+            <tr>
+              <Select options={actions} />
+            </tr>
+          </td>
+          <td>
+              <IngredientFormRecipes/>
+          </td>
+          <td>ing list</td>
+        </tbody>
+      </table>
+    </form>
+    // <div class="Everything">
+    //   <Recipe></Recipe>
+    //   <div class="IngBar">
+
+    //     <div id="Title"><h4>List of ingredients:</h4>
+    //     {/* {
+    //       ing.map(element => <div className="IngElement">
+    //         {element.value}
+    //         </div>
+    //       )} */}
+    //     </div>
+
+    //     <input id="Filter" type="text" placeholder='Start writting ingredient'></input>
+
+    //   </div>
+    //   <IngForm>
+    //   </IngForm>
+
+    // </div>
+  );
+}
+
+function IngredientFormRecipes() {
+  const [ingredients, setIngredients] = useState([]);
+  const [error, setError] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(5);
+
+  useEffect(() => {
+    getIngredients()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  function getIngredients() {
+    fetch(`${apiUrl}/ingredients/all?page=${currentPage}&limit=${postsPerPage}`, {
       credentials: 'include',
-      method: 'GET'
+      method: 'POST'
     }).then(res => {
       res.json().then((data) => {
         if (data.error) {
           setError(data.message);
         } else {
-          setIngredients(data);
-          setLoading(true);
-          setPosts(data);
-          setLoading(false);
+          if(data.length > 0){
+            setIngredients(data);
+            setLoading(true);
+            setPosts(data);
+            setLoading(false);
+          } else {
+            setCurrentPage(currentPage > 1 ? currentPage - 1 : 1);
+          }
         }
       }).catch(error => {
         console.error(error);
@@ -77,79 +164,32 @@ function IngForm() {
 
   
 
-  function addRecipe() {
-    fetch(`${apiUrl}/recipes`, {
-      credentials: 'include',
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: name, ingredients: ingredients })
-    }).then(res => {
-      res.json().then((data) => {
-        if (data.error) {
-          setError(data.message);
-        } else {
-          setRecipes(data);
-          //
-        }
-      }).catch(error => {
-        console.error(error);
-        setError('Invalid response');
-      }).catch(error => {
-        console.error(error);
-        setError('Failed to connect');
-      })
-    });
-  }
+  // const indexOfLastPost = currentPage * postsPerPage;
+  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
-  // var recipes = ['Ingredient1','Ingredient2','Ingredient3','Ingredient2','Ingredient3','Ingredient2','Ingredient3','Ingredient2']
-  
+  const paginate = pageNumber => setCurrentPage(pageNumber);
 
-  function pushRules(list){
-    
-    var w1 = document.getElementById("Namee");
-    console.log(ingredients.id);
-    var w = w1.innerHTML;
-    var li = document.createElement("li");
-
-    var rule = document.createTextNode(w);
-    li.appendChild(rule);
-    console.log(rule)
-    
-  }
+  useEffect(() => {
+    getIngredients();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage])
 
   return (
-    <div className="IngForm" onSubmit={addRecipe}>
-       {
-          <div>
-          <Posts posts={currentPosts} loading={loading} />
+    <form className='add-rec-admin-form'>
+      <div>
+          <Posts posts={posts} loading={loading} />
           <Pagination postsPerPage={postsPerPage}
             totalPosts={posts.length}
             paginate={paginate}
+            pagenumber={currentPage}
           />
-          </div>}
-    </div>
+          </div>
+    </form>
 
-  )
-
+  );
 }
 
-function Recipe() {
-  
-  return (
-    <div className="IngShow">
-      {
-        <div className="Recipe">Stored ingredients:
-        {
-          ing.map((element,i) => <div className="IngElement" id="tempList" key={i}>
-            {element}
-            </div>
-          )}
-          {/* <div className="StoredIng"> Here will be stored</div> */}
-        </div>
-      }
-    </div>
 
-  )
-}
 
-export default AddRecipe
+export default AddRecipe;

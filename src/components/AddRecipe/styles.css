@@ -1,99 +1,97 @@
-
-.IngForm{
-	width: 60%;
-	border-radius: 50px;
-	margin: auto;
+ 
+ .rec-add{
+    width: 50vw; margin-left : 15vw;
 	margin-top: 30px;
 	padding: 25px;
-	border-style: double;
-	border-color: #16344E;
-	border-width: 5px;
+	display: inline-block;
+	
 	max-height: 75vh;
-	overflow-y: scroll;
 	min-width: fit-content;
+    font-family: sans-serif;
+    font-size: 3rem;
+}.styled-table-add-rec {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    
 }
-.IngBar{
-	width: 60%;
-	border-radius: 50px;
-	height: auto+30px;
-	margin: auto;
-	margin-top: 30px;
-	padding: 10px;
-	display: flex;
-	justify-content: space-between;
-	min-width: fit-content;
+.styled-table-add-rec thead tr {
+    background-color: #16344E;
+    color: #ffffff;
+    text-align: center;
 }
-/* #Title{
-	width: 200px;
-	min-width: 200px;
-	border-radius: 50px;
-	height: auto;
-	font-size: large;
-	padding: 10px;
-	border-style: double;
-	border-color: #16344E;
-	border-width: 5px;
-} */
-.IngElement{
-	width: 50%;
-	border-radius: 50px;
-	margin: 10px;
-	padding: 25px;
-	border-style: double;
-	border-color: #16344E;
-	border-width: 5px;
-	min-width: fit-content;
-    display: flex;
-    justify-content: space-between;
-    margin: auto;
-    margin-top: 20px;
+.styled-table-add-rec th,
+.styled-table-add-rec td {
+    padding: 12px 15px;
 }
-::-webkit-scrollbar {
-	width: 3px;
+.styled-table-add-rec tbody tr {
+    border-bottom: 1px solid #dddddd;
 }
 
-  /* Track */
-::-webkit-scrollbar-track {
-	background: #16344E;
+.styled-table-add-rec tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
 }
 
-  /* Handle */
-::-webkit-scrollbar-thumb {
-	background: #888;
+.styled-table-add-rec tbody tr:last-of-type {
+    border-bottom: 2px solid #16344E;
+}
+.styled-table-add-rec tbody tr.active-row {
+    font-weight: bold;
+    color: #16344E;
 }
 
-  /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-	background: rgb(184, 67, 67);
+
+
+#name{
+	column-fill: auto;
+	height: 4vh;
 }
-.Recipe{
-	left: 0.5%;
-	width: 18%;
-	min-width: fit-content;
-	position: absolute;
-	height: 35%;
-	border-style: double;
-	border-color: rgb(179, 96, 48);
-	border-width: 5px;
-	border-radius: 20px;
+
+
+
+
+
+.styled-table-ing-rec {
+    border-collapse: collapse;
+    /* margin: 25px 0; */
+    font-size: 0.9em;
+    font-family: sans-serif;
+    /* min-width: 400px; */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table-ing-rec thead tr {
+    background-color: #16344E;
+    color: #ffffff;
+    text-align: center;
+}
+.styled-table-ing-rec th,
+.styled-table-ing-rec td {
+    padding: 12px 15px;
+}
+.styled-table-ing-rec tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.styled-table-ing-rec tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.styled-table-ing-rec tbody tr:last-of-type {
+    border-bottom: 2px solid #16344E;
+}
+.styled-table-ing-rec tbody tr.active-row {
+    font-weight: bold;
+    color: #16344E;
+}
+.editImg-ing-rec{
+	height: 1.2vw;
+}
+.first-column-ing-rec{
+	width: 20vw;
+}
+.second-column-ing-rec{
 	text-align: center;
-	font-size: large;
-	overflow-y: scroll;
-}
-.AddToRecipe{
-	color: #fbfdff;
-	background: #16344E;
-	box-shadow: 0 0 20px gray;
-	padding: 10px;
-	border-radius: 15px;
-	min-width: fit-content;
-    text-decoration: none;
-	cursor: pointer;
-}
-.Namee{
-	padding: 10px;
-}
-#Filter{
-	font-size: large;
-	border-radius: 5px;
-}
+} 

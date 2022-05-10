@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import styles from './styles.css'
 import { useContext, useState, useEffect } from 'react';

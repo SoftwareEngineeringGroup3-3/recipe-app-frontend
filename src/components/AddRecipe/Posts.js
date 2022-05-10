@@ -1,13 +1,12 @@
 import React from 'react';
 import { useContext, useState, useEffect } from 'react';
 import { apiUrl } from '../../api';
-import { useHistory } from 'react-router-dom';
+import editImg from '../../images/edit.png';
+import deleteImg from '../../images/delete.png';
 
 const Posts = ({ posts, loading }) => {
   const [ingredients, setIngredients] = useState([]);
   const [error, setError] = useState(false);
-  const [name, setName] = useState('');
-  const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     getIngredients()
@@ -34,44 +33,33 @@ const Posts = ({ posts, loading }) => {
     });
   }
 
-  function addRecipe() {
-    fetch(`${apiUrl}/recipes`, {
-      credentials: 'include',
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: name, ingredients: ingredients })
-    }).then(res => {
-      res.json().then((data) => {
-        if (data.error) {
-          setError(data.message);
-        } else {
-          setRecipes(data);
-          //
-        }
-      }).catch(error => {
-        console.error(error);
-        setError('Invalid response');
-      }).catch(error => {
-        console.error(error);
-        setError('Failed to connect');
-      })
-    });
-  }
+ 
   if (loading) {
     return <h2>Loading...</h2>;
   }
 
   return (
-    <ul className='list-group mb-4'>
-      {posts.map((element, i) => <tr key={i} className='ing-cols'>
-            <td className='user-rows'>{element.name}</td>
-            <td className='user-rows'>
-             <button onClick={() => addRecipe() }>
-                 Add to recipe
-             </button>
-            </td>
-          </tr>)}
-    </ul>
+    <table className='styled-table-ing-rec'>
+      <thead>
+        <tr>
+          <th className='first-column-ing-rec'>Name</th>
+          <th className='second-column-ing-rec'>Quantity</th>
+          <th className='third-column-ing-rec'>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+        {posts.map((element, i) => <tr key={i} className='ing-cols-ing-rec'>
+          <td className='first-column-ing-rec'>{element.name}</td>
+          <td className='second-column-ing-rec'>{element.id}</td>
+          <td className='third-column-ing-rec'>
+            <button>
+              Add to recipe
+            </button>
+          </td>
+        </tr>)}
+      </tbody>
+
+    </table>
   );
 };
 
