@@ -6,8 +6,9 @@ import { useHistory } from "react-router-dom";
 import Posts from "../AddRecipe/Posts";
 import Pagination from "../IngredientAdmin/Pagination";
 import Select from "react-select";
+import { Button } from "bootstrap";
 
-var ing = ["a", "b"];
+
 
 function AddRecipe() {
   const [ingredients, setIngredients] = useState([]);
@@ -29,6 +30,13 @@ function AddRecipe() {
     { label: "Low Calorie", value: 3 },
     { label: "No Lactose", value: 4 },
   ];
+  var ingList = ['ing1', 'ing2','ing3', 'ing4'];
+
+  function remove(el) {
+    var element = el;
+    element.remove();
+    
+  }
 
   useEffect(() => {
     getIngredients()
@@ -95,7 +103,21 @@ function AddRecipe() {
           <td>
               <IngredientFormRecipes/>
           </td>
-          <td>ing list</td>
+          <td>
+            {
+              ingList.map((element, i) => <tr key={i} id='chosen-ing-list'>
+                
+                <td>{element}</td>
+                <td>
+                  <button type="submit" onClick={() => remove(this)}>
+                    -
+                  </button>
+                </td>
+                
+                
+              </tr>)
+            }
+          </td>
         </tbody>
       </table>
     </form>
