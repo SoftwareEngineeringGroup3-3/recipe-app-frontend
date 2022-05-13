@@ -19,6 +19,7 @@
     grid-column: 1;
     grid-row: 1;
     background-color: rgb(204, 204, 204);
+    text-shadow: black 0.3em 0.1em 0.2em;
     opacity: 0.4;
   }
 
@@ -26,6 +27,7 @@
     grid-column: 2;
     grid-row: 1;
     background-color: rgb(204, 204, 204);
+    text-shadow: black 0.3em 0.1em 0.2em;
     opacity: 0.4;
   }
 
