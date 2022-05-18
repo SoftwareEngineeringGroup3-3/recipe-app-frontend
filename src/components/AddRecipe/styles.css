@@ -50,6 +50,13 @@
 	height: 4vh;
 }
 
+#instructions{
+    column-fill: auto;
+	height: 8vh;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
 
 
 
@@ -95,3 +102,7 @@
 .second-column-ing-rec{
 	text-align: center;
 } 
+
+.sumbitRecipeBtn{
+    margin-left: 30%;
+}

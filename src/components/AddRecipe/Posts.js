@@ -13,9 +13,9 @@ const Posts = ({ posts, loading }) => {
   }, [])
 
   function getIngredients() {
-    fetch(`${apiUrl}/ingredients`, {
+    fetch(`${apiUrl}/ingredients/all`, {
       credentials: 'include',
-      method: 'GET'
+      method: 'POST'
     }).then(res => {
       res.json().then((data) => {
         if (data.error) {

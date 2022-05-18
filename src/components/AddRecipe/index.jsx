@@ -13,6 +13,8 @@ import { Button } from "bootstrap";
 function AddRecipe() {
   const [ingredients, setIngredients] = useState([]);
   const [name, setName] = useState("");
+  const [inst, setInst] = useState("");
+  const [tags, setTags] = useState("");
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -30,12 +32,12 @@ function AddRecipe() {
     { label: "Low Calorie", value: 3 },
     { label: "No Lactose", value: 4 },
   ];
-  var ingList = ['ing1', 'ing2','ing3', 'ing4'];
+  var ingList = ['ing1', 'ing2', 'ing3', 'ing4'];
 
   function remove(el) {
     var element = el;
     element.remove();
-    
+
   }
 
   useEffect(() => {
@@ -43,9 +45,9 @@ function AddRecipe() {
   }, [])
 
   function getIngredients() {
-    fetch(`${apiUrl}/ingredients`, {
+    fetch(`${apiUrl}/ingredients/all`, {
       credentials: "include",
-      method: "GET",
+      method: "POST",
     }).then((res) => {
       res
         .json()
@@ -69,9 +71,33 @@ function AddRecipe() {
         });
     });
   }
+  function getRecipe() {
+    fetch(`${apiUrl}/recipe`, {
+      credentials: "include",
+      method: "POST",
+    }).then((res) => {
+      res
+        .json()
+        .then((data) => {
+          if (data.error) {
+            setError(data.message);
+          } else {
+             setRecipes(data);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          setError("Invalid server response");
+        })
+        .catch((error) => {
+          console.error(error);
+          setError("Failed to connect");
+        });
+    });
+  }
 
   return (
-    <form className="rec-add">
+    <form className="rec-add" >
       <table className="styled-table-add-rec">
         <thead>
           <tr>
@@ -81,43 +107,71 @@ function AddRecipe() {
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td>
+              <tr>Name</tr>
+              <tr>
+                <input
+                  id="name"
+                  type="text"
+                  onInput={(ev) => {
+                    setName(ev.target.value);
+                  }}
+                />
+              </tr>
+              <tr>
+                <br />
+              </tr>
+              <tr>Instructions</tr>
+              <tr>
+                <input
+                  id="instructions"
+                  type="text"
+                  onInput={(ev) => {
+                    setInst(ev.target.value);
+                  }}
+                />
+              </tr>
+              <tr>
+                <br />
+              </tr>
+              <tr>Tag</tr>
+              <tr>
+                <Select options={actions} />
+              </tr>
+            </td>
+            <td>
+              <IngredientFormRecipes />
+            </td>
+            <td>
+              {
+                ingList.map((element, i) => <tr key={i} id='chosen-ing-list'>
+
+                  <td>{element}</td>
+                  <td>
+                    <button type="submit" onClick={() => remove(this)}>
+                      -
+                    </button>
+                  </td>
+
+
+                </tr>)
+              }
+            </td>
+          </tr>
+          <tr>
+            <td>
+              { }
+            </td>
+            
           <td>
-            <tr>Name</tr>
-            <tr>
-              <input
-                id="name"
-                type="text"
-                onInput={(ev) => {
-                  setName(ev.target.value);
-                }}
-              />
-            </tr>
-            <tr>
-              <br/>
-            </tr>
-            <tr>Tag</tr>
-            <tr>
-              <Select options={actions} />
-            </tr>
+            <button type="submit" className="sumbitRecipeBtn">
+              SUBMIT RECIPE
+            </button>
           </td>
-          <td>
-              <IngredientFormRecipes/>
-          </td>
-          <td>
-            {
-              ingList.map((element, i) => <tr key={i} id='chosen-ing-list'>
-                
-                <td>{element}</td>
-                <td>
-                  <button type="submit" onClick={() => remove(this)}>
-                    -
-                  </button>
-                </td>
-                
-                
-              </tr>)
-            }
-          </td>
+          <td>{}</td>
+          </tr>
+          
         </tbody>
       </table>
     </form>
@@ -153,7 +207,7 @@ function IngredientFormRecipes() {
 
   useEffect(() => {
     getIngredients()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function getIngredients() {
@@ -165,7 +219,7 @@ function IngredientFormRecipes() {
         if (data.error) {
           setError(data.message);
         } else {
-          if(data.length > 0){
+          if (data.length > 0) {
             setIngredients(data);
             setLoading(true);
             setPosts(data);
@@ -184,7 +238,7 @@ function IngredientFormRecipes() {
     });
   }
 
-  
+
 
   // const indexOfLastPost = currentPage * postsPerPage;
   // const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -194,19 +248,19 @@ function IngredientFormRecipes() {
 
   useEffect(() => {
     getIngredients();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage])
 
   return (
     <form className='add-rec-admin-form'>
       <div>
-          <Posts posts={posts} loading={loading} />
-          <Pagination postsPerPage={postsPerPage}
-            totalPosts={posts.length}
-            paginate={paginate}
-            pagenumber={currentPage}
-          />
-          </div>
+        <Posts posts={posts} loading={loading} />
+        <Pagination postsPerPage={postsPerPage}
+          totalPosts={posts.length}
+          paginate={paginate}
+          pagenumber={currentPage}
+        />
+      </div>
     </form>
 
   );
