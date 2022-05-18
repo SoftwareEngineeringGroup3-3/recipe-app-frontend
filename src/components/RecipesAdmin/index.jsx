@@ -31,22 +31,31 @@ function RecipeFormAdmin() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(5);
+  const [postsPerPage, setPostsPerPage] = useState(5);
+  const [totalRecipes, setTotalRecipes] = useState(1);
 
   useEffect(() => {
     getRecipes()
   }, [])
 
   function getRecipes() {
-    fetch(`${apiUrl}/recipes`, {
+    fetch(`${apiUrl}/recipes/all?page=${currentPage}&limit=${postsPerPage}`, {
       credentials: 'include',
-      method: 'GET'
+      method: 'POST'
     }).then(res => {
       res.json().then((data) => {
         if (data.error) {
           setError(data.message);
         } else {
-          setRecipes(data);
+          if(data.recipes.length > 0) {
+            setRecipes(data);
+            setLoading(true);
+            setPosts(data);
+            setLoading(false);
+            setTotalRecipes(data.total_recipes);
+          } else {
+            setCurrentPage(currentPage > 1 ? currentPage - 1 : 1);
+          }
         }
       }).catch(error => {
         console.error(error);
@@ -58,19 +67,24 @@ function RecipeFormAdmin() {
     });
   }
 
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  // const indexOfLastPost = currentPage * postsPerPage;
+  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+  useEffect(() => {
+    getRecipes();
+  }, [currentPage])
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
   return (
     <form className="rec-admin-form">
       <div>
-        <Posts posts={currentPosts} loading={loading} />
+        <Posts posts={posts?.recipes} loading={loading} currentPage={currentPage} limit={postsPerPage} />
         <Pagination postsPerPage={postsPerPage}
-          totalPosts={posts.length}
-          paginate={paginate}
-        />
+            totalPosts={totalRecipes}
+            paginate={paginate}
+            pagenumber={currentPage}
+          />
       </div>
     </form>
 
