@@ -58,7 +58,7 @@ function AddIngredient() {
               </tr>
               <label className="label1">Quantity</label>
               <tr>
-                <input id="name" type="text" onInput={(ev) => { setQuantity(ev.target.value); }}>
+                <input id="quantity" type="text" onInput={(ev) => { setQuantity(ev.target.value); }}>
                 
                 </input>
               </tr>
@@ -66,7 +66,7 @@ function AddIngredient() {
           </tr>
           <tr>
             <td>
-              <button type="submit" className="ing-add-btn" >
+              <button type="submit" className="ing-add-btn" id="addButtonXD2" >
                 Add
               </button>
               {/* <button className="ing-add-btn">

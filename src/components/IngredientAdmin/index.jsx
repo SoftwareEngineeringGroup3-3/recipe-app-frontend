@@ -24,7 +24,7 @@ function IngredientAdmin() {
       <div class="IngredientBar">
         <div className='ing-admin-title'><h4>List of ingredients</h4></div>
         <input id="Filter" type="text" placeholder='Start writting ingredient'></input>
-        <button  onClick={toggleModal} className="AddIngredientBtn" href='/addingredient' >
+        <button  onClick={toggleModal} className="AddIngredientBtn" id="addButtonXD" href='/addingredient' >
           Add Ingredient
         </button>
         {modal && (
