@@ -14,7 +14,6 @@ it('Test 2 - Login as admin', () => {
                 });
             });
             });
-
             await driver.sleep(5000);
         } finally {
             await driver.quit();
