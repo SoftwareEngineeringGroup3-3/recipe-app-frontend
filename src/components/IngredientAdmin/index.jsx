@@ -53,7 +53,8 @@ function IngredientForm() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(5);
+  const [postsPerPage, setPostsPerPage] = useState(5);
+  const [totalIngredients, setTotalIngredients] = useState(0);
 
   useEffect(() => {
     getIngredients()
@@ -68,10 +69,11 @@ function IngredientForm() {
         if (data.error) {
           setError(data.message);
         } else {
-          if(data.length > 0){
+          if(data.ingredients.length > 0){
             setIngredients(data);
             setLoading(true);
             setPosts(data);
+            setTotalIngredients(data.total_ingredients)
             setLoading(false);
           } else {
             setCurrentPage(currentPage > 1 ? currentPage - 1 : 1);
@@ -102,9 +104,9 @@ function IngredientForm() {
   return (
     <form className='ing-admin-form'>
       <div>
-          <Posts posts={posts} loading={loading} />
+          <Posts posts={posts?.ingredients} loading={loading} currentPage={currentPage} limit={postsPerPage}/>
           <Pagination postsPerPage={postsPerPage}
-            totalPosts={posts.length}
+            totalPosts={totalIngredients}
             paginate={paginate}
             pagenumber={currentPage}
           />
