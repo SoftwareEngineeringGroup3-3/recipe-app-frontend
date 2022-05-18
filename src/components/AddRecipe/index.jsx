@@ -23,14 +23,14 @@ function AddRecipe() {
   const [postsPerPage] = useState(5);
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  //const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const actions = [
-    { label: "Vegetarian", value: 1 },
-    { label: "Gluten Free", value: 2 },
-    { label: "Low Calorie", value: 3 },
-    { label: "No Lactose", value: 4 },
+    { label: "vegetarian", value: 1 },
+    { label: "gluten free", value: 2 },
+    { label: "low calorie", value: 3 },
+    { label: "no lactose", value: 4 },
   ];
   var ingList = ['ing1', 'ing2', 'ing3', 'ing4'];
 
@@ -204,6 +204,7 @@ function IngredientFormRecipes() {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(5);
+  const [totalIngredients, setTotalIngredients] = useState(1);
 
   useEffect(() => {
     getIngredients()
@@ -219,9 +220,10 @@ function IngredientFormRecipes() {
         if (data.error) {
           setError(data.message);
         } else {
-          if (data.length > 0) {
+          if (data.ingredients.length > 0) {
             setIngredients(data);
             setLoading(true);
+            setTotalIngredients(data.total_ingredients);
             setPosts(data);
             setLoading(false);
           } else {
@@ -254,9 +256,9 @@ function IngredientFormRecipes() {
   return (
     <form className='add-rec-admin-form'>
       <div>
-        <Posts posts={posts} loading={loading} />
+        <Posts posts={posts?.ingredients} loading={loading} currentPage={currentPage} limit={postsPerPage}/>
         <Pagination postsPerPage={postsPerPage}
-          totalPosts={posts.length}
+          totalPosts={totalIngredients}
           paginate={paginate}
           pagenumber={currentPage}
         />
