@@ -77,13 +77,15 @@ function AddRecipe() {
   //       });
   //   });
   // }
+
+  const quantities = [ "g", "kg", "l", "ml", "piece(s)" ];
+
   function AddRecipe() {
     const ingr = [];
     const tgs = [];
     for(const ing of storedIngredients) {
-      ingr.push({ ingredient: {id: ing.id, name: ing.name}, quantity: '1' });
+      ingr.push({ ingredient: {id: ing.element.id, name: ing.element.name}, quantity: `${ing.amount} ${quantities[ing.quantity - 1]}` });
     }
-    console.log(ingr);
     for(const tag of tags) {
       tgs.push(tag.label);
     }
@@ -161,7 +163,6 @@ function AddRecipe() {
               <tr>Tag</tr>
               <tr>
                 <Select className="rec-tags"  isMulti options={actions} onChange={(ev) => {
-                  console.log(ev);
                   setTags(ev);
                 }}/>
               </tr>
@@ -173,14 +174,30 @@ function AddRecipe() {
               {
                 storedIngredients?.map((element, i) => <tr key={i} id='chosen-ing-list'>
 
-                  <td>{element.name}</td>
+                  <td>{element.element.name}</td>
+                  <td>
+                    <input type="text" required placeholder="quantity" onInput={ev => {
+                      ev.preventDefault();
+                      element.amount = ev.target.value;
+                    }}></input>
+                  </td>
+                  <td>
+                    <select onChange={ev => {
+                      ev.preventDefault();
+                      element.quantity = ev.target.value;
+                    }}>
+                      <option value="1">g</option>
+                      <option value="2">kg</option>
+                      <option value="3">l</option>
+                      <option value="4">ml</option>
+                      <option value="5">piece(s)</option>
+                    </select>
+                  </td>
                   <td>
                     <button type="submit" onClick={(ev) => { ev.preventDefault(); remove(element);}}>
                       -
                     </button>
                   </td>
-
-
                 </tr>)
               }
             </td>
