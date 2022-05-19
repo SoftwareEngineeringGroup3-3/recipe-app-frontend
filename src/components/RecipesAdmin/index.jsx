@@ -9,9 +9,11 @@ import AddRecipe from '../AddRecipe';
 
 function RecipesAdmin() {
   const [modal, setModal] = useState(false);
+  const [query, setQuery] = useState("");
   const toggleModal = () => {
     setModal(!modal);
   };
+
 
   if (modal) {
     document.body.classList.add('active-modal')
@@ -23,7 +25,12 @@ function RecipesAdmin() {
       <div className="RecipeBar">
         <div className='rec-admin-title'><h4>List of recipes:</h4></div>
 
-        <input id="Filter" type="text" placeholder='Start writting recipe'></input>
+        <input id="Filter" type="text" placeholder='Start writting recipe' onInput={ev => 
+        { 
+          ev.preventDefault();
+          setTimeout(500); 
+          setQuery(ev.target.value); 
+        }}></input>
         <button onClick={toggleModal} className="AddIngredientBtn" href='/addrecipe' >
           Add Recipe
         </button>
@@ -43,7 +50,7 @@ function RecipesAdmin() {
           Add recipe
         </a> */}
       </div>
-      <RecipeFormAdmin>
+      <RecipeFormAdmin query={query}>
       </RecipeFormAdmin>
 
     </div>
@@ -51,7 +58,7 @@ function RecipesAdmin() {
   )
 }
 
-function RecipeFormAdmin() {
+function RecipeFormAdmin({query}) {
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -62,10 +69,19 @@ function RecipeFormAdmin() {
 
   useEffect(() => {
     getRecipes()
-  }, [])
+  }, []);
 
-  function getRecipes() {
-    fetch(`${apiUrl}/recipes/all?page=${currentPage}&limit=${postsPerPage}`, {
+  useEffect(() => {
+    if(query != "") {
+      getRecipes(query)
+    } else {
+      getRecipes();
+    }
+  }, [query]);
+
+  function getRecipes(query) {
+    const queryName = query ? `&name=${query}` : '';
+    fetch(`${apiUrl}/recipes/all?page=${currentPage}&limit=${postsPerPage}${queryName}`, {
       credentials: 'include',
       method: 'POST'
     }).then(res => {
@@ -98,7 +114,11 @@ function RecipeFormAdmin() {
   // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
 
   useEffect(() => {
-    getRecipes();
+    if(query != "") {
+      getRecipes(query)
+    } else {
+      getRecipes();
+    }
   }, [currentPage])
 
   const paginate = pageNumber => setCurrentPage(pageNumber);
