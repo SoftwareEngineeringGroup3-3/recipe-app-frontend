@@ -52,7 +52,7 @@ const Posts = ({ posts, loading, currentPage, limit, storeIngr }) => {
           <td className='first-column-ing-rec'>{element.name}</td>
           <td className='second-column-ing-rec'>{element.id}</td>
           <td className='third-column-ing-rec'>
-            <button onClick={ev => { ev.preventDefault(); storeIngr(element);}}>
+            <button onClick={ev => { ev.preventDefault(); storeIngr({element: element, amount: 0, quantity: 1});}}>
               Add to recipe
             </button>
           </td>
