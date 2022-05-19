@@ -124,14 +124,14 @@ function AddRecipe() {
       <table className="styled-table-add-rec">
         <thead>
           <tr>
-            <th>Recipe Data</th>
-            <th>Available Ingredients</th>
-            <th>Stored Ingredients</th>
+            <th className="add-rec-first-col">Recipe Data</th>
+            <th className="add-rec-second-col">Available Ingredients</th>
+            <th className="add-rec-third-col">Stored Ingredients</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
+          <tr className="add-rec-first-row">
+            <td className="add-rec-left">
               <tr>Name</tr>
               <tr>
                 <input
@@ -160,13 +160,13 @@ function AddRecipe() {
               </tr>
               <tr>Tag</tr>
               <tr>
-                <Select isMulti options={actions} onChange={(ev) => {
+                <Select className="rec-tags"  isMulti options={actions} onChange={(ev) => {
                   console.log(ev);
                   setTags(ev);
                 }}/>
               </tr>
             </td>
-            <td>
+            <td className="all-ing-list-rec-add">
               <IngredientFormRecipes store={setIngredients} />
             </td>
             <td>

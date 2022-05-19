@@ -9,10 +9,10 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, pagenumber }) => {
   }
 
   return (
-    <nav className='pagination'>
+    <nav className='pagination-rec'>
         <a onClick={() => paginate(pagenumber - 1 > 0 ? pagenumber - 1 : 1)}><i className="arrow left" id='decrement' /*onClick={()=>decrementValue()}*/></i></a>
-          <li key={pagenumber} className='page-item' >
-            <a onClick={() => paginate(pagenumber)} className='page-link'>
+          <li key={pagenumber} className='page-item-rec' >
+            <a onClick={() => paginate(pagenumber)} className='page-link-rec'>
               {pagenumber} out of {Math.ceil(totalPosts / postsPerPage)}
             </a>
           </li>
