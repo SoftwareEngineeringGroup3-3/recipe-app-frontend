@@ -10,6 +10,7 @@ import AddIngredient from '../AddIngredient'
 
 function IngredientAdmin() {
   const [modal, setModal] = useState(false);
+  const [query, setQuery] = useState("");
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -23,7 +24,12 @@ function IngredientAdmin() {
     <div class="All">
       <div class="IngredientBar">
         <div className='ing-admin-title'><h4>List of ingredients</h4></div>
-        <input id="Filter" type="text" placeholder='Start writting ingredient'></input>
+        <input id="Filter" type="text" placeholder='Start writting recipe' onInput={ev => 
+        { 
+          ev.preventDefault();
+          setTimeout(500); 
+          setQuery(ev.target.value); 
+        }}></input>
         <button onClick={toggleModal} className="AddIngredientBtn" href='/addingredient' >
           Add Ingredient
         </button>
@@ -40,14 +46,14 @@ function IngredientAdmin() {
           </div>
         )}
       </div>
-      <IngredientForm>
+      <IngredientForm query={query}>
       </IngredientForm>
     </div>
 
   )
 }
 
-function IngredientForm() {
+function IngredientForm({query}) {
   const [ingredients, setIngredients] = useState([]);
   const [error, setError] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -60,8 +66,17 @@ function IngredientForm() {
     getIngredients()
   }, [])
 
-  function getIngredients() {
-    fetch(`${apiUrl}/ingredients/all?page=${currentPage}&limit=${postsPerPage}`, {
+  useEffect(() => {
+    if(query != "") {
+      getIngredients(query)
+    } else {
+      getIngredients();
+    }
+  }, [query]);
+
+  function getIngredients(query) {
+    const queryName = query ? `&name=${query}` : '';
+    fetch(`${apiUrl}/ingredients/all?page=${currentPage}&limit=${postsPerPage}${queryName}`, {
       credentials: 'include',
       method: 'POST'
     }).then(res => {
@@ -98,7 +113,11 @@ function IngredientForm() {
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   useEffect(() => {
-    getIngredients();
+    if(query != "") {
+      getIngredients(query)
+    } else {
+      getIngredients();
+    }
   }, [currentPage])
 
   return (
