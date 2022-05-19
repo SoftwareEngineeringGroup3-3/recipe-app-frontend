@@ -155,9 +155,9 @@ function AddRecipe() {
                   }}
                 />
               </tr>
-              <tr>
+              {/* <tr>
                 <br />
-              </tr>
+              </tr> */}
               <tr>Tag</tr>
               <tr>
                 <Select className="rec-tags"  isMulti options={actions} onChange={(ev) => {
