@@ -11,10 +11,11 @@ import { Button } from "bootstrap";
 
 
 function AddRecipe() {
+  const [storedIngredients, setStoredIngredients] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [name, setName] = useState("");
   const [inst, setInst] = useState("");
-  const [tags, setTags] = useState("");
+  const [tags, setTags] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [error, setError] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -23,8 +24,10 @@ function AddRecipe() {
   const [postsPerPage] = useState(5);
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  //const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  useEffect(() => {
+    setStoredIngredients(storedIngredients.concat(ingredients));
+  }, [ingredients]);
 
   const actions = [
     { label: "vegetarian", value: 1 },
@@ -35,46 +38,66 @@ function AddRecipe() {
   var ingList = ['ing1', 'ing2', 'ing3', 'ing4'];
 
   function remove(el) {
-    var element = el;
-    element.remove();
-
+    let ingredients = storedIngredients;
+    setStoredIngredients(ingredients.filter(elem => {
+      if(elem.id != el.id){
+        return elem;
+      }
+    }));
   }
 
-  useEffect(() => {
-    getIngredients()
-  }, [])
+  // useEffect(() => {
+  //   getIngredients()
+  // }, [])
 
-  function getIngredients() {
-    fetch(`${apiUrl}/ingredients/all`, {
+  // function getIngredients() {
+  //   fetch(`${apiUrl}/ingredients/all`, {
+  //     credentials: "include",
+  //     method: "POST",
+  //   }).then((res) => {
+  //     res
+  //       .json()
+  //       .then((data) => {
+  //         if (data.error) {
+  //           setError(data.message);
+  //         } else {
+  //           setIngredients(data);
+  //           setLoading(true);
+  //           setPosts(data);
+  //           setLoading(false);
+  //         }
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //         setError("Invalid server response");
+  //       })
+  //       .catch((error) => {
+  //         console.error(error);
+  //         setError("Failed to connect");
+  //       });
+  //   });
+  // }
+  function AddRecipe() {
+    const ingr = [];
+    const tgs = [];
+    for(const ing of storedIngredients) {
+      ingr.push({ ingredient: {id: ing.id, name: ing.name}, quantity: '1' });
+    }
+    console.log(ingr);
+    for(const tag of tags) {
+      tgs.push(tag.label);
+    }
+
+    fetch(`${apiUrl}/recipes`, {
       credentials: "include",
       method: "POST",
-    }).then((res) => {
-      res
-        .json()
-        .then((data) => {
-          if (data.error) {
-            setError(data.message);
-          } else {
-            setIngredients(data);
-            setLoading(true);
-            setPosts(data);
-            setLoading(false);
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-          setError("Invalid server response");
-        })
-        .catch((error) => {
-          console.error(error);
-          setError("Failed to connect");
-        });
-    });
-  }
-  function getRecipe() {
-    fetch(`${apiUrl}/recipe`, {
-      credentials: "include",
-      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: name,
+        instructions: inst,
+        tags: tgs,
+        ingredients: ingr
+      })
     }).then((res) => {
       res
         .json()
@@ -137,19 +160,22 @@ function AddRecipe() {
               </tr>
               <tr>Tag</tr>
               <tr>
-                <Select options={actions} />
+                <Select isMulti options={actions} onChange={(ev) => {
+                  console.log(ev);
+                  setTags(ev);
+                }}/>
               </tr>
             </td>
             <td>
-              <IngredientFormRecipes />
+              <IngredientFormRecipes store={setIngredients} />
             </td>
             <td>
               {
-                ingList.map((element, i) => <tr key={i} id='chosen-ing-list'>
+                storedIngredients?.map((element, i) => <tr key={i} id='chosen-ing-list'>
 
-                  <td>{element}</td>
+                  <td>{element.name}</td>
                   <td>
-                    <button type="submit" onClick={() => remove(this)}>
+                    <button type="submit" onClick={(ev) => { ev.preventDefault(); remove(element);}}>
                       -
                     </button>
                   </td>
@@ -165,7 +191,7 @@ function AddRecipe() {
             </td>
             
           <td>
-            <button type="submit" className="sumbitRecipeBtn">
+            <button type="submit" className="sumbitRecipeBtn" onClick={ ev => { ev.preventDefault(); AddRecipe(); }}>
               SUBMIT RECIPE
             </button>
           </td>
@@ -197,7 +223,7 @@ function AddRecipe() {
   );
 }
 
-function IngredientFormRecipes() {
+function IngredientFormRecipes({store}) {
   const [ingredients, setIngredients] = useState([]);
   const [error, setError] = useState(false);
   const [posts, setPosts] = useState([]);
@@ -240,7 +266,9 @@ function IngredientFormRecipes() {
     });
   }
 
-
+  const storeIngr = el => {
+    store(el);
+  }
 
   // const indexOfLastPost = currentPage * postsPerPage;
   // const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -256,7 +284,7 @@ function IngredientFormRecipes() {
   return (
     <form className='add-rec-admin-form'>
       <div>
-        <Posts posts={posts?.ingredients} loading={loading} currentPage={currentPage} limit={postsPerPage}/>
+        <Posts posts={posts?.ingredients} loading={loading} currentPage={currentPage} limit={postsPerPage} storeIngr={storeIngr}/>
         <Pagination postsPerPage={postsPerPage}
           totalPosts={totalIngredients}
           paginate={paginate}
