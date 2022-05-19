@@ -5,17 +5,43 @@ import { apiUrl } from '../../api';
 import { useHistory } from 'react-router-dom';
 import Posts from '../RecipesAdmin/Posts';
 import Pagination from '../RecipesAdmin/Pagination'
+import AddRecipe from '../AddRecipe';
 
 function RecipesAdmin() {
+  const [modal, setModal] = useState(false);
+  const toggleModal = () => {
+    setModal(!modal);
+  };
+
+  if (modal) {
+    document.body.classList.add('active-modal')
+  } else {
+    document.body.classList.remove('active-modal')
+  }
   return (
     <div >
       <div className="RecipeBar">
         <div className='rec-admin-title'><h4>List of recipes:</h4></div>
 
         <input id="Filter" type="text" placeholder='Start writting recipe'></input>
-        <a type="submit" id="AddRecipe" href='/addrecipe'>
+        <button onClick={toggleModal} className="AddIngredientBtn" href='/addrecipe' >
+          Add Recipe
+        </button>
+        {modal && (
+          <div className="modal-rec">
+            {/* <div onClick={toggleModal} className="overlay"></div> */}
+            <div className="modal-content-rec">
+              <AddRecipe />
+              <button className="close-modal-rec" onClick={toggleModal}>
+                CLOSE
+              </button>
+
+            </div>
+          </div>
+        )}
+        {/* <a type="submit" id="AddRecipe" href='/addrecipe'>
           Add recipe
-        </a>
+        </a> */}
       </div>
       <RecipeFormAdmin>
       </RecipeFormAdmin>

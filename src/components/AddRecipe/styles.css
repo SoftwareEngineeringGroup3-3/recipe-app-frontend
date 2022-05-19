@@ -1,5 +1,4 @@
- 
- .rec-add{
+.rec-add{
     width: 50vw; margin-left : 15vw;
 	margin-top: 30px;
 	padding: 25px;
@@ -105,4 +104,24 @@
 
 .sumbitRecipeBtn{
     margin-left: 30%;
+}
+
+.rec-tags{
+    max-width: 9vw;
+    font-size: 14px;
+}
+.all-ing-list-rec-add{
+    padding-top: 0px;
+    resize: none;
+    position: absolute;
+}
+.add-rec-second-col{
+    width: 37vw;
+}
+
+.add-rec-first-row{
+    height: 50vh;
+}
+.add-rec-left{
+    padding-top: 0px;
 }

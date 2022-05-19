@@ -14,7 +14,7 @@ function IngredientAdmin() {
     setModal(!modal);
   };
 
-  if(modal) {
+  if (modal) {
     document.body.classList.add('active-modal')
   } else {
     document.body.classList.remove('active-modal')
@@ -24,21 +24,21 @@ function IngredientAdmin() {
       <div class="IngredientBar">
         <div className='ing-admin-title'><h4>List of ingredients</h4></div>
         <input id="Filter" type="text" placeholder='Start writting ingredient'></input>
-        <button  onClick={toggleModal} className="AddIngredientBtn" href='/addingredient' >
+        <button onClick={toggleModal} className="AddIngredientBtn" href='/addingredient' >
           Add Ingredient
         </button>
         {modal && (
-        <div className="modal">
-          {/* <div onClick={toggleModal} className="overlay"></div> */}
-          <div className="modal-content">
-          <AddIngredient/>
-            <button className="close-modal" onClick={toggleModal}>
-              CLOSE
-            </button>
-            
+          <div className="modal">
+            {/* <div onClick={toggleModal} className="overlay"></div> */}
+            <div className="modal-content">
+              <AddIngredient />
+              <button className="close-modal" onClick={toggleModal}>
+                CLOSE
+              </button>
+
+            </div>
           </div>
-        </div>
-      )}
+        )}
       </div>
       <IngredientForm>
       </IngredientForm>
@@ -69,7 +69,7 @@ function IngredientForm() {
         if (data.error) {
           setError(data.message);
         } else {
-          if(data.ingredients.length > 0){
+          if (data.ingredients.length > 0) {
             setIngredients(data);
             setLoading(true);
             setPosts(data);
@@ -89,7 +89,7 @@ function IngredientForm() {
     });
   }
 
-  
+
 
   // const indexOfLastPost = currentPage * postsPerPage;
   // const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -104,13 +104,13 @@ function IngredientForm() {
   return (
     <form className='ing-admin-form'>
       <div>
-          <Posts posts={posts?.ingredients} loading={loading} currentPage={currentPage} limit={postsPerPage}/>
-          <Pagination postsPerPage={postsPerPage}
-            totalPosts={totalIngredients}
-            paginate={paginate}
-            pagenumber={currentPage}
-          />
-          </div>
+        <Posts posts={posts?.ingredients} loading={loading} currentPage={currentPage} limit={postsPerPage} />
+        <Pagination postsPerPage={postsPerPage}
+          totalPosts={totalIngredients}
+          paginate={paginate}
+          pagenumber={currentPage}
+        />
+      </div>
     </form>
 
   );
