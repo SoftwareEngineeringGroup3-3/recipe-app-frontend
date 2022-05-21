@@ -1,5 +1,4 @@
- 
- .rec-add{
+.rec-add{
     width: 50vw; margin-left : 15vw;
 	margin-top: 30px;
 	padding: 25px;
@@ -50,6 +49,13 @@
 	height: 4vh;
 }
 
+#instructions{
+    column-fill: auto;
+	height: 8vh;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
 
 
 
@@ -95,3 +101,27 @@
 .second-column-ing-rec{
 	text-align: center;
 } 
+
+.sumbitRecipeBtn{
+    margin-left: 30%;
+}
+
+.rec-tags{
+    max-width: 9vw;
+    font-size: 14px;
+}
+.all-ing-list-rec-add{
+    padding-top: 0px;
+    resize: none;
+    position: absolute;
+}
+.add-rec-second-col{
+    width: 37vw;
+}
+
+.add-rec-first-row{
+    height: 50vh;
+}
+.add-rec-left{
+    padding-top: 0px;
+}
