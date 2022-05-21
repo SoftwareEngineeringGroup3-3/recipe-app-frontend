@@ -4,18 +4,18 @@ import { apiUrl } from '../../api';
 import editImg from '../../images/edit.png';
 import deleteImg from '../../images/delete.png';
 
-const Posts = ({ posts, loading }) => {
+const Posts = ({ posts, loading, currentPage, limit }) => {
   const [ingredients, setIngredients] = useState([]);
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    getIngredients()
-  }, [])
+  // useEffect(() => {
+  //   getIngredients()
+  // }, [])
 
   function getIngredients() {
-    fetch(`${apiUrl}/ingredients`, {
+    fetch(`${apiUrl}/ingredients/all?page=${currentPage}&limit=${limit}`, {
       credentials: 'include',
-      method: 'GET'
+      method: 'POST'
     }).then(res => {
       res.json().then((data) => {
         if (data.error) {
@@ -43,8 +43,8 @@ const Posts = ({ posts, loading }) => {
           setError(data.message);
         } else {
           getIngredients();
-          alert(id);
-          console.log(id);
+          // alert(id);
+          // console.log(id);
         }
       }).catch(error => {
         console.error(error);
@@ -70,7 +70,7 @@ const Posts = ({ posts, loading }) => {
         </tr>
       </thead>
       <tbody>
-        {posts.map((element, i) => <tr key={i} className='ing-cols'>
+        {posts?.map((element, i) => <tr key={i} className='ing-cols'>
           <td className='first-column'>{element.name}</td>
           <td className='second-column'>{element.id}</td>
           <td className='user-rows'>

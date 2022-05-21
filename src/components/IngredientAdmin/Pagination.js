@@ -22,19 +22,22 @@ function decrementValue()
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
   }
+  function displayTotalPages(){
+    if(Math.ceil(totalPosts / postsPerPage) > 0)
+      return Math.ceil(totalPosts / postsPerPage);
+    else
+      return 1;
+  }
   var num = 1;
   return (
     <nav className='pagination'>
-      
-      <i className="arrow left" id='decrement' onClick={()=>decrementValue()}></i>
-        
-        <a onClick={() => paginate(pagenumber - 1 > 0 ? pagenumber - 1 : 1)}></a>
+        <a onClick={() => paginate(pagenumber - 1 > 0 ? pagenumber - 1 : 1)}><i className="arrow left" id='decrement' /*onClick={()=>decrementValue()}*/></i></a>
           <li key={pagenumber} className='page-item' >
             <a onClick={() => paginate(pagenumber)} className='page-link'>
-              {pagenumber}
+              {pagenumber} out of {displayTotalPages()}
             </a>
           </li>
-        <a onClick={() => paginate(pagenumber + 1)}><i class="arrow right" id='increment' onClick={()=>decrementValue()}></i></a>
+        <a onClick={() => paginate(pagenumber + 1)}><i class="arrow right" id='increment' /*onClick={()=>decrementValue()}*/></i></a>
     </nav>
   );
 };
