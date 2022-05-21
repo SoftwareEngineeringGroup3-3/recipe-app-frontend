@@ -22,8 +22,8 @@ it('Test 3 - Create a User', () => {
                     });
                 });
             });
-            await driver.sleep(15000);
         });
+        await driver.sleep(15000);
         } finally {
             await driver.quit();
         }

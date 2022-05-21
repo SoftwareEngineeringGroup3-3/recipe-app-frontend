@@ -1,6 +1,6 @@
 const { Builder, By } = require('selenium-webdriver');
 
-it('Test 2 - Login as admin', () => {
+it('Test 4 - Add ingredient', () => {
     (async () => {
         const driver = await new Builder().forBrowser('MicrosoftEdge').build();
         try {
@@ -19,7 +19,6 @@ it('Test 2 - Login as admin', () => {
                                     driver.findElement(By.id("addButtonXD2")).click().then(function(){
                                         driver.get('http://localhost:3000/ingredientAdmin').then(function(){
                                             var tmp2 = driver.findElement(By.className("first-column")).getCssValue("textContent");
-            
                                             expect(tmp).toEqual(tmp2);
                                         });
                                     });
@@ -31,7 +30,6 @@ it('Test 2 - Login as admin', () => {
             });
 
             await driver.sleep(5000);
- 
         } finally {
             await driver.quit();
         }
