@@ -5,18 +5,23 @@ import editImg from '../../images/edit.png';
 import deleteImg from '../../images/delete.png';
 
 const Posts = ({ posts, loading, currentPage, limit }) => {
-  const [ingredients, setIngredients] = useState([]);
+  const [users, setUsers] = useState([]);
   const [error, setError] = useState(false);
-  function getIngredients() {
-    fetch(`${apiUrl}/ingredients/all?page=${currentPage}&limit=${limit}`, {
+
+  // useEffect(() => {
+  //   getIngredients()
+  // }, [])
+
+  function getUsers() {
+    fetch(`${apiUrl}/users/all?page=${currentPage}&limit=${limit}`, {
       credentials: 'include',
-      method: 'POST'
+      method: 'GET'
     }).then(res => {
       res.json().then((data) => {
         if (data.error) {
           setError(data.message);
         } else {
-          setIngredients(data);
+          setUsers(data);
         }
       }).catch(error => {
         console.error(error);
@@ -28,8 +33,8 @@ const Posts = ({ posts, loading, currentPage, limit }) => {
     });
   }
 
-  function deleteIngredient(id) {
-    fetch(`${apiUrl}/ingredients/${id}`, {
+  function deleteUsers(id) {
+    fetch(`${apiUrl}/users/${id}`, {
       credentials: 'include',
       method: 'DELETE'
     }).then(res => {
@@ -37,7 +42,7 @@ const Posts = ({ posts, loading, currentPage, limit }) => {
         if (data.error) {
           setError(data.message);
         } else {
-          getIngredients();
+          getUsers();
         }
       }).catch(error => {
         console.error(error);
@@ -57,24 +62,28 @@ const Posts = ({ posts, loading, currentPage, limit }) => {
       <thead>
         <tr>
           <th className='first-column'>Name</th>
-          <th className='second-column'>Quantity</th>
-          <th><img src={editImg} className="editImg"/></th>
-          <th><img src={deleteImg} className="editImg"/></th>
+          <th className='second-column'>email</th>
+          <th className='second-column'>ID</th>
+          <th className='first-column'>Admin</th>
+          <th>Edit</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
         {posts?.map((element, i) => <tr key={i} className='ing-cols'>
           <td className='first-column'>{element.name}</td>
+          <td className='first-column'>{element.email}</td>
           <td className='second-column'>{element.id}</td>
+          <td className='second-column'>{element.is_admin}</td>
           <td className='user-rows'>
             <button className="EditButton" >
-              <a href={"/EditIngredient/?id=" + element.id + "&name=" + element.name} className="EditButton" >
+              <a href={"/EditUser/?id=" + element.id+ "&name=" + element.name} className="EditButton" >
                 Edit
               </a>
             </button>
           </td>
           <td className='user-rows'>
-            <button className="DeleteButton" id="DeleteButton" type="submit" onClick={() => deleteIngredient(element.id)}> 
+            <button className="DeleteButton" id="DeleteButton" type="submit" onClick={() => deleteUsers(element.id)}> 
             Delete
             </button>
           </td>

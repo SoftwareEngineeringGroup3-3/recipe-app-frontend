@@ -21,8 +21,6 @@ function EditIngredient() {
   var newName = "newName";
 
   function submitIngredient() {
-    // var tmp = document.getElementById("confirm-name");
-    // newName = tmp.getAttribute("text");
     newName = document.getElementById("edit-ing-name").value;
     fetch(`${apiUrl}/ingredients/${idIngredient}`, {
       credentials: "include",

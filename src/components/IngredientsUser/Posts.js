@@ -7,6 +7,7 @@ import deleteImg from '../../images/delete.png';
 const Posts = ({ posts, loading, currentPage, limit }) => {
   const [ingredients, setIngredients] = useState([]);
   const [error, setError] = useState(false);
+
   function getIngredients() {
     fetch(`${apiUrl}/ingredients/all?page=${currentPage}&limit=${limit}`, {
       credentials: 'include',
@@ -28,26 +29,6 @@ const Posts = ({ posts, loading, currentPage, limit }) => {
     });
   }
 
-  function deleteIngredient(id) {
-    fetch(`${apiUrl}/ingredients/${id}`, {
-      credentials: 'include',
-      method: 'DELETE'
-    }).then(res => {
-      res.json().then((data) => {
-        if (data.error) {
-          setError(data.message);
-        } else {
-          getIngredients();
-        }
-      }).catch(error => {
-        console.error(error);
-        setError('Invalid server response');
-      }).catch(error => {
-        console.error(error);
-        setError('Failed to connect');
-      })
-    });
-  }
   if (loading) {
     return <h2>Loading...</h2>;
   }
@@ -57,27 +38,11 @@ const Posts = ({ posts, loading, currentPage, limit }) => {
       <thead>
         <tr>
           <th className='first-column'>Name</th>
-          <th className='second-column'>Quantity</th>
-          <th><img src={editImg} className="editImg"/></th>
-          <th><img src={deleteImg} className="editImg"/></th>
         </tr>
       </thead>
       <tbody>
         {posts?.map((element, i) => <tr key={i} className='ing-cols'>
           <td className='first-column'>{element.name}</td>
-          <td className='second-column'>{element.id}</td>
-          <td className='user-rows'>
-            <button className="EditButton" >
-              <a href={"/EditIngredient/?id=" + element.id + "&name=" + element.name} className="EditButton" >
-                Edit
-              </a>
-            </button>
-          </td>
-          <td className='user-rows'>
-            <button className="DeleteButton" id="DeleteButton" type="submit" onClick={() => deleteIngredient(element.id)}> 
-            Delete
-            </button>
-          </td>
         </tr>)}
       </tbody>
 

@@ -19,7 +19,8 @@ import { deleteCookie, getCookie, setCookie } from './cookie';
 import EditIngredient from './components/EditIngredient';
 import RecipesAdmin from './components/RecipesAdmin';
 import AddRecipe from './components/AddRecipe';
-
+import IngredientsUser from './components/IngredientsUser';
+import EditUser from './components/EditUser';
 
 function App() {
   const token = getCookie('security_header');
@@ -50,33 +51,9 @@ function App() {
                 if (session && session.valid && !isAdmin) {
                   return [
                     <Switch>
-                      <Route path="/recipes">
-                        <Navbar />
-                        <RecipesAdmin />
-                      </Route>,
-                      {/* <Route path="/addrecipe">
-                        <Navbar />
-                        <AddRecipe /> 
-                      </Route>, */}
-                      <Route path="/ingredients">
-                        <Navbar />
-                        <Ingredient />
-                      </Route>,
-                      {/* <Route path="/ingredientsAdmin">
-                        <Navbar /> 
-                        <IngredientAdmin />
-                      </Route>,
-                      <Route path="/addingredient">
-                        <Navbar />
-                        <AddIngredient />
-                      </Route>,
-                      <Route path="/editingredient">
-                        <Navbar />
-                        <EditIngredient />
-                      </Route>, */}
                       <Route path="/">
-                        <Navbar />
-                        <IngrRecSplitUser />
+                        <Navbar/>
+                        <IngredientsUser/>
                       </Route>
                     </Switch>
 
@@ -126,12 +103,14 @@ function App() {
                         <NavbarAdmin />
                         <DisplayUsers />
                       </Route>,
+                      <Route path="/edituser">
+                        <NavbarAdmin />
+                        <EditUser />
+                      </Route>,
                       <Route path="/">
                         <NavbarAdmin />
                         <IngrRecSplit />
                       </Route>,
-                      
-
                     </Switch>
                   ]
                 }

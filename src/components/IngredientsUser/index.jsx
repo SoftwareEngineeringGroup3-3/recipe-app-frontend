@@ -3,58 +3,66 @@ import styles from './styles.css'
 import { useContext, useState, useEffect } from 'react';
 import { apiUrl } from '../../api';
 import { useHistory } from 'react-router-dom';
-import Posts from '../DisplayUsers/Posts';
-import Pagination from '../DisplayUsers/Pagination'
+import Posts from '../IngredientsUser/Posts';
+import Pagination from '../IngredientsUser/Pagination'
+import AddIngredient from '../AddIngredient'
 
-
-function DisplayUsers() {
+function IngredientsUser() {
   const [query, setQuery] = useState("");
-  
+ 
   return (
     <div>
-      <UserForm query={query}>
-      </UserForm>
+      <div>
+        <div><h4>List of ingredients</h4></div>
+        <input  type="text" placeholder='Start writting recipe' onInput={ev => 
+        { 
+          ev.preventDefault();
+          setQuery(ev.target.value); 
+        }}></input>
+      
+      </div>
+      <IngredientFormUser query={query}/>
     </div>
 
   )
 }
 
-function UserForm({query}) {
-  const [users, setUsers] = useState([]);
+function IngredientFormUser({query}) {
+  const [ingredients, setIngredients] = useState([]);
   const [error, setError] = useState(false);
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(5);
-  const [totalUsers, setTotalUsers] = useState(0);
+  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [totalIngredients, setTotalIngredients] = useState(0);
 
   useEffect(() => {
-    getUsers()
+    getIngredients()
   }, [])
 
   useEffect(() => {
     if(query != "") {
-      getUsers(query)
+      getIngredients(query)
     } else {
-      getUsers();
+      getIngredients();
     }
   }, [query]);
 
-  function getUsers(query) {
+  function getIngredients(query) {
     const queryName = query ? `&name=${query}` : '';
-    fetch(`${apiUrl}/users/all?page=${currentPage}&limit=${postsPerPage}${queryName}`, {
+    fetch(`${apiUrl}/ingredients/all?page=${currentPage}&limit=${postsPerPage}${queryName}`, {
       credentials: 'include',
-      method: 'GET'
+      method: 'POST'
     }).then(res => {
       res.json().then((data) => {
         if (data.error) {
           setError(data.message);
         } else {
-          if (data.users.length > 0) {
-            setUsers(data);
+          if (data.ingredients.length > 0) {
+            setIngredients(data);
             setLoading(true);
             setPosts(data);
-            setTotalUsers(data.total_users)
+            setTotalIngredients(data.total_ingredients)
             setLoading(false);
           } else {
             setCurrentPage(currentPage > 1 ? currentPage - 1 : 1);
@@ -69,23 +77,19 @@ function UserForm({query}) {
       })
     });
   }
-  
+
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   useEffect(() => {
-    if(query != "") {
-      getUsers(query)
-    } else {
-      getUsers();
-    }
+    getIngredients();
   }, [currentPage])
 
   return (
     <form>
       <div>
-        <Posts posts={posts?.users} loading={loading} currentPage={currentPage} limit={postsPerPage} />
+        <Posts posts={posts?.ingredients} loading={loading} currentPage={currentPage} limit={postsPerPage} />
         <Pagination postsPerPage={postsPerPage}
-          totalPosts={totalUsers}
+          totalPosts={totalIngredients}
           paginate={paginate}
           pagenumber={currentPage}
         />
@@ -95,5 +99,5 @@ function UserForm({query}) {
   );
 }
 
-export default DisplayUsers;
+export default IngredientsUser
 

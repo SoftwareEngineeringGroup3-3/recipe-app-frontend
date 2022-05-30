@@ -218,25 +218,6 @@ function AddRecipe() {
         </tbody>
       </table>
     </form>
-    // <div class="Everything">
-    //   <Recipe></Recipe>
-    //   <div class="IngBar">
-
-    //     <div id="Title"><h4>List of ingredients:</h4>
-    //     {/* {
-    //       ing.map(element => <div className="IngElement">
-    //         {element.value}
-    //         </div>
-    //       )} */}
-    //     </div>
-
-    //     <input id="Filter" type="text" placeholder='Start writting ingredient'></input>
-
-    //   </div>
-    //   <IngForm>
-    //   </IngForm>
-
-    // </div>
   );
 }
 
@@ -251,7 +232,6 @@ function IngredientFormRecipes({store}) {
 
   useEffect(() => {
     getIngredients()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   function getIngredients() {
@@ -287,15 +267,10 @@ function IngredientFormRecipes({store}) {
     store(el);
   }
 
-  // const indexOfLastPost = currentPage * postsPerPage;
-  // const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  // const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   useEffect(() => {
     getIngredients();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage])
 
   return (
