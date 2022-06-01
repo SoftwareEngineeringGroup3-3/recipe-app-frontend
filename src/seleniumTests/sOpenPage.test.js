@@ -10,7 +10,7 @@ it('Test 1 - Open Page for 5s', () => {
                 expect("React App").toEqual(title);
             });
 
-            await driver.sleep(5000);
+            await driver.sleep(1000);
         } finally {
             await driver.quit();
         }
