@@ -3,6 +3,7 @@ import { useContext, useState, useEffect } from 'react';
 import { apiUrl } from '../../api';
 import editImg from '../../images/edit.png';
 import deleteImg from '../../images/delete.png';
+import { List, Datagrid, TextField, DateField, BooleanField } from 'react-admin';
 
 const Posts = ({ posts, loading, currentPage, limit }) => {
   const [users, setUsers] = useState([]);

@@ -49,10 +49,11 @@ function IngredientFormUser({query}) {
   }, [query]);
 
   function getIngredients(query) {
-    const queryName = query ? `&name=${query}` : '';
-    fetch(`${apiUrl}/ingredients/all?page=${currentPage}&limit=${postsPerPage}${queryName}`, {
+    // const queryName = query ? `&name=${query}` : '';
+    fetch(`${apiUrl}/ingredients/next?page=${currentPage}&limit=${postsPerPage}`, {
       credentials: 'include',
-      method: 'POST'
+      method: 'GET',
+      // body: '{}'
     }).then(res => {
       res.json().then((data) => {
         if (data.error) {

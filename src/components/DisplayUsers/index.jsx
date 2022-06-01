@@ -5,7 +5,9 @@ import { apiUrl } from '../../api';
 import { useHistory } from 'react-router-dom';
 import Posts from '../DisplayUsers/Posts';
 import Pagination from '../DisplayUsers/Pagination'
-
+import { List, Datagrid, TextField, DateField, BooleanField } from 'react-admin';
+import { Admin, Resource } from 'react-admin';
+import jsonServerProvider from 'ra-data-json-server';
 
 function DisplayUsers() {
   const [query, setQuery] = useState("");

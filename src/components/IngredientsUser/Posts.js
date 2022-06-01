@@ -9,9 +9,9 @@ const Posts = ({ posts, loading, currentPage, limit }) => {
   const [error, setError] = useState(false);
 
   function getIngredients() {
-    fetch(`${apiUrl}/ingredients/all?page=${currentPage}&limit=${limit}`, {
+    fetch(`${apiUrl}/ingredients/next?page=${currentPage}&limit=${limit}`, {
       credentials: 'include',
-      method: 'POST'
+      method: 'GET'
     }).then(res => {
       res.json().then((data) => {
         if (data.error) {
